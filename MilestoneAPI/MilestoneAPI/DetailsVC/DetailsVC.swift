@@ -21,18 +21,28 @@ class DetailsVC: UIViewController {
     
     // MARK: - Variables
     private var cellType: [CellType] = [.poster, .details, .buttons]
+    private var singleMove: Movie?
+    
+    public var id: Int = 0
     
     // MARK: - Lifecycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+       
+        getSingleMovie()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configCollection()
         
+        configCollection()
     }
     
     // MARK: - Functions
     
     private func configCollection() {
+        
         detailsCollectionView.register(UINib(nibName: "PosterCVC", bundle: nil), forCellWithReuseIdentifier: PosterCVC.identifier)
         detailsCollectionView.register(UINib(nibName: "DetailsCVC", bundle: nil), forCellWithReuseIdentifier: DetailsCVC.identifier)
         detailsCollectionView.register(UINib(nibName: "ButtonsCVC", bundle: nil), forCellWithReuseIdentifier: ButtonsCVC.identifier)
@@ -43,11 +53,20 @@ class DetailsVC: UIViewController {
         
         detailsCollectionView.backgroundColor = .black
     }
+    
+    // MARK: - API Request
+    
+    private func getSingleMovie() {
+        API.shared.getMovieById(id: id) { _ in
+            
+        }
+    }
 }
 
 // MARK: - UICollectionView Data Source
 
 extension DetailsVC: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print(cellType.count)
         return cellType.count
@@ -59,11 +78,16 @@ extension DetailsVC: UICollectionViewDataSource {
         case .poster:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterCVC.identifier, for: indexPath) as! PosterCVC
             
+            if let singleMovie = singleMove {
+                cell.configure(model: singleMovie)
+            }
             return cell
             
         case .details:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailsCVC.identifier, for: indexPath) as! DetailsCVC
-            
+            if let singleMovie = singleMove {
+                cell.configure(model: singleMovie)
+            }
             return cell
             
         case .buttons:

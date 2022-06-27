@@ -68,6 +68,12 @@
                 <constraint firstItem="ks7-RK-afo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="24" id="jWZ-zl-JNL"/>
             </constraints>
             <size key="customSize" width="334" height="136"/>
+            <connections>
+                <outlet property="dateLabel" destination="R3c-WQ-Itk" id="Qdu-1F-zBi"/>
+                <outlet property="genreLabel" destination="hyX-bV-reB" id="EYI-pA-DTL"/>
+                <outlet property="rateLabel" destination="3Nb-VG-ZHp" id="OLK-Bt-g6F"/>
+                <outlet property="titleLabel" destination="nqw-OO-GRv" id="DMy-uA-9FJ"/>
+            </connections>
             <point key="canvasLocation" x="343.47826086956525" y="96.428571428571431"/>
         </collectionViewCell>
     </objects>

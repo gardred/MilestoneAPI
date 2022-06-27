@@ -8,10 +8,20 @@
 import UIKit
 
 class DetailsCVC: UICollectionViewCell {
+    
     static let identifier = "DetailsCVC"
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var rateLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var genreLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
-
+    
+    public func configure(model: Movie) {
+        
+    }
 }

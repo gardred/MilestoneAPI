@@ -8,10 +8,18 @@
 import UIKit
 
 class PosterCVC: UICollectionViewCell {
-static let identifier = "PosterCVC"
+
+    static let identifier = "PosterCVC"
+    
+    @IBOutlet weak var imageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+    }
+    
+    public func configure(model: Movie) {
+        
     }
 
 }

@@ -8,10 +8,22 @@
 import UIKit
 
 class HomeCVC: UICollectionViewCell {
-static let identifier = "HomeCVC"
+
+    static let identifier = "HomeCVC"
+    
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var genreLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
+    public func configure(model: Movie) {
+        
+    }
+    
 }

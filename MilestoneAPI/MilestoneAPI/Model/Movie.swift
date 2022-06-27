@@ -13,12 +13,11 @@ struct MovieResponse: Codable {
 
 struct Movie: Codable {
     let id: Int
-    let media_type: String?
-    let original_title: String?
-    let poster_path: String?
-    let release_date: String?
-    let vote_average: String?
-    let overview: String?
+    let original_title: String
+    let poster_path: String
+    let release_date: String
+    let vote_average: String
+    let vote_count: Int
 }
 
 /*

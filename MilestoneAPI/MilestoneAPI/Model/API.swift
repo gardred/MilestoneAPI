@@ -29,7 +29,24 @@ class API {
                 let result = try JSONDecoder().decode(MovieResponse.self, from: data)
                 print(result)
             } catch {
-                print(error.localizedDescription)
+                print(error)
+            }
+        }
+        task.resume()
+    }
+    
+    func getMovieById(id: Int, completion: @escaping (String) -> Void) {
+        //https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>&language=en-US
+        guard let url = URL(string: "\(Constants.baseURL)/3/movie/\(id)?api_key=\(Constants.API_KEY)&language=en-US") else { return }
+        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            do {
+                let result = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+                print(result)
+            } catch {
+                print(error)
             }
         }
         task.resume()
