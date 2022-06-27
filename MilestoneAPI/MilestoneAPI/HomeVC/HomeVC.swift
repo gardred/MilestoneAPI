@@ -16,6 +16,7 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configCollection()
+        getMovies()
     }
     
     // MARK: - Functions
@@ -24,6 +25,14 @@ class HomeVC: UIViewController {
         moviesCollectionView.register(UINib(nibName: "HomeCVC", bundle: nil), forCellWithReuseIdentifier: HomeCVC.identifier)
         moviesCollectionView.dataSource = self
         moviesCollectionView.delegate = self
+    }
+    
+    // MARK: - API Request
+    
+    private func getMovies() {
+        API.shared.getMovies { _ in
+           
+        }
     }
 }
 

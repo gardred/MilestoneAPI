@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" text="Search" translatesAutoresizingMaskIntoConstraints="NO" id="qOE-HV-F45">
-                                <rect key="frame" x="0.0" y="71" width="322" height="51"/>
+                                <rect key="frame" x="0.0" y="71" width="375" height="51"/>
                                 <color key="tintColor" name="AccentColor"/>
                                 <color key="barTintColor" red="0.14509803921568626" green="0.16470588235294117" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
