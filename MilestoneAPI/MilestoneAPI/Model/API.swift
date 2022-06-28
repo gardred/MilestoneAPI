@@ -36,7 +36,7 @@ class API {
     }
     
     func getMovieById(id: Int, completion: @escaping (String) -> Void) {
-        //https://api.themoviedb.org/3/movie/{movie_id}?api_key=<<api_key>>&language=en-US
+        
         guard let url = URL(string: "\(Constants.baseURL)/3/movie/\(id)?api_key=\(Constants.API_KEY)&language=en-US") else { return }
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {

@@ -11,8 +11,8 @@ class HomeVC: UIViewController {
 
     // MARK: - UI Elements
     
-    @IBOutlet weak var moviesCollectionView: UICollectionView!
-    
+    @IBOutlet private weak var moviesCollectionView: UICollectionView!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     // MARK: - Variables
     
     private var movies: [Movie] = [Movie]()
@@ -49,13 +49,14 @@ class HomeVC: UIViewController {
 extension HomeVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies.count
+//        return movies.count
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCVC.identifier, for: indexPath) as! HomeCVC
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCVC.identifier, for: indexPath) as? HomeCVC else { return UICollectionViewCell() }
         
-        cell.configure(model: movies[indexPath.row])
+//        cell.configure(model: movies[indexPath.row])
         
         return cell
     }
@@ -64,9 +65,9 @@ extension HomeVC: UICollectionViewDataSource {
 // MARK: - CollectionView Delegate
 
 extension HomeVC: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let controller = DetailsVC()
-        controller.id = movies[indexPath.row].id
+        let controller = DetailsVC.construct(id: 8, cellType: [.poster, .details, .description])
         self.navigationController?.pushViewController(controller, animated: true)
     }
 }
@@ -76,7 +77,7 @@ extension HomeVC: UICollectionViewDelegate {
 extension HomeVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: 358.0, height: 116.0)
+        return CGSize(width: collectionView.bounds.width, height: 116.0)
     }
 }
 

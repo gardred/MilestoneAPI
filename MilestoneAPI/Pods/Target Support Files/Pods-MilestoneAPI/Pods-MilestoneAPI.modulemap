@@ -1,0 +1,6 @@
+framework module Pods_MilestoneAPI {
+  umbrella header "Pods-MilestoneAPI-umbrella.h"
+
+  export *
+  module * { export * }
+}

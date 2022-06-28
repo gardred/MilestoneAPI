@@ -13,6 +13,12 @@ class PosterCVC: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        resetView()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -21,5 +27,8 @@ class PosterCVC: UICollectionViewCell {
     public func configure(model: Movie) {
         
     }
-
+    
+    private func resetView() {
+        
+    }
 }

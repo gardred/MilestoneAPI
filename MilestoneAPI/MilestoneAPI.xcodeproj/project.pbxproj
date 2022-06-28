@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4739044B821C2B152F00A212 /* Pods_MilestoneAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF90D9123E1D0E28E6A632F6 /* Pods_MilestoneAPI.framework */; };
 		F11EC4432869FAB000516762 /* UIAlert-.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11EC4422869FAB000516762 /* UIAlert-.swift */; };
 		F1A02F212869870400FCE92F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F202869870400FCE92F /* AppDelegate.swift */; };
 		F1A02F232869870400FCE92F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F222869870400FCE92F /* SceneDelegate.swift */; };
@@ -20,8 +21,6 @@
 		F1A02F3F28698BF700FCE92F /* PosterCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1A02F3D28698BF700FCE92F /* PosterCVC.xib */; };
 		F1A02F4228698C1700FCE92F /* DetailsCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F4028698C1700FCE92F /* DetailsCVC.swift */; };
 		F1A02F4328698C1700FCE92F /* DetailsCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1A02F4128698C1700FCE92F /* DetailsCVC.xib */; };
-		F1A02F4628698C4000FCE92F /* ButtonsCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F4428698C4000FCE92F /* ButtonsCVC.swift */; };
-		F1A02F4728698C4000FCE92F /* ButtonsCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1A02F4528698C4000FCE92F /* ButtonsCVC.xib */; };
 		F1A02F4928698DFF00FCE92F /* DetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F4828698DFF00FCE92F /* DetailsVC.swift */; };
 		F1A02F4C2869959F00FCE92F /* DescriptionCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F4A2869959F00FCE92F /* DescriptionCVC.swift */; };
 		F1A02F4D2869959F00FCE92F /* DescriptionCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1A02F4B2869959F00FCE92F /* DescriptionCVC.xib */; };
@@ -33,6 +32,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0EDF12E09000560C6BDE21B0 /* Pods-MilestoneAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MilestoneAPI.release.xcconfig"; path = "Target Support Files/Pods-MilestoneAPI/Pods-MilestoneAPI.release.xcconfig"; sourceTree = "<group>"; };
+		4897CEC3056B57105F5BF935 /* Pods-MilestoneAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MilestoneAPI.debug.xcconfig"; path = "Target Support Files/Pods-MilestoneAPI/Pods-MilestoneAPI.debug.xcconfig"; sourceTree = "<group>"; };
+		CF90D9123E1D0E28E6A632F6 /* Pods_MilestoneAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MilestoneAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F11EC4422869FAB000516762 /* UIAlert-.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlert-.swift"; sourceTree = "<group>"; };
 		F1A02F1D2869870400FCE92F /* MilestoneAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MilestoneAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A02F202869870400FCE92F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,8 +50,6 @@
 		F1A02F3D28698BF700FCE92F /* PosterCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PosterCVC.xib; sourceTree = "<group>"; };
 		F1A02F4028698C1700FCE92F /* DetailsCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCVC.swift; sourceTree = "<group>"; };
 		F1A02F4128698C1700FCE92F /* DetailsCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsCVC.xib; sourceTree = "<group>"; };
-		F1A02F4428698C4000FCE92F /* ButtonsCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsCVC.swift; sourceTree = "<group>"; };
-		F1A02F4528698C4000FCE92F /* ButtonsCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonsCVC.xib; sourceTree = "<group>"; };
 		F1A02F4828698DFF00FCE92F /* DetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsVC.swift; sourceTree = "<group>"; };
 		F1A02F4A2869959F00FCE92F /* DescriptionCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionCVC.swift; sourceTree = "<group>"; };
 		F1A02F4B2869959F00FCE92F /* DescriptionCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DescriptionCVC.xib; sourceTree = "<group>"; };
@@ -65,12 +65,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4739044B821C2B152F00A212 /* Pods_MilestoneAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		375CE3963F81B771B8208DF8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4897CEC3056B57105F5BF935 /* Pods-MilestoneAPI.debug.xcconfig */,
+				0EDF12E09000560C6BDE21B0 /* Pods-MilestoneAPI.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		6B5149731121AFBE505DE560 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CF90D9123E1D0E28E6A632F6 /* Pods_MilestoneAPI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F11EC4412869FA9C00516762 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +102,8 @@
 			children = (
 				F1A02F1F2869870400FCE92F /* MilestoneAPI */,
 				F1A02F1E2869870400FCE92F /* Products */,
+				375CE3963F81B771B8208DF8 /* Pods */,
+				6B5149731121AFBE505DE560 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -147,8 +167,6 @@
 				F1A02F3D28698BF700FCE92F /* PosterCVC.xib */,
 				F1A02F4028698C1700FCE92F /* DetailsCVC.swift */,
 				F1A02F4128698C1700FCE92F /* DetailsCVC.xib */,
-				F1A02F4428698C4000FCE92F /* ButtonsCVC.swift */,
-				F1A02F4528698C4000FCE92F /* ButtonsCVC.xib */,
 				F1A02F4A2869959F00FCE92F /* DescriptionCVC.swift */,
 				F1A02F4B2869959F00FCE92F /* DescriptionCVC.xib */,
 				F1A02F4E286995B400FCE92F /* ReviewCVC.swift */,
@@ -181,9 +199,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F1A02F312869870800FCE92F /* Build configuration list for PBXNativeTarget "MilestoneAPI" */;
 			buildPhases = (
+				1AB0BA062C4194631713007B /* [CP] Check Pods Manifest.lock */,
 				F1A02F192869870400FCE92F /* Sources */,
 				F1A02F1A2869870400FCE92F /* Frameworks */,
 				F1A02F1B2869870400FCE92F /* Resources */,
+				6955EB5AA4E2671F8B70D9F8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -232,7 +252,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1A02F4728698C4000FCE92F /* ButtonsCVC.xib in Resources */,
 				F1A02F2D2869870800FCE92F /* LaunchScreen.storyboard in Resources */,
 				F1A02F3A28698A4300FCE92F /* HomeCVC.xib in Resources */,
 				F1A02F4D2869959F00FCE92F /* DescriptionCVC.xib in Resources */,
@@ -246,6 +265,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1AB0BA062C4194631713007B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MilestoneAPI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6955EB5AA4E2671F8B70D9F8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MilestoneAPI/Pods-MilestoneAPI-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MilestoneAPI/Pods-MilestoneAPI-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MilestoneAPI/Pods-MilestoneAPI-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F1A02F192869870400FCE92F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -258,7 +319,6 @@
 				F11EC4432869FAB000516762 /* UIAlert-.swift in Sources */,
 				F1A02F252869870400FCE92F /* HomeVC.swift in Sources */,
 				F1A02F4C2869959F00FCE92F /* DescriptionCVC.swift in Sources */,
-				F1A02F4628698C4000FCE92F /* ButtonsCVC.swift in Sources */,
 				F1A02F3928698A4300FCE92F /* HomeCVC.swift in Sources */,
 				F1A02F592869AA7D00FCE92F /* Movie.swift in Sources */,
 				F1A02F212869870400FCE92F /* AppDelegate.swift in Sources */,
@@ -406,6 +466,7 @@
 		};
 		F1A02F322869870800FCE92F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4897CEC3056B57105F5BF935 /* Pods-MilestoneAPI.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -434,6 +495,7 @@
 		};
 		F1A02F332869870800FCE92F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0EDF12E09000560C6BDE21B0 /* Pods-MilestoneAPI.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

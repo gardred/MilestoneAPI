@@ -8,10 +8,13 @@
 import UIKit
 
 class DescriptionCVC: UICollectionViewCell {
-static let identifier = "DescriptionCVC"
+    static let identifier = "DescriptionCVC"
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
 }
