@@ -20,7 +20,7 @@ class DetailsVC: UIViewController {
         case description
         case review
     }
-
+    
     // MARK: - UI Elements
     
     @IBOutlet private weak var detailsCollectionView: UICollectionView!
@@ -33,10 +33,13 @@ class DetailsVC: UIViewController {
     private var selectedMovie: Movie?
     private var screenState: CellType = .description
     
-    public var id = 0
-    
+    private var id = 0
     // MARK: - Lifecycle
-   
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -50,7 +53,7 @@ class DetailsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         configureUI()
         configCollection()
     }
@@ -58,7 +61,7 @@ class DetailsVC: UIViewController {
     // MARK: - Functions
     
     
-    static func construct(id: Int, cellType: [CellType]) -> DetailsVC {
+    static func construct(id: Int,cellType: [CellType]) -> DetailsVC {
         let controller: DetailsVC = .fromStoryboard("Main")
         controller.id = id
         controller.cellType = cellType
@@ -105,11 +108,22 @@ class DetailsVC: UIViewController {
         API.shared.getMovieById(id: id) { [weak self] (result) in
             guard let self = self else { return }
             
+            DispatchQueue.main.async {
+                self.activityIndicator.startAnimating()
+            }
             switch result {
             case .success(let movie):
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
+                }
                 self.selectedMovie = movie
-            case .failure(_):
-                print("error")
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
+                    self.presentAlert(title: "Error", body: error.localizedDescription)
+                }
             }
         }
     }
@@ -118,7 +132,7 @@ class DetailsVC: UIViewController {
     
     @IBAction func writeReviewAction(_ sender: Any) {
         guard let selectedMovie = selectedMovie else { return }
-
+        
         let controller = ReviewVC.construct(movie: selectedMovie)
         navigationController?.pushViewController(controller, animated: true)
     }
@@ -149,7 +163,7 @@ extension DetailsVC: UICollectionViewDataSource {
             
         case .details:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailsCVC.identifier, for: indexPath) as? DetailsCVC else { return UICollectionViewCell() }
-           
+            
             if let selectedMovie = selectedMovie {
                 cell.configure(model: selectedMovie)
             }
@@ -165,14 +179,14 @@ extension DetailsVC: UICollectionViewDataSource {
             }
             
             return cell
-        
+            
         case .description:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DescriptionCVC.identifier, for: indexPath) as? DescriptionCVC else { return UICollectionViewCell() }
             if let selectedMovie = selectedMovie {
                 cell.configure(model: selectedMovie)
             }
             return cell
-        
+            
         case .review:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewCVC.identifier, for: indexPath) as? ReviewCVC else { return UICollectionViewCell() }
             

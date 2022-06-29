@@ -18,10 +18,10 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ks7-RK-afo">
-                        <rect key="frame" x="24" y="16" width="213" height="92"/>
+                        <rect key="frame" x="24" y="16" width="313" height="92"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[movie title]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nqw-OO-GRv">
-                                <rect key="frame" x="0.0" y="0.0" width="90.5" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[movie title]" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nqw-OO-GRv">
+                                <rect key="frame" x="0.0" y="0.0" width="313" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="wNO-Gc-ylz"/>
                                 </constraints>
@@ -68,6 +68,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="nqw-OO-GRv" secondAttribute="trailing" id="3nR-hC-gyE"/>
+                        </constraints>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SpC-wW-VMj">
                         <rect key="frame" x="16" y="140" width="329" height="42"/>
@@ -134,7 +137,7 @@
                 <constraint firstItem="SpC-wW-VMj" firstAttribute="top" secondItem="ks7-RK-afo" secondAttribute="bottom" constant="32" id="2Gu-2c-jsI"/>
                 <constraint firstItem="SpC-wW-VMj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="DdP-4M-tWu"/>
                 <constraint firstItem="ks7-RK-afo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="16" id="EAw-nU-Nlf"/>
-                <constraint firstAttribute="trailing" secondItem="ks7-RK-afo" secondAttribute="trailing" constant="124" id="bMx-Z4-NZZ"/>
+                <constraint firstAttribute="trailing" secondItem="ks7-RK-afo" secondAttribute="trailing" constant="24" id="bMx-Z4-NZZ"/>
                 <constraint firstItem="ks7-RK-afo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="24" id="jWZ-zl-JNL"/>
                 <constraint firstAttribute="trailing" secondItem="SpC-wW-VMj" secondAttribute="trailing" constant="16" id="nMg-1i-mBd"/>
             </constraints>

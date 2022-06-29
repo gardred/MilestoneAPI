@@ -29,6 +29,7 @@
 		F1A02F5428699B5C00FCE92F /* ReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F5328699B5C00FCE92F /* ReviewVC.swift */; };
 		F1A02F572869A52A00FCE92F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F562869A52A00FCE92F /* API.swift */; };
 		F1A02F592869AA7D00FCE92F /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F582869AA7C00FCE92F /* Movie.swift */; };
+		F1D4E514286C7C0000538F56 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D4E513286C7C0000538F56 /* Genre.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		F1A02F5328699B5C00FCE92F /* ReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewVC.swift; sourceTree = "<group>"; };
 		F1A02F562869A52A00FCE92F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		F1A02F582869AA7C00FCE92F /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		F1D4E513286C7C0000538F56 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 		F1A02F1F2869870400FCE92F /* MilestoneAPI */ = {
 			isa = PBXGroup;
 			children = (
+				F1D4E515286C9E3000538F56 /* Fonts */,
 				F11EC4412869FA9C00516762 /* Utilities */,
 				F1A02F552869A51000FCE92F /* Model */,
 				F1A02F5228699B4600FCE92F /* ReviewVC */,
@@ -188,8 +191,16 @@
 			children = (
 				F1A02F562869A52A00FCE92F /* API.swift */,
 				F1A02F582869AA7C00FCE92F /* Movie.swift */,
+				F1D4E513286C7C0000538F56 /* Genre.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F1D4E515286C9E3000538F56 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,6 +328,7 @@
 				F1A02F4928698DFF00FCE92F /* DetailsVC.swift in Sources */,
 				F1A02F5428699B5C00FCE92F /* ReviewVC.swift in Sources */,
 				F11EC4432869FAB000516762 /* UIAlert-.swift in Sources */,
+				F1D4E514286C7C0000538F56 /* Genre.swift in Sources */,
 				F1A02F252869870400FCE92F /* HomeVC.swift in Sources */,
 				F1A02F4C2869959F00FCE92F /* DescriptionCVC.swift in Sources */,
 				F1A02F3928698A4300FCE92F /* HomeCVC.swift in Sources */,

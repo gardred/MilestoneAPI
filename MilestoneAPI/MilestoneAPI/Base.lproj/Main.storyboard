@@ -58,6 +58,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="Z7e-Ux-LtM" id="8kJ-sc-Fxo"/>
                         <outlet property="moviesCollectionView" destination="AiZ-GU-Rhz" id="rA2-e7-r6X"/>
+                        <outlet property="searchBar" destination="qOE-HV-F45" id="dwr-7L-z5U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -262,31 +263,17 @@
                                                     <constraint firstItem="RTw-Ny-VHL" firstAttribute="top" secondItem="6Vr-B8-psB" secondAttribute="top" constant="104.5" id="gyQ-cN-iB0"/>
                                                 </constraints>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NUS-4Y-el0">
-                                                <rect key="frame" x="16" y="717.5" width="343" height="48"/>
-                                                <color key="backgroundColor" red="0.37647058823529411" green="0.42745098039215684" blue="0.87058823529411766" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="48" id="1eW-Nf-tNU"/>
-                                                </constraints>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Submit">
-                                                    <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </buttonConfiguration>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="dGM-in-GNx" firstAttribute="centerY" secondItem="Sb4-b0-b7g" secondAttribute="centerY" id="5Cr-TS-1cy"/>
                                             <constraint firstAttribute="trailing" secondItem="6Vr-B8-psB" secondAttribute="trailing" constant="16" id="83f-ov-BBg"/>
                                             <constraint firstAttribute="height" constant="800" id="FoA-zb-cAl"/>
-                                            <constraint firstItem="NUS-4Y-el0" firstAttribute="leading" secondItem="Sb4-b0-b7g" secondAttribute="leading" constant="16" id="HLX-ay-sXw"/>
-                                            <constraint firstItem="NUS-4Y-el0" firstAttribute="top" secondItem="6Vr-B8-psB" secondAttribute="bottom" constant="32" id="L8l-l9-fiI"/>
                                             <constraint firstItem="r6C-en-Gny" firstAttribute="leading" secondItem="Sb4-b0-b7g" secondAttribute="leading" constant="16" id="PYv-qi-fjF"/>
                                             <constraint firstItem="VaI-dM-CuD" firstAttribute="leading" secondItem="Sb4-b0-b7g" secondAttribute="leading" id="QsY-qd-hbq"/>
                                             <constraint firstItem="6Vr-B8-psB" firstAttribute="leading" secondItem="Sb4-b0-b7g" secondAttribute="leading" constant="16" id="RQf-nu-UPd"/>
                                             <constraint firstAttribute="bottom" secondItem="6Vr-B8-psB" secondAttribute="bottom" constant="114.5" id="Tvx-ZV-tnx"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="r6C-en-Gny" secondAttribute="trailing" constant="20" symbolic="YES" id="VFU-xf-iH4"/>
-                                            <constraint firstAttribute="trailing" secondItem="NUS-4Y-el0" secondAttribute="trailing" constant="16" id="WlI-CN-MlD"/>
                                             <constraint firstItem="r6C-en-Gny" firstAttribute="top" secondItem="VaI-dM-CuD" secondAttribute="bottom" constant="32" id="h7G-a4-a1P"/>
                                             <constraint firstItem="6Vr-B8-psB" firstAttribute="top" secondItem="dGM-in-GNx" secondAttribute="bottom" constant="28" id="mjt-pT-pZq"/>
                                             <constraint firstItem="dGM-in-GNx" firstAttribute="top" secondItem="r6C-en-Gny" secondAttribute="bottom" constant="32" id="sg3-p1-0fy"/>
@@ -324,16 +311,42 @@
                                     <constraint firstAttribute="bottom" secondItem="ZbI-aK-MFq" secondAttribute="bottom" constant="20" id="wlQ-cO-Rug"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pyx-bv-BLj">
+                                <rect key="frame" x="0.0" y="710" width="375" height="90"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NUS-4Y-el0">
+                                        <rect key="frame" x="16" y="0.0" width="343" height="48"/>
+                                        <color key="backgroundColor" red="0.37647058823529411" green="0.42745098039215684" blue="0.87058823529411766" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="1eW-Nf-tNU"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Submit">
+                                            <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="labelColor"/>
+                                <constraints>
+                                    <constraint firstItem="NUS-4Y-el0" firstAttribute="top" secondItem="Pyx-bv-BLj" secondAttribute="top" id="Nf1-Ta-VMQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="NUS-4Y-el0" secondAttribute="trailing" constant="16" id="OGV-NF-MhC"/>
+                                    <constraint firstAttribute="height" constant="90" id="PGb-7O-4MJ"/>
+                                    <constraint firstItem="NUS-4Y-el0" firstAttribute="leading" secondItem="Pyx-bv-BLj" secondAttribute="leading" constant="16" id="Zhv-Jb-Q8L"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9wo-GB-DXx"/>
                         <color key="backgroundColor" systemColor="labelColor"/>
                         <constraints>
                             <constraint firstItem="fgo-mJ-hM6" firstAttribute="leading" secondItem="2PF-xv-cw2" secondAttribute="leading" id="3yX-yb-Tea"/>
+                            <constraint firstItem="Pyx-bv-BLj" firstAttribute="leading" secondItem="9wo-GB-DXx" secondAttribute="leading" id="4dR-Cw-EhB"/>
+                            <constraint firstItem="9wo-GB-DXx" firstAttribute="trailing" secondItem="Pyx-bv-BLj" secondAttribute="trailing" id="4eK-1J-h1V"/>
                             <constraint firstItem="EJ6-d0-wsF" firstAttribute="leading" secondItem="9wo-GB-DXx" secondAttribute="leading" id="7X0-Fg-rcK"/>
                             <constraint firstItem="fgo-mJ-hM6" firstAttribute="top" secondItem="2PF-xv-cw2" secondAttribute="top" id="C4k-qu-017"/>
                             <constraint firstItem="fgo-mJ-hM6" firstAttribute="bottom" secondItem="9wo-GB-DXx" secondAttribute="bottom" id="CBE-mF-A2g"/>
                             <constraint firstItem="EJ6-d0-wsF" firstAttribute="trailing" secondItem="9wo-GB-DXx" secondAttribute="trailing" id="FSF-Pd-L0X"/>
                             <constraint firstItem="EJ6-d0-wsF" firstAttribute="top" secondItem="2PF-xv-cw2" secondAttribute="top" id="Kof-ph-wRz"/>
+                            <constraint firstItem="9wo-GB-DXx" firstAttribute="bottom" secondItem="Pyx-bv-BLj" secondAttribute="bottom" id="RY8-8G-Kui"/>
                             <constraint firstAttribute="trailing" secondItem="fgo-mJ-hM6" secondAttribute="trailing" id="nI6-Zf-JOj"/>
                         </constraints>
                     </view>
@@ -352,11 +365,6 @@
             <point key="canvasLocation" x="1596" y="7.1964017991004505"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="78J-HA-Le0">
-            <size key="intrinsicContentSize" width="120" height="20"/>
-        </designable>
-    </designables>
     <resources>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="rating.stars" width="29" height="27.5"/>
