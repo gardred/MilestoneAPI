@@ -10,6 +10,7 @@ import Foundation
 struct Constants {
     static let API_KEY = "a560703232bc4d393f220567c65184df"
     static let baseURL = "https://api.themoviedb.org"
+    static let imageURL = "https://image.tmdb.org/t/p/w500/"
 }
 
 
@@ -17,36 +18,37 @@ class API {
     
     static let shared = API()
     
-    func getMovies(completion: @escaping (String) -> Void) {
+    func getMovies(completion: @escaping (Result<[Movie], Error>) -> Void) {
         guard let url = URL(string: "\(Constants.baseURL)/3/discover/movie?api_key=\(Constants.API_KEY)&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate") else { return }
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
-            guard let data = data, error == nil else {
-                return
-            }
-
-            do {
-                let result = try JSONDecoder().decode(MovieResponse.self, from: data)
-                print(result)
-            } catch {
-                print(error)
+            if let data = data {
+                do {
+                    let result = try JSONDecoder().decode(MovieResponse.self, from: data)
+                    completion(.success(result.movie))
+                } catch {
+                    print(error)
+                }
+            } else if let error = error{
+                print(error.localizedDescription)
             }
         }
         task.resume()
     }
     
-    func getMovieById(id: Int, completion: @escaping (String) -> Void) {
+    func getMovieById(id: Int, completion: @escaping (Result<Movie, Error>) -> Void) {
         
         guard let url = URL(string: "\(Constants.baseURL)/3/movie/\(id)?api_key=\(Constants.API_KEY)&language=en-US") else { return }
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            do {
-                let result = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-                print(result)
-            } catch {
-                print(error)
+            if let data = data {
+                do {
+                    let results = try JSONDecoder().decode(Movie.self, from: data)
+                    completion(.success(results))
+                } catch {
+                    print("error")
+                }
+            } else if let error = error {
+                print(error.localizedDescription)
             }
         }
         task.resume()

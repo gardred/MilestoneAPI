@@ -44,7 +44,12 @@ class DetailsCVC: UICollectionViewCell {
     // MARK: - Functions
     
     public func configure(model: Movie) {
-        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.titleLabel.text = model.title
+            self.rateLabel.text = "\(model.rate)"
+            self.dateLabel.text = model.year
+        }
     }
     
     private func configureButtons() {

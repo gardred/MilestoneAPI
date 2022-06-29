@@ -17,4 +17,11 @@ class DescriptionCVC: UICollectionViewCell {
         
     }
 
+    public func configure(model: Movie) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.descriptionLabel.text = model.overview
+        }
+    }
+    
 }

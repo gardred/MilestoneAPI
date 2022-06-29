@@ -25,10 +25,14 @@ class PosterCVC: UICollectionViewCell {
     }
     
     public func configure(model: Movie) {
-        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.imageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(model.posterImage)"))
+            self.imageView.sizeToFit()
+        }
     }
     
     private func resetView() {
-        
+        imageView.image = nil
     }
 }

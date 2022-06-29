@@ -7,6 +7,7 @@
 
 import UIKit
 import Cosmos
+import SDWebImage
 
 class ReviewVC: UIViewController {
     
@@ -20,6 +21,19 @@ class ReviewVC: UIViewController {
     @IBOutlet private weak var reviewTitle: UITextField!
     @IBOutlet private weak var reviewBody: UITextView!
     @IBOutlet private weak var submitButton: UIButton!
+    @IBOutlet private weak var backButton: UIButton!
+    
+    private var movie: Movie?
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,16 +42,23 @@ class ReviewVC: UIViewController {
         configureSubmitButton()
     }
     
-    static func construct() -> ReviewVC {
+    static func construct(movie: Movie) -> ReviewVC {
         let controller: ReviewVC = .fromStoryboard("Main")
+        controller.movie = movie
         return controller
     }
     
     private func configureUI() {
+        guard let movie = movie else { return }
+
         reviewBody.layer.cornerRadius = 8
         submitButton.layer.cornerRadius = 8
         
+        movieTitle.text = movie.title
+        imageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(movie.posterImage)"))
     }
+    
+    // MARK: - API Request
     
     private func configureSubmitButton() {
         if reviewTitle.text == "" || reviewBody.text == "" {
@@ -47,5 +68,8 @@ class ReviewVC: UIViewController {
             submitButton.isUserInteractionEnabled = true
             submitButton.backgroundColor = hexStringToUIColor(hex: "#FFFFFF")
         }
+    }
+    @IBAction func backButtonAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 }

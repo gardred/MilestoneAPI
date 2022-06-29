@@ -26,6 +26,7 @@ class DetailsVC: UIViewController {
     @IBOutlet private weak var detailsCollectionView: UICollectionView!
     @IBOutlet private weak var writeReviewButton: UIButton!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var backButton: UIButton!
     // MARK: - Variables
     
     private var cellType: [CellType] = []
@@ -35,16 +36,21 @@ class DetailsVC: UIViewController {
     public var id = 0
     
     // MARK: - Lifecycle
+   
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
+        navigationController?.setNavigationBarHidden(true, animated: animated)
         getSingleMovie()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         configureUI()
         configCollection()
     }
@@ -96,16 +102,29 @@ class DetailsVC: UIViewController {
     // MARK: - API Request
     
     private func getSingleMovie() {
-        API.shared.getMovieById(id: id) { _ in
+        API.shared.getMovieById(id: id) { [weak self] (result) in
+            guard let self = self else { return }
             
+            switch result {
+            case .success(let movie):
+                self.selectedMovie = movie
+            case .failure(_):
+                print("error")
+            }
         }
     }
     
     // MARK: - IB Actions
     
     @IBAction func writeReviewAction(_ sender: Any) {
-        let controller = ReviewVC.construct()
+        guard let selectedMovie = selectedMovie else { return }
+
+        let controller = ReviewVC.construct(movie: selectedMovie)
         navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @IBAction func backButtonAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
@@ -149,7 +168,9 @@ extension DetailsVC: UICollectionViewDataSource {
         
         case .description:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DescriptionCVC.identifier, for: indexPath) as? DescriptionCVC else { return UICollectionViewCell() }
-            
+            if let selectedMovie = selectedMovie {
+                cell.configure(model: selectedMovie)
+            }
             return cell
         
         case .review:
@@ -172,7 +193,7 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout {
         case .details:
             return CGSize(width: collectionView.bounds.width, height: 200.0)
         case .description:
-            return CGSize(width: collectionView.bounds.width, height: view.frame.height)
+            return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
         case .review:
             return CGSize(width: collectionView.bounds.width, height: view.frame.height)
         }
