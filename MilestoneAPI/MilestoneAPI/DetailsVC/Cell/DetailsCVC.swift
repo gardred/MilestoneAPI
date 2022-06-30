@@ -58,6 +58,7 @@ class DetailsCVC: UICollectionViewCell {
     private func configureButtons() {
         descriptionButton.layer.cornerRadius = 8
         descriptionButton.layer.masksToBounds = true
+        descriptionButton.setTitleColor(.white, for: .normal)
         descriptionButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         reviewButton.layer.cornerRadius = 8
@@ -75,16 +76,18 @@ class DetailsCVC: UICollectionViewCell {
     
     @IBAction func descriptionAction(_ sender: Any) {
         if descriptionButton.isSelected == false {
-           
-            descriptionButton.isSelected = true
-            descriptionButton.setTitleColor(UIColor.white, for: .normal)
-            descriptionButton.backgroundColor = .systemGray
+            
             NotificationCenter.default.post(name: NSNotification.Name("change"), object: nil)
+            
+            descriptionButton.isSelected = true
+            descriptionButton.backgroundColor = .darkGray
+    
             changeCollectionCellToDescription?()
             
             reviewButton.isSelected = false
             reviewButton.backgroundColor = .black
-            reviewButton.setTitleColor(UIColor.white, for: .normal)
+            reviewButton.setTitleColor(UIColor.darkGray, for: .normal)
+            reviewsCount.textColor = .darkGray
             
         } else {
             descriptionButton.isSelected = false
@@ -97,14 +100,17 @@ class DetailsCVC: UICollectionViewCell {
     @IBAction func reviewAction(_ sender: Any) {
         if reviewButton.isSelected == false {
             
-            reviewButton.isSelected = true
-            reviewButton.backgroundColor = .systemGray
             NotificationCenter.default.post(name: NSNotification.Name("hide"), object: nil)
+            
+            reviewButton.isSelected = true
+            reviewButton.backgroundColor = .darkGray
+            reviewsCount.textColor = .white
+            
             changeCollectionCellToReview?()
             
             descriptionButton.isSelected = false
             descriptionButton.backgroundColor = .black
-            descriptionButton.setTitleColor(UIColor.white, for: .normal)
+            descriptionButton.setTitleColor(UIColor.darkGray, for: .normal)
         
         } else {
             reviewButton.isSelected = false

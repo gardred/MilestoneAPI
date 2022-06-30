@@ -65,6 +65,7 @@ class HomeVC: UIViewController {
         
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
+        searchController.searchBar.searchBarStyle = .minimal
         searchBackground.backgroundColor = .black
         searchBackground.addSubview(searchController.searchBar)
     }

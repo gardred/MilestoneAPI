@@ -34,7 +34,6 @@
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4PW-6G-yaD">
                                 <rect key="frame" x="0.0" y="59" width="428" height="63"/>
-                                <color key="backgroundColor" systemColor="labelColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="63" id="cQl-IL-HhC"/>
                                 </constraints>
@@ -355,7 +354,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zzB-Rq-z6g" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1596" y="7.1964017991004505"/>
+            <point key="canvasLocation" x="1585" y="26"/>
         </scene>
     </scenes>
     <resources>
