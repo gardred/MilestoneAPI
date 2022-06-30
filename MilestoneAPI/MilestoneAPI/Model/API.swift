@@ -12,7 +12,6 @@ struct Constants {
     static let API_KEY = "a560703232bc4d393f220567c65184df"
     static let baseURL = "https://api.themoviedb.org"
     static let imageURL = "https://image.tmdb.org/t/p/w500/"
-    
 }
 
 
@@ -45,6 +44,7 @@ class API {
     }
     
     func getGenre(completion: @escaping (Result<[Genre], Error>) -> Void) {
+        
         guard let url = URL(string: "https://api.themoviedb.org/3/genre/movie/list?api_key=\(Constants.API_KEY)&language=en-US") else { return }
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             
@@ -86,7 +86,7 @@ class API {
         task.resume()
     }
     
-    func search(with query: String, completion: @escaping (Result<Movie, Error>) -> Void) {
+    func search(with query: String, completion: @escaping (Result<[Movie], Error>) -> Void) {
         
         guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
         guard let url = URL(string: "\(Constants.baseURL)/3/search/movie?api_key=\(Constants.API_KEY)&query=\(query)") else { return}
@@ -94,8 +94,8 @@ class API {
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             if let data = data {
                 do {
-                    let results = try JSONDecoder().decode(Movie.self, from: data)
-                    completion(.success(results))
+                    let results = try JSONDecoder().decode(MovieResponse.self, from: data)
+                    completion(.success(results.movie))
                 } catch {
                     print(error)
                 }

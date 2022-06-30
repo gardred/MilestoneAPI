@@ -8,7 +8,7 @@
 import UIKit
 
 class HomeVC: UIViewController {
-
+    
     class func fromStoryboard<T: HomeVC>(_ storyboardName: String) -> T {
         let identifier = "HomeVC"
         return UIStoryboard(name: storyboardName, bundle: nil).instantiateViewController(withIdentifier: identifier) as! T
@@ -16,10 +16,12 @@ class HomeVC: UIViewController {
     
     
     // MARK: - UI Elements
-    
+    private var searchController: UISearchController!
     @IBOutlet private weak var moviesCollectionView: UICollectionView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet private weak var searchBar: UISearchBar!
+    @IBOutlet private weak var searchBackground: UIView!
+    
+    
     // MARK: - Variables
     
     private var movies = [Movie]()
@@ -35,7 +37,7 @@ class HomeVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -43,12 +45,14 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        view.backgroundColor = .black
+        configureSearchBar()
         
         getMovies()
         getGenre()
         
         configCollection()
-        configureSearchBar()
     }
     
     // MARK: - Functions
@@ -60,8 +64,12 @@ class HomeVC: UIViewController {
     }
     
     private func configureSearchBar() {
-        searchBar.keyboardType = .default
-        searchBar.delegate = self
+        
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchBackground.backgroundColor = .black
+        searchBackground.addSubview(searchController.searchBar)
+        searchController.searchBar.delegate = self
     }
     
     static func construct() -> HomeVC {
@@ -72,17 +80,17 @@ class HomeVC: UIViewController {
     // MARK: - API Request
     
     private func getMovies() {
+        
+        activityIndicator.startAnimating()
+        
         API.shared.getMovies { [weak self] (result) in
             guard let self = self else { return }
-            
-            DispatchQueue.main.async {
-                self.activityIndicator.startAnimating()
-            }
             
             switch result {
                 
             case .success(let getMovies ):
                 self.movies.append(contentsOf: getMovies)
+                
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
@@ -90,19 +98,7 @@ class HomeVC: UIViewController {
                 }
                 
             case .failure(let error):
-                self.presentAlert(title: "Error", body: error.localizedDescription)
-            }
-        }
-    }
-    
-    private func getGenre() {
-        API.shared.getGenre { [weak self] (result) in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let getGenre):
-                self.genre.append(contentsOf: getGenre)
-            case .failure(let error):
+                
                 DispatchQueue.main.async {
                     self.presentAlert(title: "Error", body: error.localizedDescription)
                 }
@@ -110,15 +106,48 @@ class HomeVC: UIViewController {
         }
     }
     
-    private func searchRequest() {
-        guard let query = searchBar.text else { return }
+    private func getGenre() {
+        
+        API.shared.getGenre { [weak self] (result) in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let getGenre):
+                
+                self.genre.append(contentsOf: getGenre)
+                
+            case .failure(let error):
+                
+                DispatchQueue.main.async {
+                    self.presentAlert(title: "Error", body: error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    private func searchRequest(with query: String) {
+        
+        activityIndicator.startAnimating()
         API.shared.search(with: query) { [weak self] (result) in
+            
+            guard let self = self else { return}
+            
             switch result {
                 
-            case .success(let searchResult):
-                print(searchResult)
+            case .success(let searchMovie):
+                self.movies = searchMovie
+                
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
+                    self.moviesCollectionView.reloadData()
+                }
+                
             case .failure(let error):
-                print(error)
+                
+                DispatchQueue.main.async {
+                    self.presentAlert(title: "Error", body: error.localizedDescription)
+                }
             }
         }
     }
@@ -134,7 +163,9 @@ extension HomeVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCVC.identifier, for: indexPath) as? HomeCVC else { return UICollectionViewCell() }
+        
         cell.configure(model: movies[indexPath.row], genre: genre[indexPath.row])
+        
         return cell
     }
 }
@@ -144,8 +175,10 @@ extension HomeVC: UICollectionViewDataSource {
 extension HomeVC: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let id = movies[indexPath.row].id
-        let controller = DetailsVC.construct(id: id, cellType: [.poster, .details, .description])
+        let genre = genre[indexPath.row].name
+        let controller = DetailsVC.construct(id: id, genre: genre, cellType: [.poster, .details, .description])
         self.navigationController?.pushViewController(controller, animated: true)
     }
 }
@@ -154,13 +187,25 @@ extension HomeVC: UICollectionViewDelegate {
 
 extension HomeVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+        
         return CGSize(width: collectionView.bounds.width, height: 116.0)
     }
 }
 
 // MARK: - UI SearchBar delegate
 
+extension HomeVC: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty, query.trimmingCharacters(in: .whitespaces).count >= 3 else { return }
+        
+        searchRequest(with: query)
+    }
+}
+
 extension HomeVC: UISearchBarDelegate {
-    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        let searchBar = searchController.searchBar
+        searchBar.text = ""
+    }
 }

@@ -18,6 +18,7 @@ class DetailsCVC: UICollectionViewCell {
     @IBOutlet weak var genreLabel: UILabel!
     
     @IBOutlet weak var descriptionButton: UIButton!
+    @IBOutlet weak var reviewBackgroundView: UIView!
     @IBOutlet weak var reviewButton: UIButton!
     @IBOutlet weak var reviewsCount: UILabel!
     
@@ -25,30 +26,30 @@ class DetailsCVC: UICollectionViewCell {
     
     var changeCollectionCellToDescription: (() -> Void)?
     var changeCollectionCellToReview: (() -> Void)?
-    
+
     // MARK: - Lifecycle
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        resetViews()
-    }
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//
+//        resetViews()
+//    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        reviewBackgroundView.backgroundColor = .black
         configureButtons()
-        descriptionButton.isSelected = true
     }
     
     // MARK: - Functions
     
-    public func configure(model: Movie) {
+    public func configure(model: Movie, genre: String) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.titleLabel.text = model.title
             self.rateLabel.text = "\(model.rate)"
             self.dateLabel.text = model.year
+            self.genreLabel.text = genre
         }
     }
     
@@ -63,32 +64,21 @@ class DetailsCVC: UICollectionViewCell {
     }
     
     private func resetViews() {
-        descriptionButton.backgroundColor = .black
-        reviewButton.backgroundColor = .black
+        descriptionButton.isSelected = true
+        reviewButton.isSelected = false
+
     }
     
     // MARK: - IB Action
     
     @IBAction func descriptionAction(_ sender: Any) {
-        
-        if descriptionButton.isSelected == false {
-            descriptionButton.isSelected = true
-            changeCollectionCellToDescription?()
-        } else {
-            descriptionButton.isSelected = false
-            descriptionButton.backgroundColor = .black
-        }
+     print("descriptionAction")
+        changeCollectionCellToDescription?()
     }
     
     @IBAction func reviewAction(_ sender: Any) {
-        
-        if reviewButton.isSelected == false {
-            reviewButton.isSelected = true
-            changeCollectionCellToReview?()
-        } else {
-            reviewButton.isSelected = false
-            reviewButton.backgroundColor = .black
-        }
+        print("reviewAction")
+        changeCollectionCellToReview?()
     }
     
 }

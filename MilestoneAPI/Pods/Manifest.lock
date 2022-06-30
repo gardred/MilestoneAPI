@@ -1,22 +1,26 @@
 PODS:
   - Cosmos (23.0.0)
+  - IQKeyboardManagerSwift (6.5.10)
   - SDWebImage (5.12.5):
     - SDWebImage/Core (= 5.12.5)
   - SDWebImage/Core (5.12.5)
 
 DEPENDENCIES:
   - Cosmos
+  - IQKeyboardManagerSwift
   - SDWebImage (~> 5.0)
 
 SPEC REPOS:
   trunk:
     - Cosmos
+    - IQKeyboardManagerSwift
     - SDWebImage
 
 SPEC CHECKSUMS:
   Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
+  IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
   SDWebImage: 0905f1b7760fc8ac4198cae0036600d67478751e
 
-PODFILE CHECKSUM: 515c04a9edf58f08cb13ef69e494f7e4504cf084
+PODFILE CHECKSUM: 43f1a237466b1200a196c05fd74879ed293a7a4f
 
 COCOAPODS: 1.11.3

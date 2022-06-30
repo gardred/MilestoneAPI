@@ -17,6 +17,7 @@ class ReviewCVC: UICollectionViewCell {
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var review: UILabel!
     
+    @IBOutlet weak var errorLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         

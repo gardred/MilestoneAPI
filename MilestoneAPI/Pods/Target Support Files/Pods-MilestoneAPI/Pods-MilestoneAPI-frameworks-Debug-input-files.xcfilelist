@@ -1,3 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-MilestoneAPI/Pods-MilestoneAPI-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework
+${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework
 ${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework

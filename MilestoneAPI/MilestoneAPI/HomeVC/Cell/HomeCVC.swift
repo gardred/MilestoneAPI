@@ -24,8 +24,8 @@ class HomeCVC: UICollectionViewCell {
 
     public func configure(model: Movie, genre: Genre) {
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.imageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(model.posterImage)"))
+            guard let self = self, let image = model.posterImage else { return }
+            self.imageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(image)"))
             self.titleLabel.text = model.title
             self.dateLabel.text = model.year
             self.ratingLabel.text = "\(model.rate)"

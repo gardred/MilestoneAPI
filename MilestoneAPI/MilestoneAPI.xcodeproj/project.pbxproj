@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4739044B821C2B152F00A212 /* Pods_MilestoneAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF90D9123E1D0E28E6A632F6 /* Pods_MilestoneAPI.framework */; };
 		F11EC4432869FAB000516762 /* UIAlert-.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11EC4422869FAB000516762 /* UIAlert-.swift */; };
+		F1727D71286D81EB00447276 /* UITextFIeld-Padding-.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1727D70286D81EB00447276 /* UITextFIeld-Padding-.swift */; };
 		F1A02F212869870400FCE92F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F202869870400FCE92F /* AppDelegate.swift */; };
 		F1A02F232869870400FCE92F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F222869870400FCE92F /* SceneDelegate.swift */; };
 		F1A02F252869870400FCE92F /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F242869870400FCE92F /* HomeVC.swift */; };
@@ -37,6 +38,7 @@
 		4897CEC3056B57105F5BF935 /* Pods-MilestoneAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MilestoneAPI.debug.xcconfig"; path = "Target Support Files/Pods-MilestoneAPI/Pods-MilestoneAPI.debug.xcconfig"; sourceTree = "<group>"; };
 		CF90D9123E1D0E28E6A632F6 /* Pods_MilestoneAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MilestoneAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F11EC4422869FAB000516762 /* UIAlert-.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlert-.swift"; sourceTree = "<group>"; };
+		F1727D70286D81EB00447276 /* UITextFIeld-Padding-.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextFIeld-Padding-.swift"; sourceTree = "<group>"; };
 		F1A02F1D2869870400FCE92F /* MilestoneAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MilestoneAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A02F202869870400FCE92F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1A02F222869870400FCE92F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				F11EC4422869FAB000516762 /* UIAlert-.swift */,
+				F1727D70286D81EB00447276 /* UITextFIeld-Padding-.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -120,7 +123,6 @@
 		F1A02F1F2869870400FCE92F /* MilestoneAPI */ = {
 			isa = PBXGroup;
 			children = (
-				F1D4E515286C9E3000538F56 /* Fonts */,
 				F11EC4412869FA9C00516762 /* Utilities */,
 				F1A02F552869A51000FCE92F /* Model */,
 				F1A02F5228699B4600FCE92F /* ReviewVC */,
@@ -194,13 +196,6 @@
 				F1D4E513286C7C0000538F56 /* Genre.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		F1D4E515286C9E3000538F56 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,6 +320,7 @@
 			files = (
 				F1A02F50286995B400FCE92F /* ReviewCVC.swift in Sources */,
 				F1A02F3E28698BF700FCE92F /* PosterCVC.swift in Sources */,
+				F1727D71286D81EB00447276 /* UITextFIeld-Padding-.swift in Sources */,
 				F1A02F4928698DFF00FCE92F /* DetailsVC.swift in Sources */,
 				F1A02F5428699B5C00FCE92F /* ReviewVC.swift in Sources */,
 				F11EC4432869FAB000516762 /* UIAlert-.swift in Sources */,

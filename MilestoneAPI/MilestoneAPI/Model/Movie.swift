@@ -18,9 +18,9 @@ struct MovieResponse: Codable {
 struct Movie: Codable {
     let id: Int
     let title: String
-    let year: String
+    let year: String?
     let rate: Double
-    let posterImage: String
+    let posterImage: String?
     let overview: String
     
     private enum CodingKeys: String, CodingKey {

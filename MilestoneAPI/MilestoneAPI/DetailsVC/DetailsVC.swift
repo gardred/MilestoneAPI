@@ -7,6 +7,13 @@
 
 import UIKit
 
+enum CellType {
+    case poster
+    case details
+    case description
+    case review
+}
+
 class DetailsVC: UIViewController {
     
     class func fromStoryboard<T: DetailsVC>(_ storyboardName: String) -> T {
@@ -14,18 +21,12 @@ class DetailsVC: UIViewController {
         return UIStoryboard(name: storyboardName, bundle: nil).instantiateViewController(withIdentifier: identifier) as! T
     }
     
-    enum CellType {
-        case poster
-        case details
-        case description
-        case review
-    }
-    
     // MARK: - UI Elements
     
     @IBOutlet private weak var detailsCollectionView: UICollectionView!
     @IBOutlet private weak var writeReviewButton: UIButton!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var bottomView: UIView!
     @IBOutlet private weak var backButton: UIButton!
     // MARK: - Variables
     
@@ -34,6 +35,7 @@ class DetailsVC: UIViewController {
     private var screenState: CellType = .description
     
     private var id = 0
+    private var genre: String?
     // MARK: - Lifecycle
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -48,6 +50,7 @@ class DetailsVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        
         getSingleMovie()
     }
     
@@ -61,14 +64,19 @@ class DetailsVC: UIViewController {
     // MARK: - Functions
     
     
-    static func construct(id: Int,cellType: [CellType]) -> DetailsVC {
+    static func construct(id: Int, genre: String, cellType: [CellType]) -> DetailsVC {
+        
         let controller: DetailsVC = .fromStoryboard("Main")
         controller.id = id
+        controller.genre = genre
         controller.cellType = cellType
+        
         return controller
     }
     
     private func configureUI() {
+        view.backgroundColor = .black
+        bottomView.backgroundColor = .black
         writeReviewButton.layer.cornerRadius = 8
     }
     
@@ -164,24 +172,25 @@ extension DetailsVC: UICollectionViewDataSource {
         case .details:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailsCVC.identifier, for: indexPath) as? DetailsCVC else { return UICollectionViewCell() }
             
-            if let selectedMovie = selectedMovie {
-                cell.configure(model: selectedMovie)
+            if let selectedMovie = selectedMovie, let genre = genre {
+                cell.configure(model: selectedMovie, genre: genre)
             }
             
             cell.changeCollectionCellToDescription = { [weak self] in
-                self?.screenState = .description
                 self?.detailsCollectionView.reloadData()
+                print("reloaded")
             }
             
             cell.changeCollectionCellToReview = { [weak self] in
-                self?.screenState = .review
                 self?.detailsCollectionView.reloadData()
             }
             
             return cell
             
         case .description:
+            
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DescriptionCVC.identifier, for: indexPath) as? DescriptionCVC else { return UICollectionViewCell() }
+            
             if let selectedMovie = selectedMovie {
                 cell.configure(model: selectedMovie)
             }
@@ -199,7 +208,9 @@ extension DetailsVC: UICollectionViewDataSource {
 // MARK: - UICollectionView Flow Layout
 
 extension DetailsVC: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+  
         switch cellType[indexPath.row] {
             
         case .poster:
@@ -207,7 +218,7 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout {
         case .details:
             return CGSize(width: collectionView.bounds.width, height: 200.0)
         case .description:
-            return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
+            return CGSize(width: collectionView.bounds.width, height: 270.0)
         case .review:
             return CGSize(width: collectionView.bounds.width, height: view.frame.height)
         }

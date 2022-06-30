@@ -23,6 +23,8 @@ class ReviewVC: UIViewController {
     @IBOutlet private weak var reviewBody: UITextView!
     @IBOutlet private weak var submitButton: UIButton!
     @IBOutlet private weak var backButton: UIButton!
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var bottomView: UIView!
     
     //MARK: - Variables
     private var movie: Movie?
@@ -45,7 +47,8 @@ class ReviewVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .black
+        reviewBody.textColor = hexStringToUIColor(hex: "#C7C7C7")
         configureUI()
     }
     
@@ -58,18 +61,30 @@ class ReviewVC: UIViewController {
     }
     
     private func configureUI() {
-        guard let movie = movie else { return }
+        
+        guard let movie = movie, let image = movie.posterImage else { return }
+        
+        headerView.backgroundColor = .black
+        bottomView.backgroundColor = .black
         
         reviewBody.layer.cornerRadius = 8
         submitButton.layer.cornerRadius = 8
         
         reviewTitle.delegate = self
+        reviewTitle.setLeftPaddingPoints(16)
+        reviewTitle.setRightPaddingPoints(16)
+        
+        reviewBody.delegate = self
+        reviewBody.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16)
+        
         submitButton.backgroundColor = hexStringToUIColor(hex: "#606DDE").withAlphaComponent(0.5)
         submitButton.isUserInteractionEnabled = false
         
         movieTitle.text = movie.title
-        imageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(movie.posterImage)"))
+        imageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(image)"))
     }
+    
+    // MARK: - IB Actions
     
     @IBAction func backButtonAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -79,6 +94,7 @@ class ReviewVC: UIViewController {
 // MARK: - UI Textfield delegate
 
 extension ReviewVC: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -87,7 +103,7 @@ extension ReviewVC: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let text = (reviewTitle.text! as NSString).replacingCharacters(in: range, with: string)
 
-         if !text.isEmpty{
+         if !text.isEmpty {
              submitButton.isUserInteractionEnabled = true
              submitButton.backgroundColor = hexStringToUIColor(hex: "#606DDE").withAlphaComponent(1.0)
          } else {
@@ -95,5 +111,18 @@ extension ReviewVC: UITextFieldDelegate {
              submitButton.backgroundColor = hexStringToUIColor(hex: "#606DDE").withAlphaComponent(0.5)
          }
          return true
+    }
+}
+
+
+// MARK: - UI TextView Delegate
+
+extension ReviewVC: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == hexStringToUIColor(hex: "#C7C7C7") {
+            textView.text = nil
+            textView.textColor = UIColor.lightGray
+        }
     }
 }
