@@ -38,6 +38,8 @@ class DetailsCVC: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         reviewBackgroundView.backgroundColor = .black
+        descriptionButton.isSelected = true
+        reviewButton.isSelected = false
         configureButtons()
     }
     
@@ -72,13 +74,43 @@ class DetailsCVC: UICollectionViewCell {
     // MARK: - IB Action
     
     @IBAction func descriptionAction(_ sender: Any) {
-     print("descriptionAction")
-        changeCollectionCellToDescription?()
+        if descriptionButton.isSelected == false {
+           
+            descriptionButton.isSelected = true
+            descriptionButton.setTitleColor(UIColor.white, for: .normal)
+            descriptionButton.backgroundColor = .systemGray
+            NotificationCenter.default.post(name: NSNotification.Name("change"), object: nil)
+            changeCollectionCellToDescription?()
+            
+            reviewButton.isSelected = false
+            reviewButton.backgroundColor = .black
+            reviewButton.setTitleColor(UIColor.white, for: .normal)
+            
+        } else {
+            descriptionButton.isSelected = false
+            descriptionButton.backgroundColor = .black
+            descriptionButton.setTitleColor(UIColor.white, for: .normal)
+        }
+        
     }
     
     @IBAction func reviewAction(_ sender: Any) {
-        print("reviewAction")
-        changeCollectionCellToReview?()
+        if reviewButton.isSelected == false {
+            
+            reviewButton.isSelected = true
+            reviewButton.backgroundColor = .systemGray
+            NotificationCenter.default.post(name: NSNotification.Name("hide"), object: nil)
+            changeCollectionCellToReview?()
+            
+            descriptionButton.isSelected = false
+            descriptionButton.backgroundColor = .black
+            descriptionButton.setTitleColor(UIColor.white, for: .normal)
+        
+        } else {
+            reviewButton.isSelected = false
+            reviewButton.backgroundColor = .black
+            reviewButton.setTitleColor(UIColor.white, for: .normal)
+        }
     }
     
 }

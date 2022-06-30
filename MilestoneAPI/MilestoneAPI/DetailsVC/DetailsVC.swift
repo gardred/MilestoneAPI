@@ -11,7 +11,6 @@ enum CellType {
     case poster
     case details
     case description
-    case review
 }
 
 class DetailsVC: UIViewController {
@@ -32,7 +31,6 @@ class DetailsVC: UIViewController {
     
     private var cellType: [CellType] = []
     private var selectedMovie: Movie?
-    private var screenState: CellType = .description
     
     private var id = 0
     private var genre: String?
@@ -85,29 +83,11 @@ class DetailsVC: UIViewController {
         detailsCollectionView.register(UINib(nibName: "PosterCVC", bundle: nil), forCellWithReuseIdentifier: PosterCVC.identifier)
         detailsCollectionView.register(UINib(nibName: "DetailsCVC", bundle: nil), forCellWithReuseIdentifier: DetailsCVC.identifier)
         detailsCollectionView.register(UINib(nibName: "DescriptionCVC", bundle: nil), forCellWithReuseIdentifier: DescriptionCVC.identifier)
-        detailsCollectionView.register(UINib(nibName: "ReviewCVC", bundle: nil), forCellWithReuseIdentifier: ReviewCVC.identifier)
         
         detailsCollectionView.dataSource = self
         detailsCollectionView.delegate = self
         
         detailsCollectionView.backgroundColor = .black
-    }
-    
-    private func prepareStructure() {
-        cellType = [.poster, .details]
-        
-        switch screenState {
-        case .description:
-            cellType.append(.description)
-        case .review:
-            cellType.append(.review)
-        case .poster:
-            break
-        case .details:
-            break
-        }
-        
-        detailsCollectionView.reloadData()
     }
     
     // MARK: - API Request
@@ -178,7 +158,6 @@ extension DetailsVC: UICollectionViewDataSource {
             
             cell.changeCollectionCellToDescription = { [weak self] in
                 self?.detailsCollectionView.reloadData()
-                print("reloaded")
             }
             
             cell.changeCollectionCellToReview = { [weak self] in
@@ -194,11 +173,6 @@ extension DetailsVC: UICollectionViewDataSource {
             if let selectedMovie = selectedMovie {
                 cell.configure(model: selectedMovie)
             }
-            return cell
-            
-        case .review:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewCVC.identifier, for: indexPath) as? ReviewCVC else { return UICollectionViewCell() }
-            
             return cell
         }
         
@@ -219,8 +193,6 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout {
             return CGSize(width: collectionView.bounds.width, height: 200.0)
         case .description:
             return CGSize(width: collectionView.bounds.width, height: 270.0)
-        case .review:
-            return CGSize(width: collectionView.bounds.width, height: view.frame.height)
         }
     }
 }

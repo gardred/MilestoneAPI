@@ -16,17 +16,15 @@ class HomeVC: UIViewController {
     
     
     // MARK: - UI Elements
-    private var searchController: UISearchController!
     @IBOutlet private weak var moviesCollectionView: UICollectionView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var searchBackground: UIView!
-    
     
     // MARK: - Variables
     
     private var movies = [Movie]()
     private var genre = [Genre]()
-    
+    private var searchController: UISearchController!
     // MARK: - Lifecycle
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -69,7 +67,6 @@ class HomeVC: UIViewController {
         searchController.searchResultsUpdater = self
         searchBackground.backgroundColor = .black
         searchBackground.addSubview(searchController.searchBar)
-        searchController.searchBar.delegate = self
     }
     
     static func construct() -> HomeVC {
@@ -92,9 +89,14 @@ class HomeVC: UIViewController {
                 self.movies.append(contentsOf: getMovies)
                 
                 DispatchQueue.main.async {
+                    
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.moviesCollectionView.reloadData()
+                    
+                    if self.movies.count >= 19 {
+                        self.getGenre()
+                    }
                 }
                 
             case .failure(let error):
@@ -115,7 +117,6 @@ class HomeVC: UIViewController {
             case .success(let getGenre):
                 
                 self.genre.append(contentsOf: getGenre)
-                
             case .failure(let error):
                 
                 DispatchQueue.main.async {
@@ -200,12 +201,5 @@ extension HomeVC: UISearchResultsUpdating {
         guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty, query.trimmingCharacters(in: .whitespaces).count >= 3 else { return }
         
         searchRequest(with: query)
-    }
-}
-
-extension HomeVC: UISearchBarDelegate {
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        let searchBar = searchController.searchBar
-        searchBar.text = ""
     }
 }
