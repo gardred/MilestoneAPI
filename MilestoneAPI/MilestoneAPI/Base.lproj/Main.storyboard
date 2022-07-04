@@ -159,13 +159,13 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fgo-mJ-hM6">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sb4-b0-b7g">
+                                    <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sb4-b0-b7g">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VaI-dM-CuD">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VaI-dM-CuD">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="305"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="305" id="4g0-2h-nmY"/>
+                                                    <constraint firstAttribute="height" constant="305" id="bd6-vZ-mjX"/>
                                                 </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="dGM-in-GNx">
@@ -265,13 +265,13 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="VaI-dM-CuD" secondAttribute="trailing" id="6FC-jR-bKf"/>
-                                            <constraint firstItem="VaI-dM-CuD" firstAttribute="top" secondItem="Sb4-b0-b7g" secondAttribute="top" id="D0W-fN-bI6"/>
                                             <constraint firstAttribute="height" constant="800" id="FoA-zb-cAl"/>
-                                            <constraint firstItem="VaI-dM-CuD" firstAttribute="leading" secondItem="Sb4-b0-b7g" secondAttribute="leading" id="LTm-dD-a8l"/>
+                                            <constraint firstItem="VaI-dM-CuD" firstAttribute="leading" secondItem="Sb4-b0-b7g" secondAttribute="leading" id="Haf-S2-PcH"/>
                                             <constraint firstItem="dGM-in-GNx" firstAttribute="leading" secondItem="Sb4-b0-b7g" secondAttribute="leading" constant="16" id="Tnk-At-pcG"/>
                                             <constraint firstItem="ykJ-xs-VNA" firstAttribute="top" secondItem="Sb4-b0-b7g" secondAttribute="top" constant="20" id="UU9-Z7-lhz"/>
-                                            <constraint firstItem="dGM-in-GNx" firstAttribute="top" secondItem="VaI-dM-CuD" secondAttribute="bottom" constant="32" id="iat-dM-r84"/>
+                                            <constraint firstAttribute="trailing" secondItem="VaI-dM-CuD" secondAttribute="trailing" id="dc2-Ul-8XE"/>
+                                            <constraint firstItem="dGM-in-GNx" firstAttribute="top" secondItem="VaI-dM-CuD" secondAttribute="bottom" constant="32" id="fRH-kD-g9T"/>
+                                            <constraint firstItem="VaI-dM-CuD" firstAttribute="top" secondItem="Sb4-b0-b7g" secondAttribute="top" id="jvu-4P-t5V"/>
                                             <constraint firstItem="6Vr-B8-psB" firstAttribute="leading" secondItem="Sb4-b0-b7g" secondAttribute="leading" constant="16" id="nLa-E7-RGS"/>
                                             <constraint firstAttribute="trailing" secondItem="dGM-in-GNx" secondAttribute="trailing" constant="16" id="nSr-Lf-JnU"/>
                                             <constraint firstItem="ykJ-xs-VNA" firstAttribute="leading" secondItem="Sb4-b0-b7g" secondAttribute="leading" constant="20" id="r8i-he-Vx3"/>
@@ -343,11 +343,6 @@
             <point key="canvasLocation" x="1584.8130841121495" y="25.917926565874733"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="78J-HA-Le0">
-            <size key="intrinsicContentSize" width="195" height="35"/>
-        </designable>
-    </designables>
     <resources>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="rating.stars" width="29" height="27.5"/>

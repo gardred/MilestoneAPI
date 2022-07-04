@@ -99,12 +99,12 @@ class DescriptionCVC: UICollectionViewCell {
 
 extension DescriptionCVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(reviews.count)
         return reviews.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewTVC.identifier, for: indexPath) as? ReviewTVC else { return UITableViewCell() }
+          
         cell.configure(model: reviews[indexPath.row])
         return cell
     }

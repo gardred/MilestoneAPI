@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="grx-qt-8Dc">
-                        <rect key="frame" x="1" y="5" width="318" height="75.5"/>
+                        <rect key="frame" x="24" y="16" width="272" height="75.5"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dNR-Xa-zPV">
                                 <rect key="frame" x="0.0" y="0.0" width="74" height="12"/>
@@ -74,9 +74,9 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="grx-qt-8Dc" secondAttribute="trailing" constant="1" id="6Iu-sP-3jz"/>
-                    <constraint firstItem="grx-qt-8Dc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="JMQ-Ln-X8X"/>
-                    <constraint firstItem="grx-qt-8Dc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="1" id="hhz-9L-gI2"/>
+                    <constraint firstAttribute="trailing" secondItem="grx-qt-8Dc" secondAttribute="trailing" constant="24" id="6Iu-sP-3jz"/>
+                    <constraint firstItem="grx-qt-8Dc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="JMQ-Ln-X8X"/>
+                    <constraint firstItem="grx-qt-8Dc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="hhz-9L-gI2"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

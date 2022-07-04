@@ -21,11 +21,10 @@ class HomeVC: UIViewController {
     @IBOutlet private weak var searchBackground: UIView!
     private var searchController: UISearchController!
     private let refreshControl = UIRefreshControl()
-    // MARK: - Variables
     
+    // MARK: - Variables
     private var movies = [Movie]()
     private var genre = [Genre]()
-//    private var genreCount = genre
     private var isFetchingData = false
     private var currentPage = 1
     // MARK: - Lifecycle
@@ -71,6 +70,7 @@ class HomeVC: UIViewController {
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.delegate = self
         searchBackground.backgroundColor = .black
         searchBackground.addSubview(searchController.searchBar)
     }
@@ -199,8 +199,8 @@ extension HomeVC: UICollectionViewDelegate {
         
         let id = movies[indexPath.row].id
         let genre = genre[indexPath.row].name
-        
         let controller = DetailsVC.construct(id: id, genre: genre, cellType: [.poster, .details, .description])
+        searchController.isActive = false
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -234,5 +234,16 @@ extension HomeVC: UISearchResultsUpdating {
         guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty, query.trimmingCharacters(in: .whitespaces).count >= 3 else { return }
         
         searchRequest(with: query)
+    }
+}
+
+extension HomeVC: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        movies.removeAll()
+        currentPage = 1
+        DispatchQueue.main.async { [weak self] in
+            self?.getMovies()
+            self?.moviesCollectionView.reloadData()
+        }
     }
 }

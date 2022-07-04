@@ -48,8 +48,6 @@ class DetailsVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        
-        
     }
     
     override func viewDidLoad() {
@@ -62,7 +60,6 @@ class DetailsVC: UIViewController {
     }
     
     // MARK: - Functions
-    
     
     static func construct(id: Int, genre: String, cellType: [CellType]) -> DetailsVC {
         
