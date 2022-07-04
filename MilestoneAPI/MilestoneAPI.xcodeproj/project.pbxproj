@@ -31,6 +31,7 @@
 		F1A02F592869AA7D00FCE92F /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F582869AA7C00FCE92F /* Movie.swift */; };
 		F1A16C54286DD45A00AFB467 /* ReviewTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A16C52286DD45A00AFB467 /* ReviewTVC.swift */; };
 		F1A16C55286DD45A00AFB467 /* ReviewTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1A16C53286DD45A00AFB467 /* ReviewTVC.xib */; };
+		F1ABA84A287312C500DD80E2 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ABA849287312C500DD80E2 /* Review.swift */; };
 		F1D4E514286C7C0000538F56 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D4E513286C7C0000538F56 /* Genre.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		F1A02F582869AA7C00FCE92F /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		F1A16C52286DD45A00AFB467 /* ReviewTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTVC.swift; sourceTree = "<group>"; };
 		F1A16C53286DD45A00AFB467 /* ReviewTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewTVC.xib; sourceTree = "<group>"; };
+		F1ABA849287312C500DD80E2 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		F1D4E513286C7C0000538F56 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,6 +198,7 @@
 				F1A02F562869A52A00FCE92F /* API.swift */,
 				F1A02F582869AA7C00FCE92F /* Movie.swift */,
 				F1D4E513286C7C0000538F56 /* Genre.swift */,
+				F1ABA849287312C500DD80E2 /* Review.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				F1A02F212869870400FCE92F /* AppDelegate.swift in Sources */,
 				F1A02F232869870400FCE92F /* SceneDelegate.swift in Sources */,
 				F1A16C54286DD45A00AFB467 /* ReviewTVC.swift in Sources */,
+				F1ABA84A287312C500DD80E2 /* Review.swift in Sources */,
 				F149C1EC2872C9B000E6E57F /* HexColor.swift in Sources */,
 				F1A02F572869A52A00FCE92F /* API.swift in Sources */,
 				F1A02F4228698C1700FCE92F /* DetailsCVC.swift in Sources */,

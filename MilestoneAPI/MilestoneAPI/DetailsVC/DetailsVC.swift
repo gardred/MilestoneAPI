@@ -37,7 +37,7 @@ class DetailsVC: UIViewController {
     // MARK: - Lifecycle
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return .default
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -58,6 +58,7 @@ class DetailsVC: UIViewController {
         configureUI()
         configCollection()
         getSingleMovie()
+
     }
     
     // MARK: - Functions
@@ -172,6 +173,7 @@ extension DetailsVC: UICollectionViewDataSource {
             cell.changeCollectionCellToReview = { [weak self] in
                 guard let self = self else { return }
                 self.detailsCollectionView.reloadData()
+                cell.id = self.id
             }
             
             return cell
@@ -183,6 +185,8 @@ extension DetailsVC: UICollectionViewDataSource {
             if let selectedMovie = selectedMovie {
                 cell.configure(model: selectedMovie)
             }
+            cell.id = self.id
+            
             return cell
         }
         

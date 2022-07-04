@@ -23,16 +23,15 @@ class ReviewVC: UIViewController {
     @IBOutlet private weak var reviewBody: UITextView!
     @IBOutlet private weak var submitButton: UIButton!
     @IBOutlet private weak var backButton: UIButton!
-    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var bottomView: UIView!
-    
+    @IBOutlet weak var scrollView: UIScrollView!
     //MARK: - Variables
     private var movie: Movie?
     
     // MARK: - Lifecycle
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return .default
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -47,7 +46,6 @@ class ReviewVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
         reviewBody.textColor = hexStringToUIColor(hex: "#C7C7C7")
         configureUI()
     }
@@ -62,10 +60,11 @@ class ReviewVC: UIViewController {
     
     private func configureUI() {
         
-        guard let movie = movie, let image = movie.posterImage else { return }
+        guard let movie = movie, let image = movie.poster_path else { return }
         
-        headerView.backgroundColor = .black
+        view.backgroundColor = .black
         bottomView.backgroundColor = .black
+        scrollView.backgroundColor = .black
         
         reviewBody.layer.cornerRadius = 8
         submitButton.layer.cornerRadius = 8
@@ -82,10 +81,10 @@ class ReviewVC: UIViewController {
         
         movieTitle.text = movie.title
         imageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(image)"))
+        imageView.contentMode = .scaleToFill
     }
     
     // MARK: - IB Actions
-    
     @IBAction func backButtonAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }

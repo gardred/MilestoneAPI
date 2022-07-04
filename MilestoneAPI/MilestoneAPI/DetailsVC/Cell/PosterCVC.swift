@@ -13,28 +13,21 @@ class PosterCVC: UICollectionViewCell {
     static let identifier = "PosterCVC"
     
     @IBOutlet weak var imageView: UIImageView!
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        resetView()
-    }
+
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         imageView.isSkeletonable = true
         imageView.showSkeleton(usingColor: .concrete, animated: true, delay: 0.25, transition: .crossDissolve(0.25))
     }
     
     public func configure(model: Movie) {
         DispatchQueue.main.async { [weak self] in
-            guard let self = self, let image = model.posterImage else { return }
+            guard let self = self, let image = model.poster_path else { return }
             self.imageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(image)"))
+            self.imageView.contentMode = .scaleToFill
             self.imageView.hideSkeleton()
         }
-    }
-    
-    private func resetView() {
-        imageView.image = nil
     }
 }

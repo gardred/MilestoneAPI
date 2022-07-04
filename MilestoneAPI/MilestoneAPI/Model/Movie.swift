@@ -8,25 +8,25 @@
 import Foundation
 
 struct MovieResponse: Codable {
-    let movie: [Movie]
+    let movies: [Movie]
     
     private enum CodingKeys: String, CodingKey {
-        case movie = "results"
+        case movies = "results"
     }
 }
 
 struct Movie: Codable {
     let id: Int
     let title: String
-    let year: String?
-    let rate: Double
-    let posterImage: String?
+    let release_date: String?
+    let vote_average: Double
+    let poster_path: String?
     let overview: String
     
     private enum CodingKeys: String, CodingKey {
         case title, overview, id
-        case year = "release_date"
-        case rate = "vote_average"
-        case posterImage = "poster_path"
+        case release_date = "release_date"
+        case vote_average = "vote_average"
+        case poster_path = "poster_path"
     }
 }

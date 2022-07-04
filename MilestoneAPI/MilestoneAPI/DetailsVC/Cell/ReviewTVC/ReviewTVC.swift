@@ -7,14 +7,6 @@
 
 import UIKit
 
-struct Review {
-    let rating: Int
-    let title: String
-    let author: String
-    let reviewDate: String
-    let body: String
-}
-
 class ReviewTVC: UITableViewCell {
     
     static let identifier = "ReviewTVC"
@@ -27,7 +19,7 @@ class ReviewTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -35,4 +27,14 @@ class ReviewTVC: UITableViewCell {
         
     }
     
+    public func configure(model: Reviews) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.rating.text = "\(model.authorDetails.rating)"
+            self.reviewTitle.text = model.authorDetails.name
+            self.reviewAuthor.text = model.authorDetails.username
+            self.reviewDate.text = model.createdAt
+            self.reviewBody.text = model.content
+        }
+    }
 }

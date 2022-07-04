@@ -26,7 +26,8 @@ class DetailsCVC: UICollectionViewCell {
     
     var changeCollectionCellToDescription: (() -> Void)?
     var changeCollectionCellToReview: (() -> Void)?
-    
+    private var reviews: [Reviews] = [Reviews]()
+    var id = 0 
     // MARK: - Lifecycle
     
     override func awakeFromNib() {
@@ -64,10 +65,10 @@ class DetailsCVC: UICollectionViewCell {
             self.titleLabel.text = model.title
             self.titleLabel.hideSkeleton()
             
-            self.rateLabel.text = "\(model.rate)"
+            self.rateLabel.text = "\(model.vote_average)"
             self.rateLabel.hideSkeleton()
             
-            self.dateLabel.text = model.year
+            self.dateLabel.text = model.release_date
             self.dateLabel.hideSkeleton()
             
             self.genreLabel.text = genre
@@ -85,6 +86,7 @@ class DetailsCVC: UICollectionViewCell {
         reviewButton.layer.masksToBounds = true
         reviewButton.backgroundColor = .black
         reviewButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
     }
     
     private func describeButtonDeselectedState() {
@@ -99,6 +101,10 @@ class DetailsCVC: UICollectionViewCell {
         reviewButton.setTitleColor(UIColor.darkGray, for: .normal)
         reviewsCount.textColor = .darkGray
     }
+    
+    // MARK: - API Request
+    
+    
     
     // MARK: - IB Action
     
@@ -117,7 +123,6 @@ class DetailsCVC: UICollectionViewCell {
         } else {
             describeButtonDeselectedState()
         }
-        
     }
     
     @IBAction func reviewAction(_ sender: Any) {
@@ -128,7 +133,6 @@ class DetailsCVC: UICollectionViewCell {
             reviewButton.isSelected = true
             reviewButton.backgroundColor = hexStringToUIColor(hex: "#252A34")
             reviewsCount.textColor = .white
-            
             changeCollectionCellToReview?()
             describeButtonDeselectedState()
             

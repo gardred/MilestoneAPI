@@ -19,13 +19,15 @@ class HomeVC: UIViewController {
     @IBOutlet private weak var moviesCollectionView: UICollectionView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var searchBackground: UIView!
-    
+    private var searchController: UISearchController!
+    private let refreshControl = UIRefreshControl()
     // MARK: - Variables
+    
     private var movies = [Movie]()
     private var genre = [Genre]()
-    private var searchController: UISearchController!
-    private var genreIdCount = 19
-    
+//    private var genreCount = genre
+    private var isFetchingData = false
+    private var currentPage = 1
     // MARK: - Lifecycle
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -44,14 +46,15 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+    
         view.backgroundColor = .black
-        configureSearchBar()
+        refreshControl.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
         
+        configureSearchBar()
         getMovies()
         getGenre()
-        
         configCollection()
+        
     }
     
     // MARK: - Functions
@@ -60,6 +63,7 @@ class HomeVC: UIViewController {
         moviesCollectionView.register(UINib(nibName: "HomeCVC", bundle: nil), forCellWithReuseIdentifier: HomeCVC.identifier)
         moviesCollectionView.dataSource = self
         moviesCollectionView.delegate = self
+        moviesCollectionView.refreshControl = refreshControl
     }
     
     private func configureSearchBar() {
@@ -76,27 +80,40 @@ class HomeVC: UIViewController {
         return controller
     }
     
+    @objc private func refreshCollectionView(_ sender: UIRefreshControl) {
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.movies.removeAll()
+            self.currentPage = 1
+            self.getMovies()
+            self.moviesCollectionView.reloadData()
+        }
+        refreshControl.endRefreshing()
+    }
+    
     // MARK: - API Request
     
     private func getMovies() {
         
         activityIndicator.startAnimating()
         
-        API.shared.getMovies { [weak self] (result) in
+        API.shared.getMovies(atPage: currentPage) {  [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
                 
             case .success(let getMovies ):
                 self.movies.append(contentsOf: getMovies)
-                
+                self.isFetchingData = false
+                self.currentPage += 1
                 DispatchQueue.main.async {
                     
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.moviesCollectionView.reloadData()
                     
-                    if self.movies.count >= self.genreIdCount {
+                    if self.movies.count >= self.genre.count {
                         self.getGenre()
                     }
                 }
@@ -116,10 +133,10 @@ class HomeVC: UIViewController {
             guard let self = self else { return }
             
             switch result {
-            
+                
             case .success(let getGenre):
                 self.genre.append(contentsOf: getGenre)
-            
+                
             case .failure(let error):
                 
                 DispatchQueue.main.async {
@@ -182,8 +199,21 @@ extension HomeVC: UICollectionViewDelegate {
         
         let id = movies[indexPath.row].id
         let genre = genre[indexPath.row].name
+        
         let controller = DetailsVC.construct(id: id, genre: genre, cellType: [.poster, .details, .description])
         self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let lastMovie = movies.count - 1
+        
+        if indexPath.row == lastMovie && !isFetchingData {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.isFetchingData = true
+                self.getMovies()
+            }
+        }
     }
 }
 
