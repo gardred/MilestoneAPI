@@ -29,14 +29,16 @@ class API {
                     let result = try JSONDecoder().decode(MovieResponse.self, from: data)
                     completion(.success(result.movie))
                 } catch {
-                    print(error)
+                   print(error)
                 }
                 
             } else if let error = error {
                 
                 DispatchQueue.main.async {
                     let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+                    let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+                    alert.addAction(cancel)
+                    UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
                 }
             }
         }
@@ -57,8 +59,12 @@ class API {
                 }
             
             } else if let error = error {
-                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+                    alert.addAction(cancel)
+                    UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
+                }
             }
         }
         task.resume()
@@ -80,7 +86,12 @@ class API {
                 }
             
             } else if let error = error {
-                print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+                    alert.addAction(cancel)
+                    UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true)
+                }
             }
         }
         task.resume()

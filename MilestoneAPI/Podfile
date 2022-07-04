@@ -9,4 +9,5 @@ target 'MilestoneAPI' do
 pod 'Cosmos' 
 pod 'SDWebImage', '~> 5.0'
 pod 'IQKeyboardManagerSwift'
+pod 'SkeletonView'
 end

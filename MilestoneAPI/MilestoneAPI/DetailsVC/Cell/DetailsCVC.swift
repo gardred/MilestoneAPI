@@ -29,14 +29,9 @@ class DetailsCVC: UICollectionViewCell {
 
     // MARK: - Lifecycle
     
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//
-//        resetViews()
-//    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
+        makeElementsSkeletonable()
         reviewBackgroundView.backgroundColor = .black
         descriptionButton.isSelected = true
         reviewButton.isSelected = false
@@ -45,24 +40,48 @@ class DetailsCVC: UICollectionViewCell {
     
     // MARK: - Functions
     
+    private func makeElementsSkeletonable() {
+        titleLabel.isSkeletonable = true
+        titleLabel.showSkeleton(usingColor: .concrete, animated: true, delay: 0.25, transition: .crossDissolve(0.25))
+        
+        rateLabel.isSkeletonable = true
+        rateLabel.showSkeleton(usingColor: .concrete, animated: true, delay: 0.25, transition: .crossDissolve(0.25))
+        
+        dateLabel.isSkeletonable = true
+        dateLabel.showSkeleton(usingColor: .concrete, animated: true, delay: 0.25, transition: .crossDissolve(0.25))
+        
+        genreLabel.isSkeletonable = true
+        genreLabel.showSkeleton(usingColor: .concrete, animated: true, delay: 0.25, transition: .crossDissolve(0.25))
+    }
+    
     public func configure(model: Movie, genre: String) {
         DispatchQueue.main.async { [weak self] in
+            
             guard let self = self else { return }
+            
             self.titleLabel.text = model.title
+            self.titleLabel.hideSkeleton()
+            
             self.rateLabel.text = "\(model.rate)"
+            self.rateLabel.hideSkeleton()
+            
             self.dateLabel.text = model.year
+            self.dateLabel.hideSkeleton()
+            
             self.genreLabel.text = genre
+            self.genreLabel.hideSkeleton()
         }
     }
     
     private func configureButtons() {
+        
         descriptionButton.layer.cornerRadius = 8
         descriptionButton.layer.masksToBounds = true
-        descriptionButton.setTitleColor(.white, for: .normal)
         descriptionButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         reviewButton.layer.cornerRadius = 8
         reviewButton.layer.masksToBounds = true
+        reviewButton.backgroundColor = .black
         reviewButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
@@ -80,8 +99,8 @@ class DetailsCVC: UICollectionViewCell {
             NotificationCenter.default.post(name: NSNotification.Name("change"), object: nil)
             
             descriptionButton.isSelected = true
-            descriptionButton.backgroundColor = .darkGray
-    
+            descriptionButton.backgroundColor = hexStringToUIColor(hex: "#252A34")
+            
             changeCollectionCellToDescription?()
             
             reviewButton.isSelected = false
@@ -103,7 +122,7 @@ class DetailsCVC: UICollectionViewCell {
             NotificationCenter.default.post(name: NSNotification.Name("hide"), object: nil)
             
             reviewButton.isSelected = true
-            reviewButton.backgroundColor = .darkGray
+            reviewButton.backgroundColor = hexStringToUIColor(hex: "#252A34")
             reviewsCount.textColor = .white
             
             changeCollectionCellToReview?()

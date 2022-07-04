@@ -22,7 +22,7 @@ class DescriptionCVC: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        makeElementsSkeletonable()
         configureTableView()
         notifications()
         configureTableView()
@@ -30,10 +30,19 @@ class DescriptionCVC: UICollectionViewCell {
 
     // MARK: - Functions
     
+    private func makeElementsSkeletonable() {
+        descriptionLabel.isSkeletonable = true
+        descriptionLabel.showSkeleton(usingColor: .concrete, animated: true, delay: 0.25, transition: .crossDissolve(0.25))
+        
+        reviewTableView.isSkeletonable = true
+        reviewTableView.showSkeleton(usingColor: .concrete, animated: true, delay: 0.25, transition: .crossDissolve(0.25))
+    }
+    
     public func configure(model: Movie) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.descriptionLabel.text = model.overview
+            self.descriptionLabel.hideSkeleton()
         }
     }
     

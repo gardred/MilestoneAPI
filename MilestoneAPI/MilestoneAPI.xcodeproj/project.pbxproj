@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4739044B821C2B152F00A212 /* Pods_MilestoneAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF90D9123E1D0E28E6A632F6 /* Pods_MilestoneAPI.framework */; };
 		F11EC4432869FAB000516762 /* UIAlert-.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11EC4422869FAB000516762 /* UIAlert-.swift */; };
+		F149C1EC2872C9B000E6E57F /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F149C1EB2872C9B000E6E57F /* HexColor.swift */; };
 		F1727D71286D81EB00447276 /* UITextFIeld-Padding-.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1727D70286D81EB00447276 /* UITextFIeld-Padding-.swift */; };
 		F1A02F212869870400FCE92F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F202869870400FCE92F /* AppDelegate.swift */; };
 		F1A02F232869870400FCE92F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F222869870400FCE92F /* SceneDelegate.swift */; };
@@ -38,6 +39,7 @@
 		4897CEC3056B57105F5BF935 /* Pods-MilestoneAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MilestoneAPI.debug.xcconfig"; path = "Target Support Files/Pods-MilestoneAPI/Pods-MilestoneAPI.debug.xcconfig"; sourceTree = "<group>"; };
 		CF90D9123E1D0E28E6A632F6 /* Pods_MilestoneAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MilestoneAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F11EC4422869FAB000516762 /* UIAlert-.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlert-.swift"; sourceTree = "<group>"; };
+		F149C1EB2872C9B000E6E57F /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		F1727D70286D81EB00447276 /* UITextFIeld-Padding-.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextFIeld-Padding-.swift"; sourceTree = "<group>"; };
 		F1A02F1D2869870400FCE92F /* MilestoneAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MilestoneAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A02F202869870400FCE92F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			children = (
 				F11EC4422869FAB000516762 /* UIAlert-.swift */,
 				F1727D70286D81EB00447276 /* UITextFIeld-Padding-.swift */,
+				F149C1EB2872C9B000E6E57F /* HexColor.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				F1A02F212869870400FCE92F /* AppDelegate.swift in Sources */,
 				F1A02F232869870400FCE92F /* SceneDelegate.swift in Sources */,
 				F1A16C54286DD45A00AFB467 /* ReviewTVC.swift in Sources */,
+				F149C1EC2872C9B000E6E57F /* HexColor.swift in Sources */,
 				F1A02F572869A52A00FCE92F /* API.swift in Sources */,
 				F1A02F4228698C1700FCE92F /* DetailsCVC.swift in Sources */,
 			);

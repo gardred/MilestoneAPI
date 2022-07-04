@@ -49,7 +49,7 @@ class DetailsVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         
-        getSingleMovie()
+        
     }
     
     override func viewDidLoad() {
@@ -57,6 +57,7 @@ class DetailsVC: UIViewController {
         
         configureUI()
         configCollection()
+        getSingleMovie()
     }
     
     // MARK: - Functions
@@ -93,6 +94,7 @@ class DetailsVC: UIViewController {
     // MARK: - API Request
     
     private func getSingleMovie() {
+        
         API.shared.getMovieById(id: id) { [weak self] (result) in
             guard let self = self else { return }
             
@@ -100,13 +102,17 @@ class DetailsVC: UIViewController {
                 self.activityIndicator.startAnimating()
             }
             switch result {
+            
             case .success(let movie):
+               
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                 }
                 self.selectedMovie = movie
+           
             case .failure(let error):
+               
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
@@ -154,14 +160,18 @@ extension DetailsVC: UICollectionViewDataSource {
             
             if let selectedMovie = selectedMovie, let genre = genre {
                 cell.configure(model: selectedMovie, genre: genre)
+            } else {
+                presentAlert(title: "Error", body: "Failed to get data from server")
             }
             
             cell.changeCollectionCellToDescription = { [weak self] in
-                self?.detailsCollectionView.reloadData()
+                guard let self = self else { return }
+                self.detailsCollectionView.reloadData()
             }
             
             cell.changeCollectionCellToReview = { [weak self] in
-                self?.detailsCollectionView.reloadData()
+                guard let self = self else { return }
+                self.detailsCollectionView.reloadData()
             }
             
             return cell

@@ -4,23 +4,27 @@ PODS:
   - SDWebImage (5.12.5):
     - SDWebImage/Core (= 5.12.5)
   - SDWebImage/Core (5.12.5)
+  - SkeletonView (1.29.2)
 
 DEPENDENCIES:
   - Cosmos
   - IQKeyboardManagerSwift
   - SDWebImage (~> 5.0)
+  - SkeletonView
 
 SPEC REPOS:
   trunk:
     - Cosmos
     - IQKeyboardManagerSwift
     - SDWebImage
+    - SkeletonView
 
 SPEC CHECKSUMS:
   Cosmos: b5c6a9a637e28a061b54c8f8b1d8529d7d4db73f
   IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
   SDWebImage: 0905f1b7760fc8ac4198cae0036600d67478751e
+  SkeletonView: 915a80ecc2b6421ab7ac0f0212321c0cc1406472
 
-PODFILE CHECKSUM: 43f1a237466b1200a196c05fd74879ed293a7a4f
+PODFILE CHECKSUM: 0350bcb2cadf514ebddcaec0edb70810b11efd98
 
 COCOAPODS: 1.11.3

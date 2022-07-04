@@ -21,10 +21,11 @@ class HomeVC: UIViewController {
     @IBOutlet private weak var searchBackground: UIView!
     
     // MARK: - Variables
-    
     private var movies = [Movie]()
     private var genre = [Genre]()
     private var searchController: UISearchController!
+    private var genreIdCount = 19
+    
     // MARK: - Lifecycle
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -95,7 +96,7 @@ class HomeVC: UIViewController {
                     self.activityIndicator.isHidden = true
                     self.moviesCollectionView.reloadData()
                     
-                    if self.movies.count >= 19 {
+                    if self.movies.count >= self.genreIdCount {
                         self.getGenre()
                     }
                 }
@@ -115,9 +116,10 @@ class HomeVC: UIViewController {
             guard let self = self else { return }
             
             switch result {
+            
             case .success(let getGenre):
-                
                 self.genre.append(contentsOf: getGenre)
+            
             case .failure(let error):
                 
                 DispatchQueue.main.async {
