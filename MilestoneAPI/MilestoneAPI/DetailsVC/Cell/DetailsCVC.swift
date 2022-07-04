@@ -26,15 +26,17 @@ class DetailsCVC: UICollectionViewCell {
     
     var changeCollectionCellToDescription: (() -> Void)?
     var changeCollectionCellToReview: (() -> Void)?
-
+    
     // MARK: - Lifecycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
         makeElementsSkeletonable()
+        
         reviewBackgroundView.backgroundColor = .black
         descriptionButton.isSelected = true
         reviewButton.isSelected = false
+        
         configureButtons()
     }
     
@@ -85,10 +87,17 @@ class DetailsCVC: UICollectionViewCell {
         reviewButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
-    private func resetViews() {
-        descriptionButton.isSelected = true
+    private func describeButtonDeselectedState() {
+        descriptionButton.isSelected = false
+        descriptionButton.backgroundColor = .black
+        descriptionButton.setTitleColor(UIColor.white, for: .normal)
+    }
+    
+    private func reviewButtonDeselectedState() {
         reviewButton.isSelected = false
-
+        reviewButton.backgroundColor = .black
+        reviewButton.setTitleColor(UIColor.darkGray, for: .normal)
+        reviewsCount.textColor = .darkGray
     }
     
     // MARK: - IB Action
@@ -103,15 +112,10 @@ class DetailsCVC: UICollectionViewCell {
             
             changeCollectionCellToDescription?()
             
-            reviewButton.isSelected = false
-            reviewButton.backgroundColor = .black
-            reviewButton.setTitleColor(UIColor.darkGray, for: .normal)
-            reviewsCount.textColor = .darkGray
+            reviewButtonDeselectedState()
             
         } else {
-            descriptionButton.isSelected = false
-            descriptionButton.backgroundColor = .black
-            descriptionButton.setTitleColor(UIColor.white, for: .normal)
+            describeButtonDeselectedState()
         }
         
     }
@@ -126,15 +130,10 @@ class DetailsCVC: UICollectionViewCell {
             reviewsCount.textColor = .white
             
             changeCollectionCellToReview?()
+            describeButtonDeselectedState()
             
-            descriptionButton.isSelected = false
-            descriptionButton.backgroundColor = .black
-            descriptionButton.setTitleColor(UIColor.darkGray, for: .normal)
-        
         } else {
-            reviewButton.isSelected = false
-            reviewButton.backgroundColor = .black
-            reviewButton.setTitleColor(UIColor.white, for: .normal)
+            reviewButtonDeselectedState()
         }
     }
     
