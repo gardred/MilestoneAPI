@@ -102,7 +102,7 @@ class API {
     }
     
     
-    func getReview(id: Int, completion: @escaping (Result<[Reviews], Error>) -> Void) {
+    func getReview(id: Int, completion: @escaping (Result<[Review], Error>) -> Void) {
         
         guard let url = URL(string: "\(Constants.baseURL)/3/movie/\(id)/reviews?api_key=\(Constants.API_KEY)&language=en-US&page=1") else { return }
         

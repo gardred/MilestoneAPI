@@ -11,7 +11,7 @@ enum CellType {
     case poster
     case details
     case description
-    case reviews
+    case review([Review])
 }
 
 class DetailsVC: UIViewController {
@@ -35,6 +35,7 @@ class DetailsVC: UIViewController {
     
     private var id = 0
     private var genre: String?
+    private var reviews: [Review] = [Review]()
     // MARK: - Lifecycle
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -57,9 +58,7 @@ class DetailsVC: UIViewController {
         configureUI()
         configCollection()
         getSingleMovie()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(showReviewCell), name: NSNotification.Name("review"), object: nil)
-
+        getReview()
     }
     
     // MARK: - Functions
@@ -93,11 +92,30 @@ class DetailsVC: UIViewController {
         detailsCollectionView.backgroundColor = .black
     }
     
-    @objc private func showReviewCell() {
-        guard let genre = genre else { return }
-
-        let controller = DetailsVC.construct(id: id, genre: genre, cellType: [.poster, .details, .reviews])
-        self.navigationController?.pushViewController(controller, animated: false)
+    public func getReview() {
+        API.shared.getReview(id: id) { [weak self] (reviewsResult) in
+            guard let self = self else { return }
+            switch reviewsResult {
+                
+            case .success(let review):
+                self.reviews.append(contentsOf: review)
+            case .failure(_):
+                print("error")
+            }
+        }
+    }
+    
+    private func showCell(_ cellType: [CellType]) {
+        
+        var cells: [CellType] = [.poster, .details]
+        
+        for _ in 0..<reviews.count {
+            cells.append(.review(reviews))
+            self.cellType.removeAll()
+            self.cellType.append(contentsOf: cells)
+        }
+        
+        detailsCollectionView.reloadData()
     }
     
     // MARK: - API Request
@@ -111,17 +129,17 @@ class DetailsVC: UIViewController {
                 self.activityIndicator.startAnimating()
             }
             switch result {
-            
+                
             case .success(let movie):
-               
+                
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                 }
                 self.selectedMovie = movie
-           
+                
             case .failure(let error):
-               
+                
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
@@ -154,6 +172,7 @@ extension DetailsVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         switch cellType[indexPath.row] {
             
         case .poster:
@@ -162,6 +181,7 @@ extension DetailsVC: UICollectionViewDataSource {
             if let selectedMovie = selectedMovie {
                 cell.configure(model: selectedMovie)
             }
+            
             return cell
             
         case .details:
@@ -175,12 +195,17 @@ extension DetailsVC: UICollectionViewDataSource {
             
             cell.changeCollectionCellToDescription = { [weak self] in
                 guard let self = self else { return }
+                self.cellType.removeAll()
+                self.cellType.append(contentsOf: [.poster,.details,.description])
+                self.reviews.removeAll()
                 self.detailsCollectionView.reloadData()
             }
             
             cell.changeCollectionCellToReview = { [weak self] in
                 guard let self = self else { return }
-                self.detailsCollectionView.reloadData()
+                self.getReview()
+                self.showCell([.poster, .details, .review(self.reviews)])
+                cell.reviewsCount.text = "(\(self.reviews.count))"
             }
             
             return cell
@@ -194,11 +219,12 @@ extension DetailsVC: UICollectionViewDataSource {
             }
             
             return cell
-       
-        case .reviews:
+            
+        case .review:
+            
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewsCVC.identifier, for: indexPath) as? ReviewsCVC else { return UICollectionViewCell() }
-            cell.setup(id: self.id)
-            cell.getReview()
+            
+            cell.configure(model: reviews[indexPath.row])
             return cell
         }
     }
@@ -209,7 +235,7 @@ extension DetailsVC: UICollectionViewDataSource {
 extension DetailsVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let layout = collectionView.
+        
         switch cellType[indexPath.row] {
             
         case .poster:
@@ -217,9 +243,9 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout {
         case .details:
             return CGSize(width: collectionView.bounds.width, height: 200.0)
         case .description:
-            return CGSize(width: collectionView.bounds.width, height: 300.0)
-        case .reviews:
-            return CGSize(width: collectionView.bounds.width, height: 1000.0)
+            return CGSize(width: collectionView.bounds.width, height: 270.0)
+        case .review:
+            return CGSize(width: collectionView.bounds.width, height: 400.0)
         }
     }
 }

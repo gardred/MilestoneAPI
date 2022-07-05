@@ -48,10 +48,6 @@ class DescriptionCVC: UICollectionViewCell {
         NotificationCenter.default.addObserver(self, selector: #selector(hideDescription), name: NSNotification.Name("hide"), object: nil)
     }
     
-    // MARK: - API Request
-    
-    
-    
     // MARK: - Objc private functions
     
     @objc private func presentDescription() {

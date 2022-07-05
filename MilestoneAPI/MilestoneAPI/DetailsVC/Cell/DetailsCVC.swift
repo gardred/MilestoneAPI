@@ -26,8 +26,8 @@ class DetailsCVC: UICollectionViewCell {
     
     var changeCollectionCellToDescription: (() -> Void)?
     var changeCollectionCellToReview: (() -> Void)?
-    private var reviews: [Reviews] = [Reviews]()
-    var id = 0 
+    private var reviews: [Review] = [Review]()
+    var id = 0
     // MARK: - Lifecycle
     
     override func awakeFromNib() {
@@ -102,43 +102,23 @@ class DetailsCVC: UICollectionViewCell {
         reviewsCount.textColor = .darkGray
     }
     
-    // MARK: - API Request
-    
-    
-    
     // MARK: - IB Action
     
     @IBAction func descriptionAction(_ sender: Any) {
-        if descriptionButton.isSelected == false {
-            
-            NotificationCenter.default.post(name: NSNotification.Name("change"), object: nil)
-            
-            descriptionButton.isSelected = true
-            descriptionButton.backgroundColor = hexStringToUIColor(hex: "#252A34")
-            
-            changeCollectionCellToDescription?()
-            reviewButtonDeselectedState()
-            
-        } else {
-            describeButtonDeselectedState()
-        }
+        NotificationCenter.default.post(name: NSNotification.Name("change"), object: nil)
+        
+        descriptionButton.isSelected = true
+        descriptionButton.backgroundColor = hexStringToUIColor(hex: "#252A34")
+        
+        changeCollectionCellToDescription?()
+        reviewButtonDeselectedState()
     }
     
     @IBAction func reviewAction(_ sender: Any) {
-        if reviewButton.isSelected == false {
-            
-            NotificationCenter.default.post(name: NSNotification.Name("hide"), object: nil)
-            NotificationCenter.default.post(name: NSNotification.Name("review"), object: nil)
-            
-            reviewButton.isSelected = true
-            reviewButton.backgroundColor = hexStringToUIColor(hex: "#252A34")
-            reviewsCount.textColor = .white
-            changeCollectionCellToReview?()
-            describeButtonDeselectedState()
-            
-        } else {
-            reviewButtonDeselectedState()
-        }
+        reviewButton.isSelected = true
+        reviewButton.backgroundColor = hexStringToUIColor(hex: "#252A34")
+        reviewsCount.textColor = .white
+        changeCollectionCellToReview?()
+        describeButtonDeselectedState()
     }
-    
 }

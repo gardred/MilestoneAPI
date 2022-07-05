@@ -10,74 +10,38 @@ import UIKit
 class ReviewsCVC: UICollectionViewCell {
 
     static let identifier = "ReviewsCVC"
+
+    @IBOutlet weak var rating: UILabel!
+    @IBOutlet private weak var author: UILabel!
+    @IBOutlet private weak var date: UILabel!
+    @IBOutlet private weak var body: UILabel!
+    @IBOutlet private weak var reviewTitle: UILabel!
     
-    @IBOutlet private weak var tableView: UITableView!
-    
-    var reviews: [Reviews] = [Reviews]()
-    var id = 0
+    @IBOutlet weak var reviewStackView: UIStackView!
+    @IBOutlet weak var ratingStackView: UIStackView!
+    @IBOutlet weak var authorStackView: UIStackView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        configureTableView()
-        tableView.isSkeletonable = true
-        tableView.showSkeleton(usingColor: .concrete, animated: true, delay: 0.25, transition: .crossDissolve(0.25))
-        
+       configureCellUI()
     }
     
-    public func setup(id: Int) {
-        self.id = id
-        print(self.id)
+    private func configureCellUI() {
+        reviewStackView.backgroundColor = .black
+        ratingStackView.backgroundColor = .black
+        authorStackView.backgroundColor = .black
+        backgroundColor = .black
     }
     
-    private func configureTableView() {
-        tableView.register(UINib(nibName: "ReviewTVC", bundle: nil), forCellReuseIdentifier: ReviewTVC.identifier)
-        tableView.backgroundColor = .black
-        tableView.dataSource = self
-        tableView.delegate = self
-    }
-    
-    public func getReview() {
-        API.shared.getReview(id: id) { [weak self] (result) in
-            switch result {
-    
-            case .success(let review):
-                self?.reviews.append(contentsOf: review)
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
-                
-            case .failure(_):
-                print("")
-            }
+    public func configure(model: Review) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.rating.text = String(model.author_details.rating)
+            self.author.text = model.author
+            self.date.text = model.created_at
+            self.body.text = model.content
+            self.reviewTitle.text = model.author
         }
     }
-}
-
-// MARK: - UITableView Data Source
-
-extension ReviewsCVC: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(reviews.count)
-        return reviews.count
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewTVC.identifier, for: indexPath) as? ReviewTVC else { return UITableViewCell() }
-        
-        cell.configure(model: reviews[indexPath.row])
-        return cell
-    }
-}
-
-// MARK: - UITableView Delegate
-
-extension ReviewsCVC: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if reviews.count > 1 {
-            return 300.0
-        } else {
-            return UITableView.automaticDimension
-        }
-    }
 }

@@ -9,43 +9,43 @@ import Foundation
 
 struct ReviewResponse: Codable {
     let id, page: Int
-    let results: [Reviews]
-    let totalPages, totalResults: Int
+    let results: [Review]
+    let total_pages, total_results: Int
 
     enum CodingKeys: String, CodingKey {
         case id, page, results
-        case totalPages = "total_pages"
-        case totalResults = "total_results"
+        case total_pages = "total_pages"
+        case total_results = "total_results"
     }
 }
 
 // MARK: - Review
 
-struct Reviews: Codable {
+struct Review: Codable {
     let author: String
-    let authorDetails: AuthorDetails
-    let content, createdAt, id, updatedAt: String
+    let author_details: AuthorDetails
+    let content, created_at, id, updated_at: String
     let url: String
 
     enum CodingKeys: String, CodingKey {
         case author
-        case authorDetails = "author_details"
+        case author_details = "author_details"
         case content
-        case createdAt = "created_at"
+        case created_at = "created_at"
         case id
-        case updatedAt = "updated_at"
+        case updated_at = "updated_at"
         case url
     }
 }
 
 // MARK: - AuthorDetails
 struct AuthorDetails: Codable {
-    let name, username, avatarPath: String
+    let name, username, avatar_path: String
     let rating: Int
 
     enum CodingKeys: String, CodingKey {
         case name, username
-        case avatarPath = "avatar_path"
+        case avatar_path = "avatar_path"
         case rating
     }
 }
