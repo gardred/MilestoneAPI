@@ -31,7 +31,7 @@ class ReviewVC: UIViewController {
     // MARK: - Lifecycle
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
+        return .lightContent
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -82,6 +82,7 @@ class ReviewVC: UIViewController {
         movieTitle.text = movie.title
         imageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(image)"))
         imageView.contentMode = .scaleToFill
+        imageView.insetsLayoutMarginsFromSafeArea = false
     }
     
     // MARK: - IB Actions

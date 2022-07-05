@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="grx-qt-8Dc">
-                        <rect key="frame" x="24" y="16" width="272" height="75.5"/>
+                        <rect key="frame" x="24" y="16" width="272" height="188"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dNR-Xa-zPV">
                                 <rect key="frame" x="0.0" y="0.0" width="74" height="12"/>
@@ -38,13 +38,16 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[review title]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQW-K9-b2r">
-                                <rect key="frame" x="0.0" y="17" width="85.5" height="17"/>
+                                <rect key="frame" x="0.0" y="17" width="85.5" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="zKi-Mm-ql9"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="ZtR-Jy-6SS">
-                                <rect key="frame" x="0.0" y="39" width="165.5" height="14.5"/>
+                                <rect key="frame" x="0.0" y="46" width="165.5" height="14.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[author]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11q-tw-OiP">
                                         <rect key="frame" x="0.0" y="0.0" width="47.5" height="14.5"/>
@@ -64,17 +67,21 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[review body]" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjH-sa-lIN">
-                                <rect key="frame" x="0.0" y="58.5" width="91.5" height="17"/>
+                                <rect key="frame" x="0.0" y="65.5" width="272" height="122.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                 <color key="textColor" red="0.56078431370000004" green="0.56470588239999997" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="xjH-sa-lIN" secondAttribute="trailing" id="tI5-YF-MTg"/>
+                        </constraints>
                     </stackView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="grx-qt-8Dc" secondAttribute="trailing" constant="24" id="6Iu-sP-3jz"/>
+                    <constraint firstAttribute="bottom" secondItem="grx-qt-8Dc" secondAttribute="bottom" id="Cxp-8o-hma"/>
                     <constraint firstItem="grx-qt-8Dc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="JMQ-Ln-X8X"/>
                     <constraint firstItem="grx-qt-8Dc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="hhz-9L-gI2"/>
                 </constraints>

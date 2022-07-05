@@ -117,7 +117,6 @@ class DetailsCVC: UICollectionViewCell {
             descriptionButton.backgroundColor = hexStringToUIColor(hex: "#252A34")
             
             changeCollectionCellToDescription?()
-            
             reviewButtonDeselectedState()
             
         } else {
@@ -129,6 +128,7 @@ class DetailsCVC: UICollectionViewCell {
         if reviewButton.isSelected == false {
             
             NotificationCenter.default.post(name: NSNotification.Name("hide"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name("review"), object: nil)
             
             reviewButton.isSelected = true
             reviewButton.backgroundColor = hexStringToUIColor(hex: "#252A34")
