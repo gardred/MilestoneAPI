@@ -37,7 +37,6 @@
 		F1A02F4928698DFF00FCE92F /* DetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F4828698DFF00FCE92F /* DetailsVC.swift */; };
 		F1A02F4C2869959F00FCE92F /* DescriptionCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F4A2869959F00FCE92F /* DescriptionCVC.swift */; };
 		F1A02F4D2869959F00FCE92F /* DescriptionCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1A02F4B2869959F00FCE92F /* DescriptionCVC.xib */; };
-		F1A02F5428699B5C00FCE92F /* ReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F5328699B5C00FCE92F /* ReviewVC.swift */; };
 		F1A02F572869A52A00FCE92F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F562869A52A00FCE92F /* API.swift */; };
 		F1A02F592869AA7D00FCE92F /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F582869AA7C00FCE92F /* Movie.swift */; };
 		F1ABA84A287312C500DD80E2 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ABA849287312C500DD80E2 /* Review.swift */; };
@@ -79,7 +78,6 @@
 		F1A02F4828698DFF00FCE92F /* DetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsVC.swift; sourceTree = "<group>"; };
 		F1A02F4A2869959F00FCE92F /* DescriptionCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionCVC.swift; sourceTree = "<group>"; };
 		F1A02F4B2869959F00FCE92F /* DescriptionCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DescriptionCVC.xib; sourceTree = "<group>"; };
-		F1A02F5328699B5C00FCE92F /* ReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewVC.swift; sourceTree = "<group>"; };
 		F1A02F562869A52A00FCE92F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		F1A02F582869AA7C00FCE92F /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		F1ABA849287312C500DD80E2 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
@@ -237,7 +235,6 @@
 			children = (
 				F1350FCD2875840A003E065A /* Header */,
 				F1350FCC28758405003E065A /* Cells */,
-				F1A02F5328699B5C00FCE92F /* ReviewVC.swift */,
 				F1350FBE28757BA5003E065A /* ReviewViewController.swift */,
 			);
 			path = ReviewVC;
@@ -382,7 +379,6 @@
 				F1A02F4928698DFF00FCE92F /* DetailsVC.swift in Sources */,
 				F1350FBF28757BA5003E065A /* ReviewViewController.swift in Sources */,
 				F1350FCA2875837C003E065A /* ReviewCRV.swift in Sources */,
-				F1A02F5428699B5C00FCE92F /* ReviewVC.swift in Sources */,
 				F1350FBD28757290003E065A /* HeaderViewLayout.swift in Sources */,
 				F11EC4432869FAB000516762 /* UIAlert-.swift in Sources */,
 				F1D4E514286C7C0000538F56 /* Genre.swift in Sources */,

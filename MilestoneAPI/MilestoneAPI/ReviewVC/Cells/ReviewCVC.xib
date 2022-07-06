@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="Xgd-ut-myu">
-                        <rect key="frame" x="16" y="28" width="314" height="238"/>
+                        <rect key="frame" x="16" y="28" width="314" height="188"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="Rza-jM-h4Z">
                                 <rect key="frame" x="0.0" y="0.0" width="314" height="82.5"/>
@@ -44,7 +44,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="F0q-dI-HMq">
-                                <rect key="frame" x="0.0" y="106.5" width="314" height="131.5"/>
+                                <rect key="frame" x="0.0" y="106.5" width="314" height="81.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Leave a review " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwK-1k-dfm">
                                         <rect key="frame" x="0.0" y="0.0" width="116" height="20.5"/>
@@ -53,7 +53,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Write your review" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="REY-rb-xOD">
-                                        <rect key="frame" x="0.0" y="25.5" width="314" height="106"/>
+                                        <rect key="frame" x="0.0" y="25.5" width="314" height="56"/>
                                         <color key="backgroundColor" red="0.1450980392" green="0.1647058824" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -76,7 +76,7 @@
             <color key="backgroundColor" systemColor="labelColor"/>
             <constraints>
                 <constraint firstItem="Xgd-ut-myu" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="28" id="JFn-FP-3zZ"/>
-                <constraint firstAttribute="bottom" secondItem="Xgd-ut-myu" secondAttribute="bottom" constant="60" id="fiD-Y1-BFi"/>
+                <constraint firstAttribute="bottom" secondItem="Xgd-ut-myu" secondAttribute="bottom" constant="110" id="fiD-Y1-BFi"/>
                 <constraint firstItem="Xgd-ut-myu" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="kns-wz-aY8"/>
                 <constraint firstAttribute="trailing" secondItem="Xgd-ut-myu" secondAttribute="trailing" constant="16" id="yD7-E5-lCT"/>
             </constraints>

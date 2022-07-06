@@ -15,7 +15,7 @@ class ReviewDetailsCVC: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
     public func configure(model: SingleMovie) {

@@ -12,10 +12,10 @@ class ReviewsCVC: UICollectionViewCell {
     static let identifier = "ReviewsCVC"
 
     @IBOutlet weak var rating: UILabel!
-    @IBOutlet private weak var author: UILabel!
-    @IBOutlet private weak var date: UILabel!
-    @IBOutlet private weak var body: UILabel!
-    @IBOutlet private weak var reviewTitle: UILabel!
+    @IBOutlet  weak var author: UILabel!
+    @IBOutlet  weak var date: UILabel!
+    @IBOutlet  weak var body: UILabel!
+    @IBOutlet  weak var reviewTitle: UILabel!
     
     @IBOutlet weak var reviewStackView: UIStackView!
     @IBOutlet weak var ratingStackView: UIStackView!
@@ -42,6 +42,7 @@ class ReviewsCVC: UICollectionViewCell {
             self.body.text = model.content
             self.reviewTitle.text = model.author
         }
+        print(body.frame.height)
     }
     
 }

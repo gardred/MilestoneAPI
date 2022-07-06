@@ -232,7 +232,9 @@ extension DetailsVC: UICollectionViewDataSource {
 
 extension DetailsVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        
         let width = collectionView.bounds.width
+        
         return CGSize(width: width, height: 550)
     }
 }
@@ -243,7 +245,9 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout {
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewsCVC.identifier, for: indexPath) as! ReviewsCVC
+        let cellHeight = ((cell.date.frame.height + cell.reviewTitle.frame.height + cell.rating.frame.height) + (cell.body.frame.height * 35))
+       
         switch cellType[indexPath.row] {
             
         case .details:
@@ -251,7 +255,7 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout {
         case .description:
             return CGSize(width: collectionView.bounds.width, height: 270.0)
         case .review:
-            return CGSize(width: collectionView.bounds.width, height: 400.0)
+            return CGSize(width: collectionView.bounds.width, height: cellHeight)
         }
     }
 }

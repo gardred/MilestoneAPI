@@ -418,6 +418,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="2zO-UC-gnj" id="EkW-Oi-PCT"/>
+                        <outlet property="submitButton" destination="Wop-fM-mrG" id="LU1-cu-Vph"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cLs-CS-EMm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -425,11 +426,6 @@
             <point key="canvasLocation" x="2369.2307692307691" y="78.909952606635073"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="78J-HA-Le0">
-            <size key="intrinsicContentSize" width="195" height="35"/>
-        </designable>
-    </designables>
     <resources>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="rating.stars" width="28.666666030883789" height="27.333333969116211"/>

@@ -19,11 +19,15 @@ class ReviewViewController: UIViewController {
         return UIStoryboard(name: storyboardName, bundle: nil).instantiateViewController(withIdentifier: identifier) as! T
     }
     
+    // MARK: - UIElements
+    @IBOutlet  weak var submitButton: UIButton!
     @IBOutlet private weak var collectionView: UICollectionView!
-    
+
+    // MARK: - Variables
     private var movie: SingleMovie?
     private var cellType: [DetailsCellType] = []
     
+    // MARK: - Lifecycle
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -42,8 +46,11 @@ class ReviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        
+        submitButton.layer.cornerRadius = 8
+        submitButton.backgroundColor = hexStringToUIColor(hex: "#606DDE").withAlphaComponent(0.5)
+        submitButton.isUserInteractionEnabled = false
     }
+    // MARK: - Functions
     
     private func configureCollectionView() {
         collectionView.contentInsetAdjustmentBehavior = .never
@@ -64,6 +71,8 @@ class ReviewViewController: UIViewController {
 
 }
 
+    // MARK: - UICollectionView Data Source
+
 extension ReviewViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print(cellType.count)
@@ -79,10 +88,20 @@ extension ReviewViewController: UICollectionViewDataSource {
             if let movie = movie {
                 cell.configure(model: movie)
             }
+            
             return cell
         case .review:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewCVC.identifier, for: indexPath) as? ReviewCVC else { return UICollectionViewCell() }
-            cell.backgroundColor = .black
+           
+            cell.disableButtonInteraction = { [weak self] in
+                self?.submitButton.isUserInteractionEnabled = true
+                self?.submitButton.backgroundColor = hexStringToUIColor(hex: "#606DDE").withAlphaComponent(1.0)
+            }
+            
+            cell.enableButtonInteraction = { [weak self] in
+                self?.submitButton.isUserInteractionEnabled = false
+                self?.submitButton.backgroundColor = hexStringToUIColor(hex: "#606DDE").withAlphaComponent(0.5)
+            }
             return cell
         }
     }
@@ -98,6 +117,8 @@ extension ReviewViewController: UICollectionViewDataSource {
     }
 }
 
+    // MARK: - UICollectionView Delegate
+
 extension ReviewViewController: UICollectionViewDelegate {
  
     
@@ -107,6 +128,7 @@ extension ReviewViewController: UICollectionViewDelegate {
     }
 }
 
+    // MARK: - UICollectionView Flow Layout
 extension ReviewViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -115,7 +137,7 @@ extension ReviewViewController: UICollectionViewDelegateFlowLayout {
         case .details:
             return CGSize(width: collectionView.bounds.width, height: 125)
         case .review:
-            return CGSize(width: collectionView.bounds.width, height: 300)
+            return CGSize(width: collectionView.bounds.width, height: 350)
         }
     }
 }
