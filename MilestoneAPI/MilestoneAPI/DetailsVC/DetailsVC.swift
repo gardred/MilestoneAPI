@@ -8,10 +8,9 @@
 import UIKit
 
 enum CellType {
-    case poster
     case details
     case description
-    case review([Review])
+    case review(Review)
 }
 
 class DetailsVC: UIViewController {
@@ -31,11 +30,11 @@ class DetailsVC: UIViewController {
     // MARK: - Variables
     
     private var cellType: [CellType] = []
-    private var selectedMovie: Movie?
+    private var selectedMovie: SingleMovie?
+    private var genre: String?
+    private var reviews: [Review] = []
     
     private var id = 0
-    private var genre: String?
-    private var reviews: [Review] = [Review]()
     // MARK: - Lifecycle
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -54,9 +53,10 @@ class DetailsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(genre)
         configureUI()
         configCollection()
+        
         getSingleMovie()
         getReview()
     }
@@ -80,41 +80,30 @@ class DetailsVC: UIViewController {
     }
     
     private func configCollection() {
+        
         detailsCollectionView.contentInsetAdjustmentBehavior = .never
-        detailsCollectionView.register(UINib(nibName: "PosterCVC", bundle: nil), forCellWithReuseIdentifier: PosterCVC.identifier)
         detailsCollectionView.register(UINib(nibName: "DetailsCVC", bundle: nil), forCellWithReuseIdentifier: DetailsCVC.identifier)
         detailsCollectionView.register(UINib(nibName: "DescriptionCVC", bundle: nil), forCellWithReuseIdentifier: DescriptionCVC.identifier)
         detailsCollectionView.register(UINib(nibName: "ReviewsCVC", bundle: nil), forCellWithReuseIdentifier: ReviewsCVC.identifier)
-        
+        detailsCollectionView.register(UINib(nibName: "HeaderViewCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderViewCollectionReusableView.identifier)
         detailsCollectionView.dataSource = self
         detailsCollectionView.delegate = self
         
         detailsCollectionView.backgroundColor = .black
     }
     
-    public func getReview() {
-        API.shared.getReview(id: id) { [weak self] (reviewsResult) in
-            guard let self = self else { return }
-            switch reviewsResult {
-                
-            case .success(let review):
-                self.reviews.append(contentsOf: review)
-            case .failure(_):
-                print("error")
-            }
-        }
+    private func showDescriptionSection() {
+        cellType = [
+            .details,
+            .description
+        ]
+        
+        detailsCollectionView.reloadData()
     }
     
-    private func showCell(_ cellType: [CellType]) {
-        
-        var cells: [CellType] = [.poster, .details]
-        
-        for _ in 0..<reviews.count {
-            cells.append(.review(reviews))
-            self.cellType.removeAll()
-            self.cellType.append(contentsOf: cells)
-        }
-        
+    private func showReviewSection() {
+        cellType = [ .details ]
+        cellType.append(contentsOf: reviews.map({ .review($0) }))
         detailsCollectionView.reloadData()
     }
     
@@ -137,7 +126,7 @@ class DetailsVC: UIViewController {
                     self.activityIndicator.isHidden = true
                 }
                 self.selectedMovie = movie
-                
+                print(self.selectedMovie)
             case .failure(let error):
                 
                 DispatchQueue.main.async {
@@ -149,13 +138,26 @@ class DetailsVC: UIViewController {
         }
     }
     
+    private func getReview() {
+        API.shared.getReview(id: id) { [weak self] (reviewsResult) in
+            guard let self = self else { return }
+            switch reviewsResult {
+                
+            case .success(let review):
+                self.reviews = review
+            case .failure(_):
+                print("error")
+            }
+        }
+    }
+    
     // MARK: - IB Actions
     
     @IBAction func writeReviewAction(_ sender: Any) {
         guard let selectedMovie = selectedMovie else { return }
         
-        let controller = ReviewVC.construct(movie: selectedMovie)
-        navigationController?.pushViewController(controller, animated: true)
+        let controller = ReviewViewController.construct(cellType: [.details, .review], movie: selectedMovie)
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
     @IBAction func backButtonAction(_ sender: Any) {
@@ -174,15 +176,7 @@ extension DetailsVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         switch cellType[indexPath.row] {
-            
-        case .poster:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterCVC.identifier, for: indexPath) as? PosterCVC else { return UICollectionViewCell() }
-            
-            if let selectedMovie = selectedMovie {
-                cell.configure(model: selectedMovie)
-            }
-            
-            return cell
+   
             
         case .details:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailsCVC.identifier, for: indexPath) as? DetailsCVC else { return UICollectionViewCell() }
@@ -195,16 +189,12 @@ extension DetailsVC: UICollectionViewDataSource {
             
             cell.changeCollectionCellToDescription = { [weak self] in
                 guard let self = self else { return }
-                self.cellType.removeAll()
-                self.cellType.append(contentsOf: [.poster,.details,.description])
-                self.reviews.removeAll()
-                self.detailsCollectionView.reloadData()
+                self.showDescriptionSection()
             }
             
             cell.changeCollectionCellToReview = { [weak self] in
                 guard let self = self else { return }
-                self.getReview()
-                self.showCell([.poster, .details, .review(self.reviews)])
+                self.showReviewSection()
                 cell.reviewsCount.text = "(\(self.reviews.count))"
             }
             
@@ -220,13 +210,30 @@ extension DetailsVC: UICollectionViewDataSource {
             
             return cell
             
-        case .review:
+        case .review(let review):
+            
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewsCVC.identifier, for: indexPath) as? ReviewsCVC else { return UICollectionViewCell() }
             
-            cell.configure(model: reviews[indexPath.row])
+            cell.configure(model: review)
             return cell
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderViewCollectionReusableView.identifier, for: indexPath) as! HeaderViewCollectionReusableView
+        
+        if let selectedMovie = selectedMovie {
+            header.configure(model: selectedMovie)
+        }
+        return header
+    }
+}
+
+extension DetailsVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let width = collectionView.bounds.width
+        return CGSize(width: width, height: 550)
     }
 }
 
@@ -234,12 +241,11 @@ extension DetailsVC: UICollectionViewDataSource {
 
 extension DetailsVC: UICollectionViewDelegateFlowLayout {
     
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         switch cellType[indexPath.row] {
             
-        case .poster:
-            return CGSize(width: collectionView.bounds.width, height: 340.0)
         case .details:
             return CGSize(width: collectionView.bounds.width, height: 200.0)
         case .description:

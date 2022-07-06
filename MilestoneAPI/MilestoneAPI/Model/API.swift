@@ -59,7 +59,7 @@ class API {
         task.resume()
     }
     
-    func getMovieById(id: Int, completion: @escaping (Result<Movie, Error>) -> Void) {
+    func getMovieById(id: Int, completion: @escaping (Result<SingleMovie, Error>) -> Void) {
         
         guard let url = URL(string: "\(Constants.baseURL)/3/movie/\(id)?api_key=\(Constants.API_KEY)&language=en-US") else { return }
         
@@ -68,10 +68,11 @@ class API {
             if let data = data {
                 
                 do {
-                    let results = try JSONDecoder().decode(Movie.self, from: data)
+                    let results = try JSONDecoder().decode(SingleMovie.self, from: data)
                     completion(.success(results))
                 } catch {
                     self.handleApiError("Something went wrong. Please try again later!")
+                    print(error)
                 }
                 
             } else if let error = error {

@@ -57,7 +57,7 @@ class DetailsCVC: UICollectionViewCell {
         genreLabel.showSkeleton(usingColor: .concrete, animated: true, delay: 0.25, transition: .crossDissolve(0.25))
     }
     
-    public func configure(model: Movie, genre: String) {
+    public func configure(model: SingleMovie, genre: String) {
         DispatchQueue.main.async { [weak self] in
             
             guard let self = self else { return }

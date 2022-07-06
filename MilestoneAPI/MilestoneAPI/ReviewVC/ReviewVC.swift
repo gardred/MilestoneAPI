@@ -82,7 +82,6 @@ class ReviewVC: UIViewController {
         movieTitle.text = movie.title
         imageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(image)"))
         imageView.contentMode = .scaleToFill
-        imageView.insetsLayoutMarginsFromSafeArea = false
     }
     
     // MARK: - IB Actions

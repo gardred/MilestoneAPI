@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SkeletonView
 class DescriptionCVC: UICollectionViewCell {
     
     static let identifier = "DescriptionCVC"
@@ -30,7 +30,7 @@ class DescriptionCVC: UICollectionViewCell {
     
     // MARK: - Functions
     
-    public func configure(model: Movie) {
+    public func configure(model: SingleMovie) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.descriptionLabel.text = model.overview

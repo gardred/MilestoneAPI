@@ -45,7 +45,7 @@ class HomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         view.backgroundColor = .black
         refreshControl.addTarget(self, action: #selector(refreshCollectionView), for: .valueChanged)
         
@@ -113,9 +113,6 @@ class HomeVC: UIViewController {
                     self.activityIndicator.isHidden = true
                     self.moviesCollectionView.reloadData()
                     
-                    if self.movies.count >= self.genre.count {
-                        self.getGenre()
-                    }
                 }
                 
             case .failure(let error):
@@ -185,7 +182,7 @@ extension HomeVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCVC.identifier, for: indexPath) as? HomeCVC else { return UICollectionViewCell() }
         
-        cell.configure(model: movies[indexPath.row], genre: genre[indexPath.row])
+        cell.configure(model: movies[indexPath.row], genre: genre)
         
         return cell
     }
@@ -199,7 +196,7 @@ extension HomeVC: UICollectionViewDelegate {
         
         let id = movies[indexPath.row].id
         let genre = genre[indexPath.row].name
-        let controller = DetailsVC.construct(id: id, genre: genre, cellType: [.poster, .details, .description])
+        let controller = DetailsVC.construct(id: id,genre: genre, cellType: [.details, .description])
         searchController.isActive = false
         self.navigationController?.pushViewController(controller, animated: true)
     }
