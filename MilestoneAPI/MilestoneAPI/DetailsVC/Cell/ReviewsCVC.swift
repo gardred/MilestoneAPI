@@ -11,21 +11,26 @@ class ReviewsCVC: UICollectionViewCell {
 
     static let identifier = "ReviewsCVC"
 
+    // MARK: - UI Elements
     @IBOutlet weak var rating: UILabel!
-    @IBOutlet  weak var author: UILabel!
-    @IBOutlet  weak var date: UILabel!
-    @IBOutlet  weak var body: UILabel!
-    @IBOutlet  weak var reviewTitle: UILabel!
+    @IBOutlet weak var author: UILabel!
+    @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var body: UILabel!
+    @IBOutlet weak var reviewTitle: UILabel!
     
-    @IBOutlet weak var reviewStackView: UIStackView!
-    @IBOutlet weak var ratingStackView: UIStackView!
-    @IBOutlet weak var authorStackView: UIStackView!
+    @IBOutlet private weak var reviewStackView: UIStackView!
+    @IBOutlet private weak var ratingStackView: UIStackView!
+    @IBOutlet private weak var authorStackView: UIStackView!
+    
+    // MARK: - Lifecycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
-       configureCellUI()
+        
+        configureCellUI()
     }
     
+    // MARK: - Functions
     private func configureCellUI() {
         reviewStackView.backgroundColor = .black
         ratingStackView.backgroundColor = .black
@@ -42,7 +47,21 @@ class ReviewsCVC: UICollectionViewCell {
             self.body.text = model.content
             self.reviewTitle.text = model.author
         }
-        print(body.frame.height)
     }
-    
 }
+
+//extension ReviewCVC {
+//
+//    static func estimatedHeight(entity: Review) -> CGFloat {
+//
+//        if let nibView = ReviewCVC.instantiateFromNib() as? ReviewCVC {
+//            nibView.setup(entity: entity)
+//            nibView.layoutIfNeeded()
+//            let newFrame = nibView.sizeToFit(inViewWidth: UIScreen.main.bounds.width)
+//            return newFrame.height
+//        } else {
+//            return 190
+//        }
+//    }
+//
+//}

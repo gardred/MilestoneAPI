@@ -9,7 +9,7 @@ import UIKit
 
 class HomeVC: UIViewController {
     
-    class func fromStoryboard<T: HomeVC>(_ storyboardName: String) -> T {
+    static func fromStoryboard<T: HomeVC>(_ storyboardName: String) -> T {
         let identifier = "HomeVC"
         return UIStoryboard(name: storyboardName, bundle: nil).instantiateViewController(withIdentifier: identifier) as! T
     }
@@ -23,8 +23,8 @@ class HomeVC: UIViewController {
     private let refreshControl = UIRefreshControl()
     
     // MARK: - Variables
-    private var movies = [Movie]()
-    private var genre = [Genre]()
+    private var movies: [Movie] = []
+    private var genre: [Genre] = []
     private var isFetchingData = false
     private var currentPage = 1
     // MARK: - Lifecycle
@@ -58,7 +58,13 @@ class HomeVC: UIViewController {
     
     // MARK: - Functions
     
+    static func construct() -> HomeVC {
+        let controller: HomeVC = .fromStoryboard("Main")
+        return controller
+    }
+    
     private func configCollection() {
+        
         moviesCollectionView.register(UINib(nibName: "HomeCVC", bundle: nil), forCellWithReuseIdentifier: HomeCVC.identifier)
         moviesCollectionView.dataSource = self
         moviesCollectionView.delegate = self
@@ -75,11 +81,6 @@ class HomeVC: UIViewController {
         searchBackground.addSubview(searchController.searchBar)
     }
     
-    static func construct() -> HomeVC {
-        let controller: HomeVC = .fromStoryboard("Main")
-        return controller
-    }
-    
     @objc private func refreshCollectionView(_ sender: UIRefreshControl) {
         
         DispatchQueue.main.async { [weak self] in
@@ -90,6 +91,17 @@ class HomeVC: UIViewController {
             self.moviesCollectionView.reloadData()
         }
         refreshControl.endRefreshing()
+    }
+    
+    private func searchBarCancelAction() {
+        
+        movies.removeAll()
+        currentPage = 1
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.getMovies()
+            self.moviesCollectionView.reloadData()
+        }
     }
     
     // MARK: - API Request
@@ -104,15 +116,15 @@ class HomeVC: UIViewController {
             switch result {
                 
             case .success(let getMovies ):
+                
                 self.movies.append(contentsOf: getMovies)
                 self.isFetchingData = false
                 self.currentPage += 1
+               
                 DispatchQueue.main.async {
-                    
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
                     self.moviesCollectionView.reloadData()
-                    
                 }
                 
             case .failure(let error):
@@ -171,7 +183,7 @@ class HomeVC: UIViewController {
     }
 }
 
-// MARK: - CollectionView Data Source
+    // MARK: - CollectionView Data Source
 
 extension HomeVC: UICollectionViewDataSource {
     
@@ -197,7 +209,7 @@ extension HomeVC: UICollectionViewDelegate {
         let id = movies[indexPath.row].id
         let genre = genre[indexPath.row].name
         let controller = DetailsVC.construct(id: id,genre: genre, cellType: [.details, .description])
-        searchController.isActive = false
+        self.searchController.isActive = false
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -230,17 +242,12 @@ extension HomeVC: UISearchResultsUpdating {
         let searchBar = searchController.searchBar
         guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty, query.trimmingCharacters(in: .whitespaces).count >= 3 else { return }
         
-        searchRequest(with: query)
+        self.searchRequest(with: query)
     }
 }
 
 extension HomeVC: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        movies.removeAll()
-        currentPage = 1
-        DispatchQueue.main.async { [weak self] in
-            self?.getMovies()
-            self?.moviesCollectionView.reloadData()
-        }
+        self.searchBarCancelAction()
     }
 }

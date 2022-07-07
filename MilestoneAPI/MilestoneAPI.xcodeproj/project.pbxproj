@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4739044B821C2B152F00A212 /* Pods_MilestoneAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF90D9123E1D0E28E6A632F6 /* Pods_MilestoneAPI.framework */; };
+		F11AE6B92876D36E0026E100 /* UIView-.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11AE6B82876D36E0026E100 /* UIView-.swift */; };
 		F11EC4432869FAB000516762 /* UIAlert-.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11EC4422869FAB000516762 /* UIAlert-.swift */; };
 		F1350FBA28756D8F003E065A /* HeaderViewCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1350FB828756D8E003E065A /* HeaderViewCollectionReusableView.swift */; };
 		F1350FBB28756D8F003E065A /* HeaderViewCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1350FB928756D8E003E065A /* HeaderViewCollectionReusableView.xib */; };
@@ -47,6 +48,7 @@
 		0EDF12E09000560C6BDE21B0 /* Pods-MilestoneAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MilestoneAPI.release.xcconfig"; path = "Target Support Files/Pods-MilestoneAPI/Pods-MilestoneAPI.release.xcconfig"; sourceTree = "<group>"; };
 		4897CEC3056B57105F5BF935 /* Pods-MilestoneAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MilestoneAPI.debug.xcconfig"; path = "Target Support Files/Pods-MilestoneAPI/Pods-MilestoneAPI.debug.xcconfig"; sourceTree = "<group>"; };
 		CF90D9123E1D0E28E6A632F6 /* Pods_MilestoneAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MilestoneAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F11AE6B82876D36E0026E100 /* UIView-.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView-.swift"; sourceTree = "<group>"; };
 		F11EC4422869FAB000516762 /* UIAlert-.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlert-.swift"; sourceTree = "<group>"; };
 		F1350FB828756D8E003E065A /* HeaderViewCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewCollectionReusableView.swift; sourceTree = "<group>"; };
 		F1350FB928756D8E003E065A /* HeaderViewCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderViewCollectionReusableView.xib; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				F11EC4422869FAB000516762 /* UIAlert-.swift */,
 				F1727D70286D81EB00447276 /* UITextFIeld-Padding-.swift */,
 				F149C1EB2872C9B000E6E57F /* HexColor.swift */,
+				F11AE6B82876D36E0026E100 /* UIView-.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				F11EC4432869FAB000516762 /* UIAlert-.swift in Sources */,
 				F1D4E514286C7C0000538F56 /* Genre.swift in Sources */,
 				F1A02F252869870400FCE92F /* HomeVC.swift in Sources */,
+				F11AE6B92876D36E0026E100 /* UIView-.swift in Sources */,
 				F1A02F4C2869959F00FCE92F /* DescriptionCVC.swift in Sources */,
 				F14FB8D3287430A000A12721 /* ReviewsCVC.swift in Sources */,
 				F1A02F3928698A4300FCE92F /* HomeCVC.swift in Sources */,

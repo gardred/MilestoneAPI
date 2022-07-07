@@ -15,7 +15,7 @@ enum CellType {
 
 class DetailsVC: UIViewController {
     
-    class func fromStoryboard<T: DetailsVC>(_ storyboardName: String) -> T {
+    static func fromStoryboard<T: DetailsVC>(_ storyboardName: String) -> T {
         let identifier = "DetailsVC"
         return UIStoryboard(name: storyboardName, bundle: nil).instantiateViewController(withIdentifier: identifier) as! T
     }
@@ -25,15 +25,14 @@ class DetailsVC: UIViewController {
     @IBOutlet private weak var detailsCollectionView: UICollectionView!
     @IBOutlet private weak var writeReviewButton: UIButton!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet private weak var bottomView: UIView!
     @IBOutlet private weak var backButton: UIButton!
-    // MARK: - Variables
     
-    private var cellType: [CellType] = []
+    // MARK: - Variables
+    private var cells: [CellType] = []
+    private var reviews: [Review] = []
     private var selectedMovie: SingleMovie?
     private var genre: String?
-    private var reviews: [Review] = []
-    
     private var id = 0
     // MARK: - Lifecycle
     
@@ -53,7 +52,7 @@ class DetailsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(genre)
+        
         configureUI()
         configCollection()
         
@@ -68,12 +67,13 @@ class DetailsVC: UIViewController {
         let controller: DetailsVC = .fromStoryboard("Main")
         controller.id = id
         controller.genre = genre
-        controller.cellType = cellType
+        controller.cells = cellType
         
         return controller
     }
     
     private func configureUI() {
+        
         view.backgroundColor = .black
         bottomView.backgroundColor = .black
         writeReviewButton.layer.cornerRadius = 8
@@ -86,6 +86,7 @@ class DetailsVC: UIViewController {
         detailsCollectionView.register(UINib(nibName: "DescriptionCVC", bundle: nil), forCellWithReuseIdentifier: DescriptionCVC.identifier)
         detailsCollectionView.register(UINib(nibName: "ReviewsCVC", bundle: nil), forCellWithReuseIdentifier: ReviewsCVC.identifier)
         detailsCollectionView.register(UINib(nibName: "HeaderViewCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderViewCollectionReusableView.identifier)
+        detailsCollectionView.collectionViewLayout = HeaderViewLayout()
         detailsCollectionView.dataSource = self
         detailsCollectionView.delegate = self
         
@@ -93,7 +94,8 @@ class DetailsVC: UIViewController {
     }
     
     private func showDescriptionSection() {
-        cellType = [
+        
+        cells = [
             .details,
             .description
         ]
@@ -102,8 +104,9 @@ class DetailsVC: UIViewController {
     }
     
     private func showReviewSection() {
-        cellType = [ .details ]
-        cellType.append(contentsOf: reviews.map({ .review($0) }))
+        
+        cells = [ .details ]
+        cells.append(contentsOf: reviews.map({ .review($0) }))
         detailsCollectionView.reloadData()
     }
     
@@ -126,7 +129,7 @@ class DetailsVC: UIViewController {
                     self.activityIndicator.isHidden = true
                 }
                 self.selectedMovie = movie
-                print(self.selectedMovie)
+            
             case .failure(let error):
                 
                 DispatchQueue.main.async {
@@ -154,8 +157,8 @@ class DetailsVC: UIViewController {
     // MARK: - IB Actions
     
     @IBAction func writeReviewAction(_ sender: Any) {
-        guard let selectedMovie = selectedMovie else { return }
         
+        guard let selectedMovie = selectedMovie else { return }
         let controller = ReviewViewController.construct(cellType: [.details, .review], movie: selectedMovie)
         self.navigationController?.pushViewController(controller, animated: true)
     }
@@ -170,19 +173,24 @@ class DetailsVC: UIViewController {
 extension DetailsVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cellType.count
+        return cells.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        switch cellType[indexPath.row] {
-   
+        switch cells[indexPath.row] {
+            
             
         case .details:
+            
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailsCVC.identifier, for: indexPath) as? DetailsCVC else { return UICollectionViewCell() }
             
+            cell.reviewsCount.text = "(\(self.reviews.count))"
+           
             if let selectedMovie = selectedMovie, let genre = genre {
+                
                 cell.configure(model: selectedMovie, genre: genre)
+            
             } else {
                 presentAlert(title: "Error", body: "Failed to get data from server")
             }
@@ -194,8 +202,13 @@ extension DetailsVC: UICollectionViewDataSource {
             
             cell.changeCollectionCellToReview = { [weak self] in
                 guard let self = self else { return }
-                self.showReviewSection()
-                cell.reviewsCount.text = "(\(self.reviews.count))"
+                
+                if self.reviews.count > 0 {
+                    self.showReviewSection()
+                } else {
+                    self.presentAlert(title: "", body: "No reviews")
+                }
+                
             }
             
             return cell
@@ -212,17 +225,17 @@ extension DetailsVC: UICollectionViewDataSource {
             
         case .review(let review):
             
-            
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewsCVC.identifier, for: indexPath) as? ReviewsCVC else { return UICollectionViewCell() }
             
-            cell.configure(model: review)
+                cell.configure(model: review)
             return cell
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+       
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderViewCollectionReusableView.identifier, for: indexPath) as! HeaderViewCollectionReusableView
-        
+        header.showSkeleton()
         if let selectedMovie = selectedMovie {
             header.configure(model: selectedMovie)
         }
@@ -231,10 +244,10 @@ extension DetailsVC: UICollectionViewDataSource {
 }
 
 extension DetailsVC: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
         let width = collectionView.bounds.width
-        
         return CGSize(width: width, height: 550)
     }
 }
@@ -245,17 +258,21 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout {
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewsCVC.identifier, for: indexPath) as! ReviewsCVC
-        let cellHeight = ((cell.date.frame.height + cell.reviewTitle.frame.height + cell.rating.frame.height) + (cell.body.frame.height * 35))
-       
-        switch cellType[indexPath.row] {
+        
+        switch cells[indexPath.row] {
             
         case .details:
             return CGSize(width: collectionView.bounds.width, height: 200.0)
+       
         case .description:
-            return CGSize(width: collectionView.bounds.width, height: 270.0)
+            return CGSize(width: collectionView.bounds.width, height: 250.0)
+            
         case .review:
-            return CGSize(width: collectionView.bounds.width, height: cellHeight)
+            
+            let reviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewsCVC.identifier, for: indexPath) as! ReviewsCVC
+//            let width = reviewCell.sizeToFit(inViewWidth: collectionView.bounds.width)
+//            let height = reviewCell.sizeToFit(inViewHeight: 300)
+            return CGSize(width: 500, height: 500)
         }
     }
 }

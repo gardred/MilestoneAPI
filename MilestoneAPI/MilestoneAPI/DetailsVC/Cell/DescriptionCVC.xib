@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,43 +22,20 @@
                         <color key="textColor" red="0.5607843137254902" green="0.56470588235294117" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="VAN-kR-f7n">
-                        <rect key="frame" x="0.0" y="0.0" width="574" height="271"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </tableView>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No reviews yet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUa-Al-Rvu">
-                        <rect key="frame" x="231" y="15" width="112" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="k7D-yN-Bn2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="1Vp-2g-gF2"/>
-                <constraint firstItem="jUa-Al-Rvu" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="JNV-v0-fYi"/>
-                <constraint firstItem="jUa-Al-Rvu" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Kfn-g2-W4g"/>
-                <constraint firstAttribute="bottom" secondItem="VAN-kR-f7n" secondAttribute="bottom" id="R5t-jM-lSV"/>
-                <constraint firstItem="VAN-kR-f7n" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="RxU-UD-itG"/>
-                <constraint firstItem="VAN-kR-f7n" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="af3-uX-df7"/>
-                <constraint firstAttribute="trailing" secondItem="VAN-kR-f7n" secondAttribute="trailing" id="jnH-Fc-w9f"/>
                 <constraint firstAttribute="trailing" secondItem="k7D-yN-Bn2" secondAttribute="trailing" constant="20" id="lX0-Px-2ER"/>
                 <constraint firstItem="k7D-yN-Bn2" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="obZ-Rg-Fju"/>
             </constraints>
             <size key="customSize" width="574" height="271"/>
             <connections>
                 <outlet property="descriptionLabel" destination="k7D-yN-Bn2" id="7yq-XB-abZ"/>
-                <outlet property="errorLabel" destination="jUa-Al-Rvu" id="o66-sn-1PF"/>
-                <outlet property="reviewTableView" destination="VAN-kR-f7n" id="fqA-7m-vdP"/>
             </connections>
             <point key="canvasLocation" x="297.10144927536237" y="170.42410714285714"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

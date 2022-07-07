@@ -14,18 +14,19 @@ class ReviewViewController: UIViewController {
         case review
     }
     
-    class func fromStoryboard<T: ReviewViewController>(_ storyboardName: String) -> T {
+    static func fromStoryboard<T: ReviewViewController>(_ storyboardName: String) -> T {
         let identifier = "ReviewViewController"
         return UIStoryboard(name: storyboardName, bundle: nil).instantiateViewController(withIdentifier: identifier) as! T
     }
     
     // MARK: - UIElements
-    @IBOutlet  weak var submitButton: UIButton!
+    @IBOutlet private weak var submitButton: UIButton!
     @IBOutlet private weak var collectionView: UICollectionView!
-
+    @IBOutlet private weak var footerView: UIView!
+    
     // MARK: - Variables
     private var movie: SingleMovie?
-    private var cellType: [DetailsCellType] = []
+    private var cells: [DetailsCellType] = []
     
     // MARK: - Lifecycle
     
@@ -45,18 +46,29 @@ class ReviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureUI()
         configureCollectionView()
+    }
+    
+    // MARK: - Functions
+    
+    private func configureUI() {
+        
         submitButton.layer.cornerRadius = 8
         submitButton.backgroundColor = hexStringToUIColor(hex: "#606DDE").withAlphaComponent(0.5)
         submitButton.isUserInteractionEnabled = false
+        
+        footerView.backgroundColor = .black
     }
-    // MARK: - Functions
     
     private func configureCollectionView() {
+        
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.register(UINib(nibName: "ReviewCVC", bundle: nil), forCellWithReuseIdentifier: ReviewCVC.identifier)
         collectionView.register(UINib(nibName: "ReviewDetailsCVC", bundle: nil), forCellWithReuseIdentifier: ReviewDetailsCVC.identifier)
         collectionView.register(UINib(nibName: "ReviewCRV", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ReviewCRV.identifier)
+        collectionView.collectionViewLayout = HeaderViewLayout()
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .black
@@ -64,43 +76,54 @@ class ReviewViewController: UIViewController {
     
     static func construct(cellType: [DetailsCellType], movie: SingleMovie) -> ReviewViewController {
         let controller: ReviewViewController = .fromStoryboard("Main")
-        controller.cellType = cellType
+        controller.cells = cellType
         controller.movie = movie
         return controller
     }
 
+    @IBAction func backButtonAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
     // MARK: - UICollectionView Data Source
 
 extension ReviewViewController: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(cellType.count)
-        return cellType.count
+        print(cells.count)
+        return cells.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch cellType[indexPath.row] {
+        
+        switch cells[indexPath.row] {
             
         case .details:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewDetailsCVC.identifier, for: indexPath) as? ReviewDetailsCVC else { return UICollectionViewCell() }
-            cell.backgroundColor = .black
+           
+            
+            
             if let movie = movie {
                 cell.configure(model: movie)
             }
             
             return cell
+       
         case .review:
+            
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewCVC.identifier, for: indexPath) as? ReviewCVC else { return UICollectionViewCell() }
-           
+            
             cell.disableButtonInteraction = { [weak self] in
-                self?.submitButton.isUserInteractionEnabled = true
-                self?.submitButton.backgroundColor = hexStringToUIColor(hex: "#606DDE").withAlphaComponent(1.0)
+                guard let self = self else { return }
+                self.submitButton.isUserInteractionEnabled = true
+                self.submitButton.backgroundColor = hexStringToUIColor(hex: "#606DDE").withAlphaComponent(1.0)
             }
             
             cell.enableButtonInteraction = { [weak self] in
-                self?.submitButton.isUserInteractionEnabled = false
-                self?.submitButton.backgroundColor = hexStringToUIColor(hex: "#606DDE").withAlphaComponent(0.5)
+                guard let self = self else { return }
+                self.submitButton.isUserInteractionEnabled = false
+                self.submitButton.backgroundColor = hexStringToUIColor(hex: "#606DDE").withAlphaComponent(0.5)
             }
             return cell
         }
@@ -132,10 +155,10 @@ extension ReviewViewController: UICollectionViewDelegate {
 extension ReviewViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        switch cellType[indexPath.row] {
+        switch cells[indexPath.row] {
             
         case .details:
-            return CGSize(width: collectionView.bounds.width, height: 125)
+            return CGSize(width: collectionView.bounds.width, height: 145)
         case .review:
             return CGSize(width: collectionView.bounds.width, height: 350)
         }

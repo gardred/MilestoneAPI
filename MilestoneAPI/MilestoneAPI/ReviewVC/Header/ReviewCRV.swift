@@ -10,11 +10,12 @@ import UIKit
 class ReviewCRV: UICollectionReusableView {
 
     static let identifier = "ReviewCRV"
+    
     @IBOutlet private weak var imageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
     
     public func configure(model: SingleMovie) {
@@ -22,7 +23,6 @@ class ReviewCRV: UICollectionReusableView {
             guard let self = self, let image = model.poster_path  else { return }
             self.imageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(image)"))
             self.imageView.contentMode = .scaleAspectFill
-            print(image)
         }
     }
 }

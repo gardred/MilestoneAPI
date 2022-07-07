@@ -12,22 +12,21 @@ class DetailsCVC: UICollectionViewCell {
     static let identifier = "DetailsCVC"
     
     // MARK: - UI Elements
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var rateLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var genreLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var rateLabel: UILabel!
+    @IBOutlet private weak var dateLabel: UILabel!
+    @IBOutlet private weak var genreLabel: UILabel!
     
-    @IBOutlet weak var descriptionButton: UIButton!
-    @IBOutlet weak var reviewBackgroundView: UIView!
-    @IBOutlet weak var reviewButton: UIButton!
+    @IBOutlet private weak var descriptionButton: UIButton!
+    @IBOutlet private weak var reviewBackgroundView: UIView!
+    @IBOutlet private weak var reviewButton: UIButton!
     @IBOutlet weak var reviewsCount: UILabel!
     
     // MARK: - Variables
     
     var changeCollectionCellToDescription: (() -> Void)?
     var changeCollectionCellToReview: (() -> Void)?
-    private var reviews: [Review] = [Review]()
-    var id = 0
+    
     // MARK: - Lifecycle
     
     override func awakeFromNib() {
@@ -92,7 +91,7 @@ class DetailsCVC: UICollectionViewCell {
     private func describeButtonDeselectedState() {
         descriptionButton.isSelected = false
         descriptionButton.backgroundColor = .black
-        descriptionButton.setTitleColor(UIColor.white, for: .normal)
+        descriptionButton.setTitleColor(UIColor.darkGray, for: .normal)
     }
     
     private func reviewButtonDeselectedState() {
@@ -118,6 +117,7 @@ class DetailsCVC: UICollectionViewCell {
         reviewButton.isSelected = true
         reviewButton.backgroundColor = hexStringToUIColor(hex: "#252A34")
         reviewsCount.textColor = .white
+        
         changeCollectionCellToReview?()
         describeButtonDeselectedState()
     }

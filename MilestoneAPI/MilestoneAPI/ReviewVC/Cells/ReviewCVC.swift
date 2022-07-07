@@ -8,18 +8,27 @@
 import UIKit
 
 class ReviewCVC: UICollectionViewCell {
-
+    // cell identifier
+    static let identifier = "ReviewCVC"
+    
+    // MARK: - UI Elements
     @IBOutlet private weak var textField: UITextField!
     @IBOutlet private weak var textView: UITextView!
     
-    static let identifier = "ReviewCVC"
-    
+    // MARK: - Variables
     var disableButtonInteraction: ( () -> Void)?
     var enableButtonInteraction: (() -> Void)?
+    
+    // MARK: - Lifecycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        configureCell()
+    }
+    
+    // MARK: - Functions
+    private func configureCell() {
         backgroundColor = .black
         textField.delegate = self
         textField.setLeftPaddingPoints(16)
@@ -32,6 +41,8 @@ class ReviewCVC: UICollectionViewCell {
     }
 }
 
+    // MARK: - UITextField Delegate
+
 extension ReviewCVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -42,16 +53,17 @@ extension ReviewCVC: UITextFieldDelegate {
         let text = (textField.text! as NSString).replacingCharacters(in: range, with: string)
         
          if !text.isEmpty {
-             
              self.disableButtonInteraction?()
-             
          } else {
              self.enableButtonInteraction?()
          }
+        
          return true
     }
     
 }
+
+    // MARK: - UITextView Delegate
 
 extension ReviewCVC: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
