@@ -1,17 +1,16 @@
 //
-//  DetailsCVC.swift
+//  DetailsTVC.swift
 //  MilestoneAPI
 //
-//  Created by Сережа Присяжнюк on 27.06.2022.
+//  Created by Сережа Присяжнюк on 11.07.2022.
 //
 
 import UIKit
 
-class DetailsCVC: UICollectionViewCell {
+class DetailsTVC: UITableViewCell {
     
-    static let identifier = "DetailsCVC"
-    
-    // MARK: - UI Elements
+    static let identifier = "DetailsTVC"
+
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var rateLabel: UILabel!
     @IBOutlet private weak var dateLabel: UILabel!
@@ -22,15 +21,12 @@ class DetailsCVC: UICollectionViewCell {
     @IBOutlet private weak var reviewButton: UIButton!
     @IBOutlet weak var reviewsCount: UILabel!
     
-    // MARK: - Variables
-    
     var changeCollectionCellToDescription: (() -> Void)?
     var changeCollectionCellToReview: (() -> Void)?
     
-    // MARK: - Lifecycle
-    
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = .black
         makeElementsSkeletonable()
         
         reviewBackgroundView.backgroundColor = .black
@@ -39,8 +35,12 @@ class DetailsCVC: UICollectionViewCell {
         
         configureButtons()
     }
-    
-    // MARK: - Functions
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
     
     private func makeElementsSkeletonable() {
         titleLabel.isSkeletonable = true
@@ -100,8 +100,6 @@ class DetailsCVC: UICollectionViewCell {
         reviewButton.setTitleColor(UIColor.darkGray, for: .normal)
         reviewsCount.textColor = .darkGray
     }
-    
-    // MARK: - IB Action
     
     @IBAction func descriptionAction(_ sender: Any) {
         NotificationCenter.default.post(name: NSNotification.Name("change"), object: nil)

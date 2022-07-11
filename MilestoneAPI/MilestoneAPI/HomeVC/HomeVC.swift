@@ -208,7 +208,7 @@ extension HomeVC: UICollectionViewDelegate {
         
         let id = movies[indexPath.row].id
         let genre = genre[indexPath.row].name
-        let controller = DetailsVC.construct(id: id,genre: genre, cellType: [.details, .description])
+        let controller = DetailsVC.construct(id: id, genre: genre, cells: [.details, .description])
         self.searchController.isActive = false
         self.navigationController?.pushViewController(controller, animated: true)
     }
