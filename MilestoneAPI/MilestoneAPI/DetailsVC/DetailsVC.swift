@@ -26,6 +26,7 @@ class DetailsVC: UIViewController {
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet private weak var writeReviewButton: UIButton!
+    @IBOutlet weak var borderView: UIView!
     // MARK: - Variables
     private var cells: [CellType] = []
     private var reviews: [Review] = []
@@ -52,6 +53,7 @@ class DetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         writeReviewButton.layer.cornerRadius = 8
+        borderView.backgroundColor  = .clear
         getSingleMovie()
         getReview()
         configureTableView()
@@ -234,9 +236,10 @@ extension DetailsVC: UITableViewDelegate {
         switch cells[indexPath.row] {
             
         case .details:
-            return 300
-        case .description:
             return 180
+        case .description:
+            guard let selectedMovie = selectedMovie else { return 0 }
+            return DescriptionTVC.estimatedHeight(model: selectedMovie)
         case .review(let review):
             return ReviewTVC.estimatedHeight(model: review)
         }

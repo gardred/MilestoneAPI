@@ -16,22 +16,17 @@ class DescriptionTVC: UITableViewCell {
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
+       
         makeElementsSkeletonable()
         backgroundColor = .black
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        
-    }
     
     public func configure(model: SingleMovie) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
+//        DispatchQueue.main.async { [weak self] in
+//            guard let self = self else { return }
             self.descriptionLabel.text = model.overview
             self.descriptionLabel.hideSkeleton()
-        }
+//        }
     }
     
     private func makeElementsSkeletonable() {
@@ -51,6 +46,7 @@ extension DescriptionTVC {
             nibView.configure(model: model)
             nibView.layoutIfNeeded()
             let newFrame = nibView.sizeToFit(inViewWidth: UIScreen.main.bounds.width)
+            print(newFrame)
             return newFrame.height
         } else {
             return 190

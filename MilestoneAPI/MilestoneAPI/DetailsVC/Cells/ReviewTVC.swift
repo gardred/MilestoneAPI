@@ -15,7 +15,7 @@ class ReviewTVC: UITableViewCell {
     @IBOutlet weak var author: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var body: UILabel!
-
+    @IBOutlet  weak var reviewTitle:  UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,6 +29,7 @@ class ReviewTVC: UITableViewCell {
     
     public func configure(model: Review) {
         self.rating.text = String(model.author_details.rating)
+        self.reviewTitle.text = model.author
         self.author.text = model.author
         self.date.text = model.created_at
         self.body.text = model.content

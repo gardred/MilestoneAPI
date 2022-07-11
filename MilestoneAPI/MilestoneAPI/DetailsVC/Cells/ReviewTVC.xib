@@ -96,6 +96,7 @@
                 <outlet property="body" destination="UmC-hp-lUp" id="C5f-0Q-zXw"/>
                 <outlet property="date" destination="juW-GE-ZnR" id="lPJ-uu-Gsr"/>
                 <outlet property="rating" destination="omA-vn-eyU" id="778-AY-idK"/>
+                <outlet property="reviewTitle" destination="mlF-Ar-lBM" id="hlz-c1-gpm"/>
             </connections>
             <point key="canvasLocation" x="255.07246376811597" y="155.35714285714286"/>
         </tableViewCell>

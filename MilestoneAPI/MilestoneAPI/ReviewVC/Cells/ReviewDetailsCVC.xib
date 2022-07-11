@@ -35,13 +35,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TL0-rf-n2X" customClass="CosmosView" customModule="Cosmos">
-                                        <rect key="frame" x="0.0" y="32" width="195" height="105"/>
+                                        <rect key="frame" x="0.0" y="32" width="145" height="105"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
                                                 <integer key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="starSize">
-                                                <real key="value" value="35"/>
+                                                <real key="value" value="25"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="rating.stars.fill"/>
                                             <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="rating.stars"/>
@@ -72,7 +72,7 @@
     </objects>
     <designables>
         <designable name="TL0-rf-n2X">
-            <size key="intrinsicContentSize" width="195" height="35"/>
+            <size key="intrinsicContentSize" width="145" height="25"/>
         </designable>
     </designables>
     <resources>

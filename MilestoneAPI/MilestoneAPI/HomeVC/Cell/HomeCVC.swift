@@ -22,7 +22,8 @@ class HomeCVC: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat =  ""
     }
     // MARK: - Functions
     
