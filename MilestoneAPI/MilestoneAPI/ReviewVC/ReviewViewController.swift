@@ -68,7 +68,7 @@ class ReviewViewController: UIViewController {
         collectionView.register(UINib(nibName: "ReviewCVC", bundle: nil), forCellWithReuseIdentifier: ReviewCVC.identifier)
         collectionView.register(UINib(nibName: "ReviewDetailsCVC", bundle: nil), forCellWithReuseIdentifier: ReviewDetailsCVC.identifier)
         collectionView.register(UINib(nibName: "ReviewCRV", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ReviewCRV.identifier)
-//        collectionView.collectionViewLayout = HeaderViewLayout()
+        collectionView.collectionViewLayout = HeaderViewLayout()
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .black

@@ -207,8 +207,9 @@ extension HomeVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let id = movies[indexPath.row].id
+        let poster = movies[indexPath.row].poster_path
         let genre = genre[indexPath.row].name
-        let controller = DetailsVC.construct(id: id, genre: genre, cells: [.details, .description])
+        let controller = DetailsVC.construct(id: id, genre: genre, poster: poster ?? "Error", cells: [.details, .description])
         self.searchController.isActive = false
         self.navigationController?.pushViewController(controller, animated: true)
     }

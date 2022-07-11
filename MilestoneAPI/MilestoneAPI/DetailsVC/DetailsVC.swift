@@ -14,23 +14,27 @@ enum CellType {
 }
 
 class DetailsVC: UIViewController {
-
+    
     static func fromStoryboard<T: DetailsVC>(_ storyboardName: String) -> T {
         let identifier = "TestViewController"
         return UIStoryboard(name: storyboardName, bundle: nil).instantiateViewController(withIdentifier: identifier) as! T
     }
     
-    @IBOutlet private weak var tableView: UITableView!
-
-    
+    // MARK: - UIElements
+    @IBOutlet private weak var tableView: DetailsTV!
+    @IBOutlet private weak var headerImageView: UIImageView!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet private weak var writeReviewButton: UIButton!
+    // MARK: - Variables
     private var cells: [CellType] = []
     private var reviews: [Review] = []
     private var selectedMovie: SingleMovie?
     private var genre: String?
+    private var poster: String?
     private var id = 0
     
-    
-    
+    // MARK: - Lifecycle
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -47,31 +51,37 @@ class DetailsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        writeReviewButton.layer.cornerRadius = 8
         getSingleMovie()
         getReview()
         configureTableView()
-//        updateHeader()
     }
     
-    static func construct(id: Int, genre: String, cells: [CellType]) -> DetailsVC {
+    // MARK: - Functions
+    
+    static func construct(id: Int, genre: String, poster: String, cells: [CellType]) -> DetailsVC {
         
         let controller: DetailsVC = .fromStoryboard("Main")
         controller.cells = cells
         controller.id = id
         controller.genre = genre
+        controller.poster = poster
         
         return controller
     }
     
     private func configureTableView() {
         
-        tableView.contentInsetAdjustmentBehavior = .never
-        tableView.allowsSelection = false
-        tableView.delegate = self
-        tableView.dataSource = self
+        guard let poster = poster else { return presentAlert(title: "Error", body: "Failed to fetch data") }
+        headerImageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(poster)"))
+        
         tableView.register(UINib(nibName: "ReviewTVC", bundle: nil), forCellReuseIdentifier: ReviewTVC.identifier)
         tableView.register(UINib(nibName: "DetailsTVC", bundle: nil), forCellReuseIdentifier: DetailsTVC.identifier)
         tableView.register(UINib(nibName: "DescriptionTVC", bundle: nil), forCellReuseIdentifier: DescriptionTVC.identifier)
+        
+        tableView.allowsSelection = false
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     private func showDescriptionSection() {
@@ -99,24 +109,24 @@ class DetailsVC: UIViewController {
         API.shared.getMovieById(id: id) { [weak self] (result) in
             guard let self = self else { return }
             
-//            DispatchQueue.main.async {
-//                self.activityIndicator.startAnimating()
-//            }
+            DispatchQueue.main.async {
+                self.activityIndicator.startAnimating()
+            }
             switch result {
                 
             case .success(let movie):
                 
-//                DispatchQueue.main.async {
-//                    self.activityIndicator.stopAnimating()
-//                    self.activityIndicator.isHidden = true
-//                }
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
+                }
                 self.selectedMovie = movie
-            
+                
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-//                    self.activityIndicator.stopAnimating()
-//                    self.activityIndicator.isHidden = true
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.isHidden = true
                     self.presentAlert(title: "Error", body: error.localizedDescription)
                 }
             }
@@ -126,16 +136,33 @@ class DetailsVC: UIViewController {
     private func getReview() {
         API.shared.getReview(id: id) { [weak self] (reviewsResult) in
             guard let self = self else { return }
+            
             switch reviewsResult {
                 
             case .success(let review):
                 self.reviews = review
-            case .failure(_):
-                print("error")
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.presentAlert(title: "Error", body: error.localizedDescription)
+                }
             }
         }
     }
+    
+    @IBAction func writeReviewAction(_ sender: UIButton) {
+        guard let selectedMovie = selectedMovie else { return }
+        
+        let controller = ReviewViewController.construct(cellType: [.details, .review], movie: selectedMovie)
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @IBAction func backButtonAction(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }
+
+// MARK: - Extension UITableViewDataSource
 
 extension DetailsVC: UITableViewDataSource {
     
@@ -151,11 +178,11 @@ extension DetailsVC: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailsTVC.identifier, for: indexPath) as? DetailsTVC else { return UITableViewCell() }
             
             cell.reviewsCount.text = "(\(self.reviews.count))"
-           
+            
             if let selectedMovie = selectedMovie, let genre = genre {
                 
                 cell.configure(model: selectedMovie, genre: genre)
-            
+                
             } else {
                 presentAlert(title: "Error", body: "Failed to get data from server")
             }
@@ -173,12 +200,12 @@ extension DetailsVC: UITableViewDataSource {
                 } else {
                     self.presentAlert(title: "", body: "No reviews")
                 }
-                
             }
             
             return cell
-        
+            
         case .description:
+            
             guard let cell = tableView.dequeueReusableCell(withIdentifier: DescriptionTVC.identifier, for: indexPath) as? DescriptionTVC else { return UITableViewCell() }
             
             if let selectedMovie = selectedMovie {
@@ -186,8 +213,9 @@ extension DetailsVC: UITableViewDataSource {
             }
             
             return cell
-       
+            
         case .review(let review):
+            
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewTVC.identifier, for: indexPath) as? ReviewTVC else { return UITableViewCell() }
             
             cell.configure(model: review)
@@ -195,42 +223,22 @@ extension DetailsVC: UITableViewDataSource {
             return cell
         }
     }
-    
-    
 }
 
+// MARK: - Extension UITableViewDelegate
+
 extension DetailsVC: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-       
+        
         switch cells[indexPath.row] {
             
         case .details:
             return 300
         case .description:
-            return 125
+            return 180
         case .review(let review):
-            
-            let height = ReviewTVC.estimatedHeight(model: review)
-            return height
+            return ReviewTVC.estimatedHeight(model: review)
         }
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = Bundle.main.loadNibNamed("HeaderTVC", owner: self, options: nil)?.first as! HeaderTVC
-        
-        if let selectedMovie = selectedMovie {
-            headerView.configure(model: selectedMovie)
-        }
-        return headerView
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 550
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
     }
 }
-
-
