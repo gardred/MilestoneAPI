@@ -8,9 +8,9 @@
 import UIKit
 
 class ReviewsCVC: UICollectionViewCell {
-
+    
     static let identifier = "ReviewsCVC"
-
+    
     // MARK: - UI Elements
     @IBOutlet weak var rating: UILabel!
     @IBOutlet weak var author: UILabel!
@@ -39,29 +39,35 @@ class ReviewsCVC: UICollectionViewCell {
     }
     
     public func configure(model: Review) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.rating.text = String(model.author_details.rating)
-            self.author.text = model.author
-            self.date.text = model.created_at
-            self.body.text = model.content
-            self.reviewTitle.text = model.author
-        }
+    
+        self.rating.text = String(model.author_details.rating)
+        self.author.text = model.author
+        self.date.text = model.created_at
+        self.body.text = model.content
+        self.reviewTitle.text = model.author
+    }
+    
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+          let targetSize = CGSize(width: layoutAttributes.frame.width, height: 0)
+          layoutAttributes.frame.size = contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+          return layoutAttributes
+      }
+    
+    class func instanceFromNib() -> UIView {
+        return UINib(nibName: "ReviewsCVC", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! UIView
     }
 }
 
-//extension ReviewCVC {
-//
-//    static func estimatedHeight(entity: Review) -> CGFloat {
-//
-//        if let nibView = ReviewCVC.instantiateFromNib() as? ReviewCVC {
-//            nibView.setup(entity: entity)
-//            nibView.layoutIfNeeded()
-//            let newFrame = nibView.sizeToFit(inViewWidth: UIScreen.main.bounds.width)
-//            return newFrame.height
-//        } else {
-//            return 190
-//        }
-//    }
-//
-//}
+extension ReviewsCVC {
+    
+    static func estimatedHeight(model: Review) -> CGFloat {
+        if let nibView = ReviewsCVC.instanceFromNib() as? ReviewsCVC {
+            nibView.configure(model: model)
+            nibView.layoutIfNeeded()
+            let newFrame = nibView.sizeToFit(inViewWidth: UIScreen.main.bounds.width)
+            return newFrame.height
+        } else {
+            return 300
+        }
+    }
+}

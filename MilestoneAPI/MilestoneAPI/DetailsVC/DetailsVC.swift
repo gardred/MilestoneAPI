@@ -108,6 +108,7 @@ class DetailsVC: UIViewController {
         cells = [ .details ]
         cells.append(contentsOf: reviews.map({ .review($0) }))
         detailsCollectionView.reloadData()
+        
     }
     
     // MARK: - API Request
@@ -157,8 +158,9 @@ class DetailsVC: UIViewController {
     // MARK: - IB Actions
     
     @IBAction func writeReviewAction(_ sender: Any) {
-        
+
         guard let selectedMovie = selectedMovie else { return }
+        
         let controller = ReviewViewController.construct(cellType: [.details, .review], movie: selectedMovie)
         self.navigationController?.pushViewController(controller, animated: true)
     }
@@ -236,6 +238,7 @@ extension DetailsVC: UICollectionViewDataSource {
        
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderViewCollectionReusableView.identifier, for: indexPath) as! HeaderViewCollectionReusableView
         header.showSkeleton()
+        
         if let selectedMovie = selectedMovie {
             header.configure(model: selectedMovie)
         }
@@ -267,12 +270,11 @@ extension DetailsVC: UICollectionViewDelegateFlowLayout {
         case .description:
             return CGSize(width: collectionView.bounds.width, height: 250.0)
             
-        case .review:
-            
-            let reviewCell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewsCVC.identifier, for: indexPath) as! ReviewsCVC
-//            let width = reviewCell.sizeToFit(inViewWidth: collectionView.bounds.width)
-//            let height = reviewCell.sizeToFit(inViewHeight: 300)
-            return CGSize(width: 500, height: 500)
+        case .review(let review):
+            let width = collectionView.bounds.width
+            let height = ReviewsCVC.estimatedHeight(model: review)
+            print(height)
+            return CGSize(width: width, height: height)
         }
     }
 }
