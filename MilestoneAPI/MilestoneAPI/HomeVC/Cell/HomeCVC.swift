@@ -30,15 +30,15 @@ class HomeCVC: UICollectionViewCell {
     public func configure(model: Movie, genre: [Genre]) {
         
         DispatchQueue.main.async { [weak self] in
-            guard let self = self, let image = model.poster_path else { return }
+            guard let self = self, let image = model.posterPath else { return }
             self.imageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(image)"))
             self.titleLabel.text = model.title
-            self.dateLabel.text = model.release_date
-            self.ratingLabel.text = String(model.vote_average)
+            self.dateLabel.text = model.releaseDate
+            self.ratingLabel.text = String(model.voteAverage)
             
             let genreNames = genre
                 .filter({ _genre in
-                    return model.genre_ids.contains(where: { $0 == _genre.id })
+                    return model.genreIds.contains(where: { $0 == _genre.id })
                 })
                 .map({ $0.name })
                 .joined(separator: ", ")

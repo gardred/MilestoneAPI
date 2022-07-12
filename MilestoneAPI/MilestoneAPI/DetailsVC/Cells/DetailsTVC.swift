@@ -64,10 +64,10 @@ class DetailsTVC: UITableViewCell {
             self.titleLabel.text = model.title
             self.titleLabel.hideSkeleton()
             
-            self.rateLabel.text = "\(model.vote_average)"
+            self.rateLabel.text = "\(model.voteAverage)"
             self.rateLabel.hideSkeleton()
             
-            self.dateLabel.text = model.release_date
+            self.dateLabel.text = model.releaseDate
             self.dateLabel.hideSkeleton()
             
             self.genreLabel.text = genre

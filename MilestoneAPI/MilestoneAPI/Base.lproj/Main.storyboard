@@ -97,14 +97,14 @@
                                 <rect key="frame" x="0.0" y="744" width="390" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wop-fM-mrG">
-                                        <rect key="frame" x="16" y="0.0" width="358" height="48"/>
+                                        <rect key="frame" x="10" y="0.0" width="370" height="48"/>
                                         <color key="backgroundColor" red="0.37647058820000001" green="0.42745098040000001" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="bPb-Vm-ame"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Submit">
-                                            <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="14"/>
+                                            <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="14"/>
                                             <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </buttonConfiguration>
                                     </button>
@@ -112,8 +112,8 @@
                                 <color key="backgroundColor" systemColor="labelColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="Brl-cX-PbT"/>
-                                    <constraint firstAttribute="trailing" secondItem="Wop-fM-mrG" secondAttribute="trailing" constant="16" id="azJ-cX-xzV"/>
-                                    <constraint firstItem="Wop-fM-mrG" firstAttribute="leading" secondItem="Kmo-6I-Yno" secondAttribute="leading" constant="16" id="dz7-TD-Crk"/>
+                                    <constraint firstAttribute="trailing" secondItem="Wop-fM-mrG" secondAttribute="trailing" constant="10" id="azJ-cX-xzV"/>
+                                    <constraint firstItem="Wop-fM-mrG" firstAttribute="leading" secondItem="Kmo-6I-Yno" secondAttribute="leading" constant="10" id="dz7-TD-Crk"/>
                                     <constraint firstItem="Wop-fM-mrG" firstAttribute="top" secondItem="Kmo-6I-Yno" secondAttribute="top" id="xuv-Mt-5qY"/>
                                 </constraints>
                             </view>
@@ -183,7 +183,7 @@
                                 <rect key="frame" x="0.0" y="744" width="390" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kfk-KZ-5tM">
-                                        <rect key="frame" x="16" y="0.0" width="358" height="48"/>
+                                        <rect key="frame" x="10" y="0.0" width="370" height="48"/>
                                         <color key="backgroundColor" red="0.37647058820000001" green="0.42745098040000001" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="Nuw-dA-h6b"/>
@@ -191,7 +191,7 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Write a review">
-                                            <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="14"/>
+                                            <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="14"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="writeReviewAction:" destination="Pyi-rF-acX" eventType="touchUpInside" id="z6j-PY-G47"/>
@@ -201,9 +201,9 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="IiD-NK-PEA"/>
-                                    <constraint firstAttribute="trailing" secondItem="Kfk-KZ-5tM" secondAttribute="trailing" constant="16" id="VY1-dG-zOX"/>
+                                    <constraint firstAttribute="trailing" secondItem="Kfk-KZ-5tM" secondAttribute="trailing" constant="10" id="VY1-dG-zOX"/>
                                     <constraint firstItem="Kfk-KZ-5tM" firstAttribute="top" secondItem="xrz-qk-Chm" secondAttribute="top" id="XF7-dF-sUN"/>
-                                    <constraint firstItem="Kfk-KZ-5tM" firstAttribute="leading" secondItem="xrz-qk-Chm" secondAttribute="leading" constant="16" id="c6C-pB-Jhw"/>
+                                    <constraint firstItem="Kfk-KZ-5tM" firstAttribute="leading" secondItem="xrz-qk-Chm" secondAttribute="leading" constant="10" id="c6C-pB-Jhw"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2rk-b2-m3d">

@@ -20,7 +20,7 @@ class ReviewCRV: UICollectionReusableView {
     
     public func configure(model: SingleMovie) {
         DispatchQueue.main.async { [weak self] in
-            guard let self = self, let image = model.poster_path  else { return }
+            guard let self = self, let image = model.posterPath  else { return }
             self.imageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(image)"))
             self.imageView.contentMode = .scaleAspectFill
         }

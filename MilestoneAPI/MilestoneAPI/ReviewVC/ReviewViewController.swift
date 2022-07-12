@@ -157,7 +157,7 @@ extension ReviewViewController: UICollectionViewDelegateFlowLayout {
         switch cells[indexPath.row] {
             
         case .details:
-            return CGSize(width: collectionView.bounds.width, height: 145)
+            return CGSize(width: collectionView.bounds.width, height: 170)
         case .review:
             return CGSize(width: collectionView.bounds.width, height: 350)
         }

@@ -52,6 +52,8 @@ class DetailsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        writeReviewButton.isHidden = true
+        borderView.isHidden = true
         writeReviewButton.layer.cornerRadius = 8
         borderView.backgroundColor  = .clear
         getSingleMovie()
@@ -92,7 +94,8 @@ class DetailsVC: UIViewController {
             .details,
             .description
         ]
-        
+        writeReviewButton.isHidden = true
+        borderView.isHidden = true
         tableView.reloadData()
     }
     
@@ -100,6 +103,8 @@ class DetailsVC: UIViewController {
         
         cells = [ .details ]
         cells.append(contentsOf: reviews.map({ .review($0) }))
+        writeReviewButton.isHidden = false
+        borderView.isHidden = false
         tableView.reloadData()
         
     }
@@ -200,7 +205,7 @@ extension DetailsVC: UITableViewDataSource {
                 if self.reviews.count > 0 {
                     self.showReviewSection()
                 } else {
-                    self.presentAlert(title: "", body: "No reviews")
+//                    self.presentAlert(title: "", body: "No reviews")
                 }
             }
             
@@ -219,8 +224,8 @@ extension DetailsVC: UITableViewDataSource {
         case .review(let review):
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewTVC.identifier, for: indexPath) as? ReviewTVC else { return UITableViewCell() }
-            
-            cell.configure(model: review)
+        
+                cell.configure(model: review)
             
             return cell
         }
@@ -236,7 +241,7 @@ extension DetailsVC: UITableViewDelegate {
         switch cells[indexPath.row] {
             
         case .details:
-            return 180
+            return 195
         case .description:
             guard let selectedMovie = selectedMovie else { return 0 }
             return DescriptionTVC.estimatedHeight(model: selectedMovie)

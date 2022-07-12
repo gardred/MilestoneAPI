@@ -115,7 +115,6 @@ class API {
                     let results = try JSONDecoder().decode(ReviewResponse.self, from: data)
                     completion(.success(results.results))
                 } catch {
-                    self.handleApiError("Something went wrong. Please try again later!")
                     print(error)
                 }
                 

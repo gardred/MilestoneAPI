@@ -46,7 +46,6 @@ extension DescriptionTVC {
             nibView.configure(model: model)
             nibView.layoutIfNeeded()
             let newFrame = nibView.sizeToFit(inViewWidth: UIScreen.main.bounds.width)
-            print(newFrame)
             return newFrame.height
         } else {
             return 190
