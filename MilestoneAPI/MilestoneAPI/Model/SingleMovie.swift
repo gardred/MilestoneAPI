@@ -18,9 +18,10 @@ struct SingleMovieResponse: Codable {
 struct SingleMovie: Codable {
     let id: Int
     let title: String
-    let releaseDate: String?
+    let releaseDate: String
     let voteAverage: Double
     let posterPath: String?
+    let backdropPath: String?
     let overview: String
     
     private enum CodingKeys: String, CodingKey {
@@ -28,5 +29,6 @@ struct SingleMovie: Codable {
         case releaseDate = "release_date"
         case voteAverage = "vote_average"
         case posterPath = "poster_path"
+        case backdropPath = "backdrop_path"
     }
 }

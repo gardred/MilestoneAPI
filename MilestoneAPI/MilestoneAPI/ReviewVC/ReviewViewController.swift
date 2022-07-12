@@ -146,7 +146,7 @@ extension ReviewViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        return CGSize(width: view.frame.width, height: 550)
+        return CGSize(width: view.frame.width, height: 200)
     }
 }
 
@@ -157,7 +157,7 @@ extension ReviewViewController: UICollectionViewDelegateFlowLayout {
         switch cells[indexPath.row] {
             
         case .details:
-            return CGSize(width: collectionView.bounds.width, height: 170)
+            return CGSize(width: collectionView.bounds.width, height: 190)
         case .review:
             return CGSize(width: collectionView.bounds.width, height: 350)
         }

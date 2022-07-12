@@ -27,6 +27,7 @@ class HomeVC: UIViewController {
     private var genre: [Genre] = []
     private var isFetchingData = false
     private var currentPage = 1
+    private var query: String?
     // MARK: - Lifecycle
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -76,6 +77,8 @@ class HomeVC: UIViewController {
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.tintColor = .white
+        searchController.searchBar.searchTextField.textColor = .white
         searchController.searchBar.delegate = self
         searchBackground.backgroundColor = .black
         searchBackground.addSubview(searchController.searchBar)
@@ -97,6 +100,7 @@ class HomeVC: UIViewController {
         
         movies.removeAll()
         currentPage = 1
+        query = ""
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.getMovies()
@@ -166,7 +170,7 @@ class HomeVC: UIViewController {
                 
             case .success(let searchMovie):
                 self.movies = searchMovie
-                
+                self.query = query
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
@@ -207,10 +211,12 @@ extension HomeVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let id = movies[indexPath.row].id
-        let poster = movies[indexPath.row].posterPath
+        let poster = movies[indexPath.row].backdropPath
         let genre = genre[indexPath.row].name
+        
         let controller = DetailsVC.construct(id: id, genre: genre, poster: poster ?? "Error", cells: [.details, .description])
         self.searchController.isActive = false
+        self.searchController.searchBar.text = query
         self.navigationController?.pushViewController(controller, animated: true)
     }
     

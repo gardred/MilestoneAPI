@@ -22,8 +22,11 @@
 		F139B480287C005100353E6D /* DescriptionTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F139B47E287C005100353E6D /* DescriptionTVC.swift */; };
 		F139B481287C005100353E6D /* DescriptionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F139B47F287C005100353E6D /* DescriptionTVC.xib */; };
 		F149C1EC2872C9B000E6E57F /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F149C1EB2872C9B000E6E57F /* HexColor.swift */; };
+		F15C100B287D836E00C36C69 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15C100A287D836E00C36C69 /* String.swift */; };
 		F1727D71286D81EB00447276 /* UITextFIeld-Padding-.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1727D70286D81EB00447276 /* UITextFIeld-Padding-.swift */; };
 		F17EAF4A2875B88A0066B37B /* SingleMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17EAF492875B88A0066B37B /* SingleMovie.swift */; };
+		F1802995287D9A2300464710 /* NoReviewsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1802993287D9A2300464710 /* NoReviewsTVC.swift */; };
+		F1802996287D9A2300464710 /* NoReviewsTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1802994287D9A2300464710 /* NoReviewsTVC.xib */; };
 		F1A02F212869870400FCE92F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F202869870400FCE92F /* AppDelegate.swift */; };
 		F1A02F232869870400FCE92F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F222869870400FCE92F /* SceneDelegate.swift */; };
 		F1A02F252869870400FCE92F /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F242869870400FCE92F /* HomeVC.swift */; };
@@ -61,8 +64,11 @@
 		F139B47E287C005100353E6D /* DescriptionTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTVC.swift; sourceTree = "<group>"; };
 		F139B47F287C005100353E6D /* DescriptionTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DescriptionTVC.xib; sourceTree = "<group>"; };
 		F149C1EB2872C9B000E6E57F /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
+		F15C100A287D836E00C36C69 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		F1727D70286D81EB00447276 /* UITextFIeld-Padding-.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextFIeld-Padding-.swift"; sourceTree = "<group>"; };
 		F17EAF492875B88A0066B37B /* SingleMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMovie.swift; sourceTree = "<group>"; };
+		F1802993287D9A2300464710 /* NoReviewsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoReviewsTVC.swift; sourceTree = "<group>"; };
+		F1802994287D9A2300464710 /* NoReviewsTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoReviewsTVC.xib; sourceTree = "<group>"; };
 		F1A02F1D2869870400FCE92F /* MilestoneAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MilestoneAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A02F202869870400FCE92F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F1A02F222869870400FCE92F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +126,7 @@
 				F1727D70286D81EB00447276 /* UITextFIeld-Padding-.swift */,
 				F149C1EB2872C9B000E6E57F /* HexColor.swift */,
 				F11AE6B82876D36E0026E100 /* UIView-.swift */,
+				F15C100A287D836E00C36C69 /* String.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -153,6 +160,8 @@
 				F139B47B287C002D00353E6D /* DetailsTVC.xib */,
 				F1AAE95F287BF89A0028BC09 /* ReviewTVC.swift */,
 				F1AAE960287BF89A0028BC09 /* ReviewTVC.xib */,
+				F1802993287D9A2300464710 /* NoReviewsTVC.swift */,
+				F1802994287D9A2300464710 /* NoReviewsTVC.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -306,6 +315,7 @@
 			files = (
 				F1350FC728757ED6003E065A /* ReviewCVC.xib in Resources */,
 				F1350FCB2875837C003E065A /* ReviewCRV.xib in Resources */,
+				F1802996287D9A2300464710 /* NoReviewsTVC.xib in Resources */,
 				F1A02F2D2869870800FCE92F /* LaunchScreen.storyboard in Resources */,
 				F1A02F3A28698A4300FCE92F /* HomeCVC.xib in Resources */,
 				F1AAE962287BF89A0028BC09 /* ReviewTVC.xib in Resources */,
@@ -372,6 +382,7 @@
 				F1350FBF28757BA5003E065A /* ReviewViewController.swift in Sources */,
 				F1350FCA2875837C003E065A /* ReviewCRV.swift in Sources */,
 				F11EC4432869FAB000516762 /* UIAlert-.swift in Sources */,
+				F15C100B287D836E00C36C69 /* String.swift in Sources */,
 				F1D4E514286C7C0000538F56 /* Genre.swift in Sources */,
 				F1A02F252869870400FCE92F /* HomeVC.swift in Sources */,
 				F11AE6B92876D36E0026E100 /* UIView-.swift in Sources */,
@@ -384,6 +395,7 @@
 				F1ABA84A287312C500DD80E2 /* Review.swift in Sources */,
 				F149C1EC2872C9B000E6E57F /* HexColor.swift in Sources */,
 				F1E53FED287C378400F2D3D2 /* DetailsTV.swift in Sources */,
+				F1802995287D9A2300464710 /* NoReviewsTVC.swift in Sources */,
 				F17EAF4A2875B88A0066B37B /* SingleMovie.swift in Sources */,
 				F1A02F572869A52A00FCE92F /* API.swift in Sources */,
 				F1350FC628757ED6003E065A /* ReviewCVC.swift in Sources */,

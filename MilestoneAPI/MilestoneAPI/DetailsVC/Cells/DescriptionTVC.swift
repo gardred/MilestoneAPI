@@ -10,23 +10,21 @@ import SkeletonView
 class DescriptionTVC: UITableViewCell {
     
     static let identifier = "DescriptionTVC"
-
+    
     // MARK: - UIElements
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var descriptionLabel: UILabel!
     // MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-       
+        
         makeElementsSkeletonable()
         backgroundColor = .black
     }
     
     public func configure(model: SingleMovie) {
-//        DispatchQueue.main.async { [weak self] in
-//            guard let self = self else { return }
-            self.descriptionLabel.text = model.overview
-            self.descriptionLabel.hideSkeleton()
-//        }
+        self.descriptionLabel.text = model.overview
+        self.descriptionLabel.hideSkeleton()
+        
     }
     
     private func makeElementsSkeletonable() {
@@ -34,7 +32,7 @@ class DescriptionTVC: UITableViewCell {
         descriptionLabel.showSkeleton(usingColor: .concrete, animated: true, delay: 0.25, transition: .crossDissolve(0.25))
     }
     
-    class func instanceFromNib() -> UIView {
+    static func instanceFromNib() -> UIView {
         return UINib(nibName: "DescriptionTVC", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! UIView
     }
 }

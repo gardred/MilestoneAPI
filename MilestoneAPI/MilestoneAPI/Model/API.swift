@@ -103,9 +103,9 @@ class API {
     }
     
     
-    func getReview(id: Int, completion: @escaping (Result<[Review], Error>) -> Void) {
+    func getReview(id: Int, atPage page: Int, completion: @escaping (Result<[Review], Error>) -> Void) {
         
-        guard let url = URL(string: "\(Constants.baseURL)/3/movie/\(id)/reviews?api_key=\(Constants.API_KEY)&language=en-US&page=1") else { return }
+        guard let url = URL(string: "\(Constants.baseURL)/3/movie/\(id)/reviews?api_key=\(Constants.API_KEY)&language=en-US&page=\(page)") else { return }
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             

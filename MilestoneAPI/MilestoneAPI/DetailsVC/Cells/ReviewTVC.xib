@@ -94,11 +94,19 @@
                         <color key="textColor" red="0.5607843137254902" green="0.56470588235294117" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A1H-sI-2kX">
+                        <rect key="frame" x="199" y="100" width="84" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="UmC-hp-lUp" secondAttribute="trailing" constant="10" id="3xx-UX-6to"/>
+                    <constraint firstItem="A1H-sI-2kX" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="J0Q-pF-Dpt"/>
                     <constraint firstItem="V6F-Q7-WgQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="LzM-J6-gii"/>
                     <constraint firstItem="UmC-hp-lUp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="fnD-AZ-I7G"/>
+                    <constraint firstItem="A1H-sI-2kX" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="myh-ZF-z8v"/>
                     <constraint firstAttribute="bottom" secondItem="UmC-hp-lUp" secondAttribute="bottom" id="vgw-lz-eNO"/>
                     <constraint firstAttribute="trailing" secondItem="V6F-Q7-WgQ" secondAttribute="trailing" constant="10" id="xjW-N7-dpQ"/>
                     <constraint firstItem="V6F-Q7-WgQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="22" id="yBL-WY-bcu"/>
@@ -111,6 +119,7 @@
                 <outlet property="author" destination="RdU-E0-QdU" id="myi-rt-sIR"/>
                 <outlet property="body" destination="UmC-hp-lUp" id="C5f-0Q-zXw"/>
                 <outlet property="date" destination="rqN-Ha-lRO" id="Knn-yt-9EW"/>
+                <outlet property="errorLabel" destination="A1H-sI-2kX" id="urF-3B-RMe"/>
                 <outlet property="rating" destination="omA-vn-eyU" id="778-AY-idK"/>
                 <outlet property="reviewTitle" destination="mlF-Ar-lBM" id="hlz-c1-gpm"/>
             </connections>

@@ -11,6 +11,7 @@ enum CellType {
     case details
     case description
     case review(Review)
+    case error
 }
 
 class DetailsVC: UIViewController {
@@ -29,15 +30,17 @@ class DetailsVC: UIViewController {
     @IBOutlet weak var borderView: UIView!
     // MARK: - Variables
     private var cells: [CellType] = []
-    private var reviews: [Review] = []
+    public var reviews: [Review] = []
     private var selectedMovie: SingleMovie?
     private var genre: String?
     private var poster: String?
     private var id = 0
+    private var currentPage = 1
+    private var isFetchingData = false
     
     // MARK: - Lifecycle
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return .darkContent
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -82,10 +85,17 @@ class DetailsVC: UIViewController {
         tableView.register(UINib(nibName: "ReviewTVC", bundle: nil), forCellReuseIdentifier: ReviewTVC.identifier)
         tableView.register(UINib(nibName: "DetailsTVC", bundle: nil), forCellReuseIdentifier: DetailsTVC.identifier)
         tableView.register(UINib(nibName: "DescriptionTVC", bundle: nil), forCellReuseIdentifier: DescriptionTVC.identifier)
+        tableView.register(UINib(nibName: "NoReviewsTVC", bundle: nil), forCellReuseIdentifier: NoReviewsTVC.identifier)
         
         tableView.allowsSelection = false
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    private func hideButtons(_ state: Bool) {
+        writeReviewButton.isHidden = state
+        borderView.isHidden = state
+        tableView.reloadData()
     }
     
     private func showDescriptionSection() {
@@ -94,19 +104,25 @@ class DetailsVC: UIViewController {
             .details,
             .description
         ]
-        writeReviewButton.isHidden = true
-        borderView.isHidden = true
-        tableView.reloadData()
+        
+        hideButtons(true)
     }
     
     private func showReviewSection() {
         
-        cells = [ .details ]
-        cells.append(contentsOf: reviews.map({ .review($0) }))
-        writeReviewButton.isHidden = false
-        borderView.isHidden = false
-        tableView.reloadData()
+        if reviews.count > 0 {
+            cells = [ .details ]
+            cells.append(contentsOf: reviews.map({ .review($0) }))
         
+        } else {
+            
+            cells = [
+                .details,
+                .error
+            ]
+        }
+        
+        hideButtons(false)
     }
     
     // MARK: - API Request
@@ -119,6 +135,7 @@ class DetailsVC: UIViewController {
             DispatchQueue.main.async {
                 self.activityIndicator.startAnimating()
             }
+            
             switch result {
                 
             case .success(let movie):
@@ -128,6 +145,10 @@ class DetailsVC: UIViewController {
                     self.activityIndicator.isHidden = true
                 }
                 self.selectedMovie = movie
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
                 
             case .failure(let error):
                 
@@ -141,13 +162,20 @@ class DetailsVC: UIViewController {
     }
     
     private func getReview() {
-        API.shared.getReview(id: id) { [weak self] (reviewsResult) in
+        API.shared.getReview(id: id, atPage: currentPage) { [weak self] (reviewsResult) in
             guard let self = self else { return }
             
             switch reviewsResult {
                 
             case .success(let review):
                 self.reviews = review
+                self.currentPage += 1
+                self.isFetchingData = false
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
             case .failure(let error):
                 DispatchQueue.main.async {
                     self.presentAlert(title: "Error", body: error.localizedDescription)
@@ -184,14 +212,8 @@ extension DetailsVC: UITableViewDataSource {
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailsTVC.identifier, for: indexPath) as? DetailsTVC else { return UITableViewCell() }
             
-            cell.reviewsCount.text = "(\(self.reviews.count))"
-            
             if let selectedMovie = selectedMovie, let genre = genre {
-                
-                cell.configure(model: selectedMovie, genre: genre)
-                
-            } else {
-                presentAlert(title: "Error", body: "Failed to get data from server")
+                cell.configure(model: selectedMovie, genre: genre, reviewCount: reviews.count)
             }
             
             cell.changeCollectionCellToDescription = { [weak self] in
@@ -201,12 +223,7 @@ extension DetailsVC: UITableViewDataSource {
             
             cell.changeCollectionCellToReview = { [weak self] in
                 guard let self = self else { return }
-                
-                if self.reviews.count > 0 {
-                    self.showReviewSection()
-                } else {
-//                    self.presentAlert(title: "", body: "No reviews")
-                }
+                self.showReviewSection()
             }
             
             return cell
@@ -224,8 +241,12 @@ extension DetailsVC: UITableViewDataSource {
         case .review(let review):
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ReviewTVC.identifier, for: indexPath) as? ReviewTVC else { return UITableViewCell() }
-        
-                cell.configure(model: review)
+            
+            cell.configure(model: review)
+            
+            return cell
+        case .error:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: NoReviewsTVC.identifier, for: indexPath) as? NoReviewsTVC else { return UITableViewCell() }
             
             return cell
         }
@@ -247,6 +268,24 @@ extension DetailsVC: UITableViewDelegate {
             return DescriptionTVC.estimatedHeight(model: selectedMovie)
         case .review(let review):
             return ReviewTVC.estimatedHeight(model: review)
+        case .error:
+            return 100
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if reviews.count > 1 {
+            
+            let lastReview = reviews.count
+            if indexPath.row == lastReview && !isFetchingData {
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    
+                    self.isFetchingData = true
+                    self.getReview()
+                }
+            }
         }
     }
 }

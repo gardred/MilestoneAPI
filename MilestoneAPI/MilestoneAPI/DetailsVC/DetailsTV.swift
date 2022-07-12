@@ -17,5 +17,6 @@ class DetailsTV: UITableView {
         guard let header = tableHeaderView else { return }
         let offsetY = -contentOffset.y
         height.constant = max(header.bounds.height, header.bounds.height +  offsetY)
+        
     }
 }

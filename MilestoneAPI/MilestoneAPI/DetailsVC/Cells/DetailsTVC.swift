@@ -19,13 +19,16 @@ class DetailsTVC: UITableViewCell {
     @IBOutlet private weak var descriptionButton: UIButton!
     @IBOutlet private weak var reviewBackgroundView: UIView!
     @IBOutlet private weak var reviewButton: UIButton!
+    
     @IBOutlet weak var reviewsCount: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var changeCollectionCellToDescription: (() -> Void)?
     var changeCollectionCellToReview: (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
+       
         backgroundColor = .black
         makeElementsSkeletonable()
         
@@ -35,14 +38,13 @@ class DetailsTVC: UITableViewCell {
         
         configureButtons()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    
     
     private func makeElementsSkeletonable() {
+        
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        
         titleLabel.isSkeletonable = true
         titleLabel.showSkeleton(usingColor: .concrete, animated: true, delay: 0.25, transition: .crossDissolve(0.25))
         
@@ -56,10 +58,13 @@ class DetailsTVC: UITableViewCell {
         genreLabel.showSkeleton(usingColor: .concrete, animated: true, delay: 0.25, transition: .crossDissolve(0.25))
     }
     
-    public func configure(model: SingleMovie, genre: String) {
+    public func configure(model: SingleMovie, genre: String, reviewCount: Int) {
         DispatchQueue.main.async { [weak self] in
             
             guard let self = self else { return }
+            
+            self.activityIndicator.isHidden = true
+            self.activityIndicator.stopAnimating()
             
             self.titleLabel.text = model.title
             self.titleLabel.hideSkeleton()
@@ -72,6 +77,8 @@ class DetailsTVC: UITableViewCell {
             
             self.genreLabel.text = genre
             self.genreLabel.hideSkeleton()
+            
+            self.reviewsCount.text = "(\(reviewCount))"
         }
     }
     
@@ -115,7 +122,6 @@ class DetailsTVC: UITableViewCell {
         reviewButton.isSelected = true
         reviewButton.backgroundColor = hexStringToUIColor(hex: "#252A34")
         reviewsCount.textColor = .white
-        
         changeCollectionCellToReview?()
         describeButtonDeselectedState()
     }
