@@ -58,7 +58,7 @@ class DetailsTVC: UITableViewCell {
         genreLabel.showSkeleton(usingColor: .concrete, animated: true, delay: 0.25, transition: .crossDissolve(0.25))
     }
     
-    public func configure(model: SingleMovie, genre: String, reviewCount: Int) {
+    public func configure(model: Movie, genre: String, reviewCount: Int) {
         DispatchQueue.main.async { [weak self] in
             
             guard let self = self else { return }

@@ -37,7 +37,8 @@ class HomeCVC: UICollectionViewCell {
             
             let genreNames = genre
                 .filter({ _genre in
-                    return model.genreIds.contains(where: { $0 == _genre.id })
+                    guard let genreIds = model.genreIds else { return false}
+                    return genreIds.contains(where: { $0 == _genre.id })
                 })
                 .map({ $0.name })
                 .joined(separator: ", ")

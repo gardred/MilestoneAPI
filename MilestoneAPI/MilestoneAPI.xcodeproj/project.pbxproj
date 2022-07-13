@@ -24,7 +24,6 @@
 		F149C1EC2872C9B000E6E57F /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F149C1EB2872C9B000E6E57F /* HexColor.swift */; };
 		F15C100B287D836E00C36C69 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15C100A287D836E00C36C69 /* String.swift */; };
 		F1727D71286D81EB00447276 /* UITextFIeld-Padding-.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1727D70286D81EB00447276 /* UITextFIeld-Padding-.swift */; };
-		F17EAF4A2875B88A0066B37B /* SingleMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17EAF492875B88A0066B37B /* SingleMovie.swift */; };
 		F1802995287D9A2300464710 /* NoReviewsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1802993287D9A2300464710 /* NoReviewsTVC.swift */; };
 		F1802996287D9A2300464710 /* NoReviewsTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1802994287D9A2300464710 /* NoReviewsTVC.xib */; };
 		F1A02F212869870400FCE92F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A02F202869870400FCE92F /* AppDelegate.swift */; };
@@ -66,7 +65,6 @@
 		F149C1EB2872C9B000E6E57F /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		F15C100A287D836E00C36C69 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		F1727D70286D81EB00447276 /* UITextFIeld-Padding-.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextFIeld-Padding-.swift"; sourceTree = "<group>"; };
-		F17EAF492875B88A0066B37B /* SingleMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMovie.swift; sourceTree = "<group>"; };
 		F1802993287D9A2300464710 /* NoReviewsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoReviewsTVC.swift; sourceTree = "<group>"; };
 		F1802994287D9A2300464710 /* NoReviewsTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoReviewsTVC.xib; sourceTree = "<group>"; };
 		F1A02F1D2869870400FCE92F /* MilestoneAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MilestoneAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -248,7 +246,6 @@
 				F1A02F582869AA7C00FCE92F /* Movie.swift */,
 				F1D4E513286C7C0000538F56 /* Genre.swift */,
 				F1ABA849287312C500DD80E2 /* Review.swift */,
-				F17EAF492875B88A0066B37B /* SingleMovie.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -396,7 +393,6 @@
 				F149C1EC2872C9B000E6E57F /* HexColor.swift in Sources */,
 				F1E53FED287C378400F2D3D2 /* DetailsTV.swift in Sources */,
 				F1802995287D9A2300464710 /* NoReviewsTVC.swift in Sources */,
-				F17EAF4A2875B88A0066B37B /* SingleMovie.swift in Sources */,
 				F1A02F572869A52A00FCE92F /* API.swift in Sources */,
 				F1350FC628757ED6003E065A /* ReviewCVC.swift in Sources */,
 				F139B47C287C002D00353E6D /* DetailsTVC.swift in Sources */,

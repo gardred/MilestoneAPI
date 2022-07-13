@@ -17,6 +17,14 @@ class DetailsTV: UITableView {
         guard let header = tableHeaderView else { return }
         let offsetY = -contentOffset.y
         height.constant = max(header.bounds.height, header.bounds.height +  offsetY)
+//        height.constant = min(header.bounds.height, header.bounds.height + offsetY)
         
     }
 }
+//func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//      var offset = min(scrollView.contentOffset.y, 0)
+//      if offset > -scrollView.safeAreaInsets.top {
+//          offset = -scrollView.safeAreaInsets.top
+//      }
+//      contentViewTopConstraint.constant = offset
+//  }

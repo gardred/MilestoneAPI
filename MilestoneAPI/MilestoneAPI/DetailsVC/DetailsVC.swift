@@ -22,16 +22,17 @@ class DetailsVC: UIViewController {
     }
     
     // MARK: - UIElements
-    @IBOutlet private weak var tableView: DetailsTV!
+    @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var headerImageView: UIImageView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet private weak var writeReviewButton: UIButton!
     @IBOutlet weak var borderView: UIView!
+   
     // MARK: - Variables
     private var cells: [CellType] = []
     public var reviews: [Review] = []
-    private var selectedMovie: SingleMovie?
+    private var selectedMovie: Movie?
     private var genre: String?
     private var poster: String?
     private var id = 0
@@ -39,6 +40,7 @@ class DetailsVC: UIViewController {
     private var isFetchingData = false
     
     // MARK: - Lifecycle
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .darkContent
     }
@@ -51,25 +53,23 @@ class DetailsVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        getSingleMovie()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        writeReviewButton.isHidden = true
-        borderView.isHidden = true
-        writeReviewButton.layer.cornerRadius = 8
-        borderView.backgroundColor  = .clear
-        getSingleMovie()
+        
+        showDescriptionSection()
         getReview()
         configureTableView()
     }
     
     // MARK: - Functions
     
-    static func construct(id: Int, genre: String, poster: String, cells: [CellType]) -> DetailsVC {
+    static func construct(id: Int, genre: String?, poster: String?) -> DetailsVC {
         
         let controller: DetailsVC = .fromStoryboard("Main")
-        controller.cells = cells
+
         controller.id = id
         controller.genre = genre
         controller.poster = poster
@@ -78,7 +78,7 @@ class DetailsVC: UIViewController {
     }
     
     private func configureTableView() {
-        
+
         guard let poster = poster else { return presentAlert(title: "Error", body: "Failed to fetch data") }
         headerImageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(poster)"))
         
@@ -94,9 +94,14 @@ class DetailsVC: UIViewController {
     
     private func hideButtons(_ state: Bool) {
         writeReviewButton.isHidden = state
+        writeReviewButton.layer.cornerRadius = 8
         borderView.isHidden = state
         tableView.reloadData()
+        
     }
+    
+    
+    
     
     private func showDescriptionSection() {
         
@@ -187,7 +192,7 @@ class DetailsVC: UIViewController {
     @IBAction func writeReviewAction(_ sender: UIButton) {
         guard let selectedMovie = selectedMovie else { return }
         
-        let controller = ReviewViewController.construct(cellType: [.details, .review], movie: selectedMovie)
+        let controller = ReviewViewController.construct(movie: selectedMovie)
         navigationController?.pushViewController(controller, animated: true)
     }
     

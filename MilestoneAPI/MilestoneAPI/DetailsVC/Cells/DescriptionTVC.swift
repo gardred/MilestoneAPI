@@ -21,7 +21,7 @@ class DescriptionTVC: UITableViewCell {
         backgroundColor = .black
     }
     
-    public func configure(model: SingleMovie) {
+    public func configure(model: Movie) {
         self.descriptionLabel.text = model.overview
         self.descriptionLabel.hideSkeleton()
         
@@ -39,7 +39,7 @@ class DescriptionTVC: UITableViewCell {
 
 extension DescriptionTVC {
     
-    static func estimatedHeight(model: SingleMovie) -> CGFloat {
+    static func estimatedHeight(model: Movie) -> CGFloat {
         if let nibView = DescriptionTVC.instanceFromNib() as? DescriptionTVC {
             nibView.configure(model: model)
             nibView.layoutIfNeeded()

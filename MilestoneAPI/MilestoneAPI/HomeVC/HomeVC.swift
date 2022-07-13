@@ -124,7 +124,7 @@ class HomeVC: UIViewController {
                 self.movies.append(contentsOf: getMovies)
                 self.isFetchingData = false
                 self.currentPage += 1
-               
+                print(self.movies)
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
@@ -214,7 +214,7 @@ extension HomeVC: UICollectionViewDelegate {
         let poster = movies[indexPath.row].backdropPath
         let genre = genre[indexPath.row].name
         
-        let controller = DetailsVC.construct(id: id, genre: genre, poster: poster ?? "Error", cells: [.details, .description])
+        let controller = DetailsVC.construct(id: id, genre: genre, poster: poster)
         self.searchController.isActive = false
         self.searchController.searchBar.text = query
         self.navigationController?.pushViewController(controller, animated: true)

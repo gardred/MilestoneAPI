@@ -22,8 +22,9 @@ struct Movie: Codable {
     let voteAverage: Double
     let posterPath: String?
     let overview: String
-    let genreIds: [Int]
-    let backdropPath: String?
+    let genreIds: [Int]?
+    let backdropPath: String
+    
     private enum CodingKeys: String, CodingKey {
         case title, overview, id
         case releaseDate = "release_date"

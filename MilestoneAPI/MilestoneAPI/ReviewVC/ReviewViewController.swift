@@ -25,7 +25,7 @@ class ReviewViewController: UIViewController {
     @IBOutlet private weak var footerView: UIView!
     
     // MARK: - Variables
-    private var movie: SingleMovie?
+    private var movie: Movie?
     private var cells: [DetailsCellType] = []
     
     // MARK: - Lifecycle
@@ -74,10 +74,10 @@ class ReviewViewController: UIViewController {
         collectionView.backgroundColor = .black
     }
     
-    static func construct(cellType: [DetailsCellType], movie: SingleMovie) -> ReviewViewController {
+    static func construct( movie: Movie) -> ReviewViewController {
         let controller: ReviewViewController = .fromStoryboard("Main")
-        controller.cells = cellType
         controller.movie = movie
+        controller.cells = [.details, .review]
         return controller
     }
 
