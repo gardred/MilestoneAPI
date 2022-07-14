@@ -25,10 +25,12 @@ class DetailsVC: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var headerImageView: UIImageView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet private weak var backButton: UIButton!
     @IBOutlet private weak var writeReviewButton: UIButton!
-    @IBOutlet weak var borderView: UIView!
-   
+    @IBOutlet private weak var borderView: UIView!
+    @IBOutlet weak var headerView: UIView!
+    
+    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     // MARK: - Variables
     private var cells: [CellType] = []
     public var reviews: [Review] = []
@@ -38,7 +40,7 @@ class DetailsVC: UIViewController {
     private var id = 0
     private var currentPage = 1
     private var isFetchingData = false
-    
+    private let headerHeight: CGFloat = 200
     // MARK: - Lifecycle
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -69,7 +71,7 @@ class DetailsVC: UIViewController {
     static func construct(id: Int, genre: String?, poster: String?) -> DetailsVC {
         
         let controller: DetailsVC = .fromStoryboard("Main")
-
+        
         controller.id = id
         controller.genre = genre
         controller.poster = poster
@@ -78,14 +80,22 @@ class DetailsVC: UIViewController {
     }
     
     private func configureTableView() {
-
+        
         guard let poster = poster else { return presentAlert(title: "Error", body: "Failed to fetch data") }
         headerImageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(poster)"))
+        
+        headerView = tableView.tableHeaderView
+        tableView.tableHeaderView = nil
+        tableView.addSubview(headerView)
         
         tableView.register(UINib(nibName: "ReviewTVC", bundle: nil), forCellReuseIdentifier: ReviewTVC.identifier)
         tableView.register(UINib(nibName: "DetailsTVC", bundle: nil), forCellReuseIdentifier: DetailsTVC.identifier)
         tableView.register(UINib(nibName: "DescriptionTVC", bundle: nil), forCellReuseIdentifier: DescriptionTVC.identifier)
         tableView.register(UINib(nibName: "NoReviewsTVC", bundle: nil), forCellReuseIdentifier: NoReviewsTVC.identifier)
+        
+        tableView.contentInset = UIEdgeInsets(top: headerHeight, left: 0, bottom: 0, right: 0)
+        tableView.contentOffset = CGPoint(x: 0, y: -headerHeight)
+        updateHeader()
         
         tableView.allowsSelection = false
         tableView.delegate = self
@@ -97,11 +107,15 @@ class DetailsVC: UIViewController {
         writeReviewButton.layer.cornerRadius = 8
         borderView.isHidden = state
         tableView.reloadData()
-        
     }
     
-    
-    
+    private func updateHeader() {
+        
+        if tableView.contentOffset.y < headerHeight {
+            headerView.frame.origin.y = tableView.contentOffset.y
+            headerView.frame.size.height = -tableView.contentOffset.y
+        }
+    }
     
     private func showDescriptionSection() {
         
@@ -118,7 +132,7 @@ class DetailsVC: UIViewController {
         if reviews.count > 0 {
             cells = [ .details ]
             cells.append(contentsOf: reviews.map({ .review($0) }))
-        
+            
         } else {
             
             cells = [
@@ -182,6 +196,7 @@ class DetailsVC: UIViewController {
                 }
                 
             case .failure(let error):
+                
                 DispatchQueue.main.async {
                     self.presentAlert(title: "Error", body: error.localizedDescription)
                 }
@@ -293,4 +308,9 @@ extension DetailsVC: UITableViewDelegate {
             }
         }
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        updateHeader()
+    }
 }
+

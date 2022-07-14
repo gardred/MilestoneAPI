@@ -157,15 +157,12 @@
                                         <rect key="frame" x="0.0" y="0.0" width="428" height="836"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <view key="tableHeaderView" contentMode="scaleAspectFill" id="mZu-ii-cpx">
+                                        <view key="tableHeaderView" clipsSubviews="YES" contentMode="scaleAspectFill" id="mZu-ii-cpx">
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jkG-9n-6oD">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jkG-9n-6oD">
                                                     <rect key="frame" x="0.0" y="0.0" width="428" height="200"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="200" id="4mR-nl-rsk"/>
-                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -173,11 +170,9 @@
                                                 <constraint firstAttribute="trailing" secondItem="jkG-9n-6oD" secondAttribute="trailing" id="7By-ag-LAu"/>
                                                 <constraint firstItem="jkG-9n-6oD" firstAttribute="top" secondItem="mZu-ii-cpx" secondAttribute="top" id="dIQ-om-YDe"/>
                                                 <constraint firstItem="jkG-9n-6oD" firstAttribute="leading" secondItem="mZu-ii-cpx" secondAttribute="leading" id="pZr-Fw-sfd"/>
+                                                <constraint firstAttribute="bottom" secondItem="jkG-9n-6oD" secondAttribute="bottom" id="sbw-fE-xqU"/>
                                             </constraints>
                                         </view>
-                                        <connections>
-                                            <outlet property="height" destination="4mR-nl-rsk" id="gZP-jU-bXc"/>
-                                        </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrz-qk-Chm">
                                         <rect key="frame" x="0.0" y="836" width="428" height="90"/>
@@ -243,6 +238,7 @@
                         <outlet property="backButton" destination="2rk-b2-m3d" id="jiV-0E-qzT"/>
                         <outlet property="borderView" destination="xrz-qk-Chm" id="pJP-hK-olJ"/>
                         <outlet property="headerImageView" destination="jkG-9n-6oD" id="GYR-y0-odH"/>
+                        <outlet property="headerView" destination="mZu-ii-cpx" id="1fe-UY-9tb"/>
                         <outlet property="tableView" destination="bvG-6P-sd8" id="LuT-pc-Pan"/>
                         <outlet property="writeReviewButton" destination="Kfk-KZ-5tM" id="Esw-Yh-yfG"/>
                     </connections>

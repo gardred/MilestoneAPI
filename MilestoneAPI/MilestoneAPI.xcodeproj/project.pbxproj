@@ -41,7 +41,6 @@
 		F1AAE962287BF89A0028BC09 /* ReviewTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1AAE960287BF89A0028BC09 /* ReviewTVC.xib */; };
 		F1ABA84A287312C500DD80E2 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1ABA849287312C500DD80E2 /* Review.swift */; };
 		F1D4E514286C7C0000538F56 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D4E513286C7C0000538F56 /* Genre.swift */; };
-		F1E53FED287C378400F2D3D2 /* DetailsTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E53FEC287C378400F2D3D2 /* DetailsTV.swift */; };
 		F1E53FEF287C412500F2D3D2 /* HeaderViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E53FEE287C412500F2D3D2 /* HeaderViewLayout.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,7 +83,6 @@
 		F1AAE960287BF89A0028BC09 /* ReviewTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewTVC.xib; sourceTree = "<group>"; };
 		F1ABA849287312C500DD80E2 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		F1D4E513286C7C0000538F56 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
-		F1E53FEC287C378400F2D3D2 /* DetailsTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTV.swift; sourceTree = "<group>"; };
 		F1E53FEE287C412500F2D3D2 /* HeaderViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderViewLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -214,7 +212,6 @@
 			children = (
 				F139B479287BFF9200353E6D /* Cells */,
 				F1AAE95D287BF8470028BC09 /* DetailsVC.swift */,
-				F1E53FEC287C378400F2D3D2 /* DetailsTV.swift */,
 			);
 			path = DetailsVC;
 			sourceTree = "<group>";
@@ -391,7 +388,6 @@
 				F1A02F232869870400FCE92F /* SceneDelegate.swift in Sources */,
 				F1ABA84A287312C500DD80E2 /* Review.swift in Sources */,
 				F149C1EC2872C9B000E6E57F /* HexColor.swift in Sources */,
-				F1E53FED287C378400F2D3D2 /* DetailsTV.swift in Sources */,
 				F1802995287D9A2300464710 /* NoReviewsTVC.swift in Sources */,
 				F1A02F572869A52A00FCE92F /* API.swift in Sources */,
 				F1350FC628757ED6003E065A /* ReviewCVC.swift in Sources */,

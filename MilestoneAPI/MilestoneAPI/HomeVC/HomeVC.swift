@@ -171,6 +171,7 @@ class HomeVC: UIViewController {
             case .success(let searchMovie):
                 self.movies = searchMovie
                 self.query = query
+                
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.isHidden = true
@@ -209,11 +210,10 @@ extension HomeVC: UICollectionViewDataSource {
 extension HomeVC: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let id = movies[indexPath.row].id
         let poster = movies[indexPath.row].backdropPath
         let genre = genre[indexPath.row].name
-        
+
         let controller = DetailsVC.construct(id: id, genre: genre, poster: poster)
         self.searchController.isActive = false
         self.searchController.searchBar.text = query
