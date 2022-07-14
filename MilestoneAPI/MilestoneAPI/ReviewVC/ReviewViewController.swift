@@ -36,9 +36,9 @@ class ReviewViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -157,7 +157,7 @@ extension ReviewViewController: UICollectionViewDelegateFlowLayout {
         switch cells[indexPath.row] {
             
         case .details:
-            return CGSize(width: collectionView.bounds.width, height: 190)
+            return CGSize(width: collectionView.bounds.width, height: 135)
         case .review:
             return CGSize(width: collectionView.bounds.width, height: 350)
         }

@@ -35,8 +35,12 @@ class DetailsVC: UIViewController {
     private var cells: [CellType] = []
     public var reviews: [Review] = []
     private var selectedMovie: Movie?
-    private var genre: String?
+    
+    private var genre: [Genre] = []
+    private var genreIds: String?
+    
     private var poster: String?
+    
     private var id = 0
     private var currentPage = 1
     private var isFetchingData = false
@@ -49,7 +53,7 @@ class DetailsVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,17 +67,19 @@ class DetailsVC: UIViewController {
         
         showDescriptionSection()
         getReview()
+        getGenre()
         configureTableView()
+        print("Genre id: \(genreIds)")
     }
     
     // MARK: - Functions
     
-    static func construct(id: Int, genre: String?, poster: String?) -> DetailsVC {
+    static func construct(id: Int, genreIds: String?, poster: String?) -> DetailsVC {
         
         let controller: DetailsVC = .fromStoryboard("Main")
-        
+
         controller.id = id
-        controller.genre = genre
+        controller.genreIds = genreIds
         controller.poster = poster
         
         return controller
@@ -148,23 +154,21 @@ class DetailsVC: UIViewController {
     
     private func getSingleMovie() {
         
+        activityIndicator.startAnimating()
+        
         API.shared.getMovieById(id: id) { [weak self] (result) in
             guard let self = self else { return }
             
             DispatchQueue.main.async {
-                self.activityIndicator.startAnimating()
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
             }
             
             switch result {
                 
             case .success(let movie):
-                
-                DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
-                    self.activityIndicator.isHidden = true
-                }
                 self.selectedMovie = movie
-                
+                print("Selected movie: \(self.selectedMovie)")
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -172,8 +176,6 @@ class DetailsVC: UIViewController {
             case .failure(let error):
                 
                 DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
-                    self.activityIndicator.isHidden = true
                     self.presentAlert(title: "Error", body: error.localizedDescription)
                 }
             }
@@ -181,8 +183,15 @@ class DetailsVC: UIViewController {
     }
     
     private func getReview() {
+        activityIndicator.startAnimating()
         API.shared.getReview(id: id, atPage: currentPage) { [weak self] (reviewsResult) in
+            
             guard let self = self else { return }
+           
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
+            }
             
             switch reviewsResult {
                 
@@ -197,6 +206,25 @@ class DetailsVC: UIViewController {
                 
             case .failure(let error):
                 
+                DispatchQueue.main.async {
+                    self.presentAlert(title: "Error", body: error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    private func getGenre() {
+
+        API.shared.getGenre { [weak self] (result) in
+            guard let self = self else { return }
+
+            switch result {
+
+            case .success(let getGenre):
+                self.genre.append(contentsOf: getGenre)
+                
+            case .failure(let error):
+
                 DispatchQueue.main.async {
                     self.presentAlert(title: "Error", body: error.localizedDescription)
                 }
@@ -232,8 +260,8 @@ extension DetailsVC: UITableViewDataSource {
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailsTVC.identifier, for: indexPath) as? DetailsTVC else { return UITableViewCell() }
             
-            if let selectedMovie = selectedMovie, let genre = genre {
-                cell.configure(model: selectedMovie, genre: genre, reviewCount: reviews.count)
+            if let selectedMovie = selectedMovie {
+                cell.configure(model: selectedMovie, genre: self.genre, reviewCount: reviews.count)
             }
             
             cell.changeCollectionCellToDescription = { [weak self] in

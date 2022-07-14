@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AiZ-GU-Rhz">
-                                <rect key="frame" x="0.0" y="154" width="428" height="772"/>
+                                <rect key="frame" x="0.0" y="122" width="428" height="804"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="24" minimumInteritemSpacing="24" id="DJ2-U7-hCA">
                                     <size key="itemSize" width="0.0" height="0.0"/>
@@ -26,7 +26,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <activityIndicatorView key="backgroundView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="Z7e-Ux-LtM">
-                                    <rect key="frame" x="0.0" y="0.0" width="428" height="772"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="428" height="804"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </activityIndicatorView>
@@ -44,7 +44,7 @@
                         <constraints>
                             <constraint firstItem="4PW-6G-yaD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="3sD-aK-Rl7"/>
                             <constraint firstItem="AiZ-GU-Rhz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6SY-SY-p3N"/>
-                            <constraint firstItem="AiZ-GU-Rhz" firstAttribute="top" secondItem="4PW-6G-yaD" secondAttribute="bottom" constant="32" id="7E2-MO-Jb3"/>
+                            <constraint firstItem="AiZ-GU-Rhz" firstAttribute="top" secondItem="4PW-6G-yaD" secondAttribute="bottom" id="7E2-MO-Jb3"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="AiZ-GU-Rhz" secondAttribute="trailing" id="Afu-Kw-PqL"/>
                             <constraint firstItem="4PW-6G-yaD" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bRx-JZ-nOO"/>
                             <constraint firstAttribute="bottom" secondItem="AiZ-GU-Rhz" secondAttribute="bottom" id="kZt-P3-hpr"/>
@@ -153,7 +153,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fxf-w8-xAr">
                                 <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="DetailsTV" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="180" estimatedRowHeight="180" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bvG-6P-sd8" customClass="DetailsTV" customModule="MilestoneAPI" customModuleProvider="target">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="DetailsTV" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="180" estimatedRowHeight="180" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bvG-6P-sd8" customClass="DetailsTV" customModule="MilestoneAPI" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="428" height="836"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -161,7 +161,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="428" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jkG-9n-6oD">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jkG-9n-6oD">
                                                     <rect key="frame" x="0.0" y="0.0" width="428" height="200"/>
                                                 </imageView>
                                             </subviews>

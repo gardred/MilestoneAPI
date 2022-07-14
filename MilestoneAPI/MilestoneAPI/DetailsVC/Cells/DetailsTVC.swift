@@ -58,7 +58,7 @@ class DetailsTVC: UITableViewCell {
         genreLabel.showSkeleton(usingColor: .concrete, animated: true, delay: 0.25, transition: .crossDissolve(0.25))
     }
     
-    public func configure(model: Movie, genre: String, reviewCount: Int) {
+    public func configure(model: Movie, genre: [Genre], reviewCount: Int) {
         DispatchQueue.main.async { [weak self] in
             
             guard let self = self else { return }
@@ -69,14 +69,12 @@ class DetailsTVC: UITableViewCell {
             self.titleLabel.text = model.title
             self.titleLabel.hideSkeleton()
             
+           
             self.rateLabel.text = "\(model.voteAverage)"
             self.rateLabel.hideSkeleton()
             
             self.dateLabel.text = model.releaseDate
             self.dateLabel.hideSkeleton()
-            
-            self.genreLabel.text = genre
-            self.genreLabel.hideSkeleton()
             
             self.reviewsCount.text = "(\(reviewCount))"
         }

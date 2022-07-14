@@ -19,10 +19,27 @@ class API {
     
     static let shared = API()
     
+    
+    
     func getMovies(atPage page: Int, completion: @escaping (Result<[Movie], Error>) -> Void) {
-        guard let url = URL(string: "\(Constants.baseURL)/3/discover/movie?api_key=\(Constants.API_KEY)&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=\(page)&with_watch_monetization_types=flatrate") else { return }
         
-        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+        var components = URLComponents()
+        
+        components.scheme = "https"
+        components.host = "api.themoviedb.org"
+        components.path = "/3/discover/movie"
+        
+        components.queryItems = [
+            URLQueryItem(name: "api_key", value: "a560703232bc4d393f220567c65184df"),
+            URLQueryItem(name: "language", value: "en-US"),
+            URLQueryItem(name: "sort_by", value: "popularity.desc"),
+            URLQueryItem(name: "include_adult", value: "false"),
+            URLQueryItem(name: "include_video", value: "false"),
+            URLQueryItem(name: "page", value: "\(page)"),
+            URLQueryItem(name: "with_watch_monetization_types", value: "flatrate")
+        ]
+        
+        let task = URLSession.shared.dataTask(with: URLRequest(url: components.url!)) { data, _, error in
             
             if let data = data {
                 do {
@@ -41,8 +58,18 @@ class API {
     
     func getGenre(completion: @escaping (Result<[Genre], Error>) -> Void) {
         
-        guard let url = URL(string: "https://api.themoviedb.org/3/genre/movie/list?api_key=\(Constants.API_KEY)&language=en-US") else { return }
-        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "api.themoviedb.org"
+        components.path = "/3/genre/movie/list"
+        
+        components.queryItems = [
+            URLQueryItem(name: "api_key", value: "a560703232bc4d393f220567c65184df"),
+            URLQueryItem(name: "language", value: "en-US")
+        ]
+        
+        
+        let task = URLSession.shared.dataTask(with: URLRequest(url: components.url!)) { data, _, error in
             
             if let data = data {
                 do {
@@ -61,9 +88,18 @@ class API {
     
     func getMovieById(id: Int, completion: @escaping (Result<Movie, Error>) -> Void) {
         
-        guard let url = URL(string: "\(Constants.baseURL)/3/movie/\(id)?api_key=\(Constants.API_KEY)&language=en-US") else { return }
+        var components = URLComponents()
         
-        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+        components.scheme = "https"
+        components.host = "api.themoviedb.org"
+        components.path = "/3/movie/\(id)"
+        components.queryItems = [
+            URLQueryItem(name: "api_key", value: "a560703232bc4d393f220567c65184df"),
+            URLQueryItem(name: "language", value: "en-US")
+        ]
+        
+        
+        let task = URLSession.shared.dataTask(with: URLRequest(url: components.url!)) { data, _, error in
             
             if let data = data {
                 
@@ -85,9 +121,18 @@ class API {
     func search(with query: String, completion: @escaping (Result<[Movie], Error>) -> Void) {
         
         guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
-        guard let url = URL(string: "\(Constants.baseURL)/3/search/movie?api_key=\(Constants.API_KEY)&query=\(query)") else { return}
         
-        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+        var components = URLComponents()
+        
+        components.scheme = "https"
+        components.host = "api.themoviedb.org"
+        components.path = "/3/search/movie"
+        components.queryItems = [
+            URLQueryItem(name: "api_key", value: "a560703232bc4d393f220567c65184df"),
+            URLQueryItem(name: "query", value: "\(query)")
+        ]
+        
+        let task = URLSession.shared.dataTask(with: URLRequest(url: components.url!)) { data, _, error in
             if let data = data {
                 do {
                     let results = try JSONDecoder().decode(MovieResponse.self, from: data)
@@ -105,9 +150,18 @@ class API {
     
     func getReview(id: Int, atPage page: Int, completion: @escaping (Result<[Review], Error>) -> Void) {
         
-        guard let url = URL(string: "\(Constants.baseURL)/3/movie/\(id)/reviews?api_key=\(Constants.API_KEY)&language=en-US&page=\(page)") else { return }
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "api.themoviedb.org"
+        components.path = "/3/movie/\(id)/reviews"
+       
+        components.queryItems = [
+            URLQueryItem(name: "api_key", value: "a560703232bc4d393f220567c65184df"),
+            URLQueryItem(name: "language", value: "en-US"),
+            URLQueryItem(name: "page", value: "\(page)")
+        ]
         
-        let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
+        let task = URLSession.shared.dataTask(with: URLRequest(url:  components.url!)) { data, _, error in
             
             if let data = data {
                 

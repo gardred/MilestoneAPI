@@ -18,6 +18,7 @@ class HomeCVC: UICollectionViewCell {
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var genreLabel: UILabel!
     
+    var genreNames: String?
     // MARK: - Lifecycle
     
     override func awakeFromNib() {
@@ -35,7 +36,7 @@ class HomeCVC: UICollectionViewCell {
             self.dateLabel.text = model.releaseDate
             self.ratingLabel.text = String(model.voteAverage)
             
-            let genreNames = genre
+            self.genreNames = genre
                 .filter({ _genre in
                     guard let genreIds = model.genreIds else { return false}
                     return genreIds.contains(where: { $0 == _genre.id })
@@ -43,7 +44,8 @@ class HomeCVC: UICollectionViewCell {
                 .map({ $0.name })
                 .joined(separator: ", ")
             
-            self.genreLabel.text = genreNames
+            self.genreLabel.text = self.genreNames
+            
         }
     }
 }

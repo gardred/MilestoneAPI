@@ -11,21 +11,24 @@ import IQKeyboardManagerSwift
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
+        guard let _ = (scene as? UIWindowScene) else { return }
         
         IQKeyboardManager.shared.enable = true
-        
+        setInitialViewController()
+    }
+    
+    public func setInitialViewController() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController (withIdentifier: "HomeVC") as! HomeVC
-        let navigationController = UINavigationController(rootViewController: controller)
-        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        window?.windowScene = windowScene
+        let rootNavigationController = UINavigationController(rootViewController: controller)
+        rootNavigationController.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        rootNavigationController.navigationBar.isHidden = true
+        rootNavigationController.navigationBar.tintColor = .clear
+        window?.rootViewController = rootNavigationController
         window?.makeKeyAndVisible()
-        window?.rootViewController = navigationController
-        
-        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

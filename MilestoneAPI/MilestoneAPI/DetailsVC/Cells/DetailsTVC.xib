@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hKJ-Oy-Wma">
-                        <rect key="frame" x="10" y="24" width="405" height="92"/>
+                        <rect key="frame" x="10" y="0.0" width="405" height="92"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[movie title]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Czh-Z5-ilo">
                                 <rect key="frame" x="0.0" y="0.0" width="101" height="24"/>
@@ -101,7 +101,7 @@
                         </subviews>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="61" translatesAutoresizingMaskIntoConstraints="NO" id="cJk-7y-pnc">
-                        <rect key="frame" x="10" y="148" width="405" height="50"/>
+                        <rect key="frame" x="10" y="124" width="405" height="50"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n7R-0n-A9h">
                                 <rect key="frame" x="0.0" y="0.0" width="170" height="50"/>
@@ -177,7 +177,7 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="hKJ-Oy-Wma" secondAttribute="trailing" constant="10" id="675-1s-7cE"/>
                     <constraint firstItem="LMh-il-fZQ" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="C79-On-Pti"/>
-                    <constraint firstItem="hKJ-Oy-Wma" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="Dir-Dr-auX"/>
+                    <constraint firstItem="hKJ-Oy-Wma" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Dir-Dr-auX"/>
                     <constraint firstItem="LMh-il-fZQ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="GRV-U5-QN5"/>
                     <constraint firstAttribute="trailing" secondItem="cJk-7y-pnc" secondAttribute="trailing" constant="10" id="v5I-6F-HYg"/>
                     <constraint firstItem="cJk-7y-pnc" firstAttribute="top" secondItem="hKJ-Oy-Wma" secondAttribute="bottom" constant="32" id="woh-CM-tXE"/>
