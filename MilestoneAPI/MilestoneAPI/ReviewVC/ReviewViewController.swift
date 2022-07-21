@@ -74,7 +74,7 @@ class ReviewViewController: UIViewController {
         collectionView.backgroundColor = .black
     }
     
-    static func construct( movie: Movie) -> ReviewViewController {
+    static func construct(movie: Movie) -> ReviewViewController {
         let controller: ReviewViewController = .fromStoryboard("Main")
         controller.movie = movie
         controller.cells = [.details, .review]

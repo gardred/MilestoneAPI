@@ -23,15 +23,29 @@ struct Movie: Codable {
     let posterPath: String?
     let overview: String
     let genreIds: [Int]?
+    let genres: [Genre]?
     let backdropPath: String
     
     private enum CodingKeys: String, CodingKey {
-        case title, overview, id
+        case title, overview, id, genres
         case releaseDate = "release_date"
         case voteAverage = "vote_average"
         case posterPath = "poster_path"
         case genreIds = "genre_ids"
         case backdropPath = "backdrop_path"
+    }
+    
+    func getGeneres() -> [Genre] {
+        
+        if let genreIds = genreIds {
+            
+            return GenreManager.shared.genre
+                .filter({ _genre in
+                    return genreIds.contains(where: { $0 == _genre.id })
+                })
+        }
+        
+        return []
     }
 }
 

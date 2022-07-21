@@ -89,7 +89,7 @@
                                     <constraint firstAttribute="height" constant="24" id="jxo-Ar-zFI"/>
                                 </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[genre]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zhu-VL-1wT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[genre]" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zhu-VL-1wT">
                                 <rect key="frame" x="0.0" y="68" width="50" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="ij5-TR-CrY"/>

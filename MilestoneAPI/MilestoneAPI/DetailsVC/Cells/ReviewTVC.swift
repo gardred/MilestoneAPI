@@ -33,13 +33,13 @@ class ReviewTVC: UITableViewCell {
     
     public func configure(model: Review) {
         
-        self.rating.text = String(model.authorDetails.rating)
-        self.reviewTitle.text = model.author
-        self.author.text = model.author
-        self.body.text = model.content
-        self.date.text = convertDateFormatter(date: model.createdAt)
+        rating.text = String(model.authorDetails.rating)
+        reviewTitle.text = model.author
+        author.text = model.author
+        body.text = model.content
+        date.text = convertDateFormatter(date: model.createdAt)
         
-        self.errorLabel.isHidden = true
+        errorLabel.isHidden = true
     }
     
     static func instanceFromNib() -> UIView {

@@ -38,7 +38,7 @@ class API {
             URLQueryItem(name: "page", value: "\(page)"),
             URLQueryItem(name: "with_watch_monetization_types", value: "flatrate")
         ]
-        
+        print(components.url)
         let task = URLSession.shared.dataTask(with: URLRequest(url: components.url!)) { data, _, error in
             
             if let data = data {
@@ -47,6 +47,7 @@ class API {
                     completion(.success(result.movies))
                 } catch {
                     self.handleApiError("Something went wrong. Please try again later!")
+                    print(error)
                 }
                 
             } else if let error = error {
@@ -97,7 +98,6 @@ class API {
             URLQueryItem(name: "api_key", value: "a560703232bc4d393f220567c65184df"),
             URLQueryItem(name: "language", value: "en-US")
         ]
-        
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: components.url!)) { data, _, error in
             

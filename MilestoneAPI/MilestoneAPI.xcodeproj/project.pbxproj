@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4739044B821C2B152F00A212 /* Pods_MilestoneAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF90D9123E1D0E28E6A632F6 /* Pods_MilestoneAPI.framework */; };
+		F10FF362288055AE00A804FA /* GenreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F10FF361288055AE00A804FA /* GenreManager.swift */; };
 		F11AE6B92876D36E0026E100 /* UIView-.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11AE6B82876D36E0026E100 /* UIView-.swift */; };
 		F11EC4432869FAB000516762 /* UIAlert-.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11EC4422869FAB000516762 /* UIAlert-.swift */; };
 		F1350FBF28757BA5003E065A /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1350FBE28757BA5003E065A /* ReviewViewController.swift */; };
@@ -48,6 +49,7 @@
 		0EDF12E09000560C6BDE21B0 /* Pods-MilestoneAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MilestoneAPI.release.xcconfig"; path = "Target Support Files/Pods-MilestoneAPI/Pods-MilestoneAPI.release.xcconfig"; sourceTree = "<group>"; };
 		4897CEC3056B57105F5BF935 /* Pods-MilestoneAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MilestoneAPI.debug.xcconfig"; path = "Target Support Files/Pods-MilestoneAPI/Pods-MilestoneAPI.debug.xcconfig"; sourceTree = "<group>"; };
 		CF90D9123E1D0E28E6A632F6 /* Pods_MilestoneAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MilestoneAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F10FF361288055AE00A804FA /* GenreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreManager.swift; sourceTree = "<group>"; };
 		F11AE6B82876D36E0026E100 /* UIView-.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView-.swift"; sourceTree = "<group>"; };
 		F11EC4422869FAB000516762 /* UIAlert-.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlert-.swift"; sourceTree = "<group>"; };
 		F1350FBE28757BA5003E065A /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				F1A02F292869870800FCE92F /* Assets.xcassets */,
 				F1A02F2B2869870800FCE92F /* LaunchScreen.storyboard */,
 				F1A02F2E2869870800FCE92F /* Info.plist */,
+				F10FF361288055AE00A804FA /* GenreManager.swift */,
 			);
 			path = MilestoneAPI;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				F15C100B287D836E00C36C69 /* String.swift in Sources */,
 				F1D4E514286C7C0000538F56 /* Genre.swift in Sources */,
 				F1A02F252869870400FCE92F /* HomeVC.swift in Sources */,
+				F10FF362288055AE00A804FA /* GenreManager.swift in Sources */,
 				F11AE6B92876D36E0026E100 /* UIView-.swift in Sources */,
 				F1AAE95E287BF8470028BC09 /* DetailsVC.swift in Sources */,
 				F1A02F3928698A4300FCE92F /* HomeCVC.swift in Sources */,

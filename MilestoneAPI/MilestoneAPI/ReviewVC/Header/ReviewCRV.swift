@@ -19,10 +19,7 @@ class ReviewCRV: UICollectionReusableView {
     }
     
     public func configure(model: Movie) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.imageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(model.backdropPath)"))
-            self.imageView.contentMode = .scaleAspectFill
-        }
+        imageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(model.backdropPath)"))
+        imageView.contentMode = .scaleAspectFill
     }
 }

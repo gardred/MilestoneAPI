@@ -23,9 +23,6 @@ class ReviewDetailsCVC: UICollectionViewCell {
     // MARK: - Functions
     
     public func configure(model: Movie) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.movieTitle.text = model.title
-        }
+        movieTitle.text = model.title
     }
 }

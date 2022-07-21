@@ -9,7 +9,7 @@ import UIKit
 import SDWebImage
 
 class HomeCVC: UICollectionViewCell {
-
+    
     static let identifier = "HomeCVC"
     // MARK: - UI Elements
     @IBOutlet private weak var imageView: UIImageView!
@@ -18,7 +18,7 @@ class HomeCVC: UICollectionViewCell {
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var genreLabel: UILabel!
     
-    var genreNames: String?
+    private var genreNames: String?
     // MARK: - Lifecycle
     
     override func awakeFromNib() {
@@ -27,25 +27,20 @@ class HomeCVC: UICollectionViewCell {
     }
     // MARK: - Functions
     
-    public func configure(model: Movie, genre: [Genre]) {
+    public func configure(model: Movie) {
         
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self, let image = model.posterPath else { return }
-            self.imageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(image)"))
-            self.titleLabel.text = model.title
-            self.dateLabel.text = model.releaseDate
-            self.ratingLabel.text = String(model.voteAverage)
-            
-            self.genreNames = genre
-                .filter({ _genre in
-                    guard let genreIds = model.genreIds else { return false}
-                    return genreIds.contains(where: { $0 == _genre.id })
-                })
-                .map({ $0.name })
-                .joined(separator: ", ")
-            
-            self.genreLabel.text = self.genreNames
-            
-        }
+        guard let image = model.posterPath else { return }
+        
+        imageView.sd_setImage(with: URL(string: "\(Constants.imageURL)\(image)"))
+        titleLabel.text = model.title
+        dateLabel.text = model.releaseDate
+        ratingLabel.text = String(model.voteAverage)
+        
+        let genreNames = model.getGeneres().map({ $0.name })
+            .joined(separator: ", ")
+        
+        genreLabel.text = genreNames
+        
+        
     }
 }

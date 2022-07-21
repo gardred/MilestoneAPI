@@ -10,7 +10,7 @@ import UIKit
 class DetailsTVC: UITableViewCell {
     
     static let identifier = "DetailsTVC"
-
+    
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var rateLabel: UILabel!
     @IBOutlet private weak var dateLabel: UILabel!
@@ -25,10 +25,11 @@ class DetailsTVC: UITableViewCell {
     
     var changeCollectionCellToDescription: (() -> Void)?
     var changeCollectionCellToReview: (() -> Void)?
+    private var genreNames: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-       
+        
         backgroundColor = .black
         makeElementsSkeletonable()
         
@@ -58,26 +59,30 @@ class DetailsTVC: UITableViewCell {
         genreLabel.showSkeleton(usingColor: .concrete, animated: true, delay: 0.25, transition: .crossDissolve(0.25))
     }
     
-    public func configure(model: Movie, genre: [Genre], reviewCount: Int) {
-        DispatchQueue.main.async { [weak self] in
+    public func configure(model: Movie, reviewCount: Int) {
+      
+            activityIndicator.isHidden = true
+            activityIndicator.stopAnimating()
             
-            guard let self = self else { return }
+            titleLabel.text = model.title
+            titleLabel.hideSkeleton()
             
-            self.activityIndicator.isHidden = true
-            self.activityIndicator.stopAnimating()
+            genreLabel.text = "[genre]"
+            genreLabel.hideSkeleton()
             
-            self.titleLabel.text = model.title
-            self.titleLabel.hideSkeleton()
+            rateLabel.text = "\(model.voteAverage)"
+            rateLabel.hideSkeleton()
             
-           
-            self.rateLabel.text = "\(model.voteAverage)"
-            self.rateLabel.hideSkeleton()
+            dateLabel.text = model.releaseDate
+            dateLabel.hideSkeleton()
             
-            self.dateLabel.text = model.releaseDate
-            self.dateLabel.hideSkeleton()
+            let genreNames = (model.genres ?? []).map({ $0.name })
+            let genresString = genreNames.joined(separator: ", ")
             
-            self.reviewsCount.text = "(\(reviewCount))"
-        }
+            genreLabel.text = genresString
+            genreLabel.hideSkeleton()
+            
+            reviewsCount.text = "(\(reviewCount))"
     }
     
     private func configureButtons() {

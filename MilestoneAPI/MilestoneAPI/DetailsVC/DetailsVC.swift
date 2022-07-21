@@ -33,12 +33,8 @@ class DetailsVC: UIViewController {
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     // MARK: - Variables
     private var cells: [CellType] = []
-    public var reviews: [Review] = []
+    public  var reviews: [Review] = []
     private var selectedMovie: Movie?
-    
-    private var genre: [Genre] = []
-    private var genreIds: String?
-    
     private var poster: String?
     
     private var id = 0
@@ -67,19 +63,16 @@ class DetailsVC: UIViewController {
         
         showDescriptionSection()
         getReview()
-        getGenre()
         configureTableView()
-        print("Genre id: \(genreIds)")
     }
     
     // MARK: - Functions
     
-    static func construct(id: Int, genreIds: String?, poster: String?) -> DetailsVC {
+    static func construct(id: Int, poster: String?) -> DetailsVC {
         
         let controller: DetailsVC = .fromStoryboard("Main")
-
+    
         controller.id = id
-        controller.genreIds = genreIds
         controller.poster = poster
         
         return controller
@@ -168,11 +161,10 @@ class DetailsVC: UIViewController {
                 
             case .success(let movie):
                 self.selectedMovie = movie
-                print("Selected movie: \(self.selectedMovie)")
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-                
+            
             case .failure(let error):
                 
                 DispatchQueue.main.async {
@@ -213,25 +205,6 @@ class DetailsVC: UIViewController {
         }
     }
     
-    private func getGenre() {
-
-        API.shared.getGenre { [weak self] (result) in
-            guard let self = self else { return }
-
-            switch result {
-
-            case .success(let getGenre):
-                self.genre.append(contentsOf: getGenre)
-                
-            case .failure(let error):
-
-                DispatchQueue.main.async {
-                    self.presentAlert(title: "Error", body: error.localizedDescription)
-                }
-            }
-        }
-    }
-    
     @IBAction func writeReviewAction(_ sender: UIButton) {
         guard let selectedMovie = selectedMovie else { return }
         
@@ -261,7 +234,8 @@ extension DetailsVC: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailsTVC.identifier, for: indexPath) as? DetailsTVC else { return UITableViewCell() }
             
             if let selectedMovie = selectedMovie {
-                cell.configure(model: selectedMovie, genre: self.genre, reviewCount: reviews.count)
+                cell.configure(model: selectedMovie, reviewCount: reviews.count)
+                
             }
             
             cell.changeCollectionCellToDescription = { [weak self] in
@@ -293,7 +267,9 @@ extension DetailsVC: UITableViewDataSource {
             cell.configure(model: review)
             
             return cell
+        
         case .error:
+            
             guard let cell = tableView.dequeueReusableCell(withIdentifier: NoReviewsTVC.identifier, for: indexPath) as? NoReviewsTVC else { return UITableViewCell() }
             
             return cell

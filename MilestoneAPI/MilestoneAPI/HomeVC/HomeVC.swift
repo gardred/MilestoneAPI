@@ -52,7 +52,7 @@ class HomeVC: UIViewController {
         
         configureSearchBar()
         getMovies()
-        getGenre()
+        GenreManager.shared.getGenre()
         configCollection()
         
     }
@@ -132,29 +132,11 @@ class HomeVC: UIViewController {
                 DispatchQueue.main.async {
                     self.moviesCollectionView.reloadData()
                 }
-                
-            case .failure(let error):
-                
-                DispatchQueue.main.async {
-                    self.presentAlert(title: "Error", body: error.localizedDescription)
-                }
-            }
-        }
-    }
-    
-    private func getGenre() {
         
-        API.shared.getGenre { [weak self] (result) in
-            guard let self = self else { return }
-            
-            switch result {
-                
-            case .success(let getGenre):
-                self.genre.append(contentsOf: getGenre)
-
             case .failure(let error):
                 
                 DispatchQueue.main.async {
+                    
                     self.presentAlert(title: "Error", body: error.localizedDescription)
                 }
             }
@@ -203,7 +185,8 @@ extension HomeVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCVC.identifier, for: indexPath) as? HomeCVC else { return UICollectionViewCell() }
         
-        cell.configure(model: movies[indexPath.row], genre: genre)
+        let movies = movies[indexPath.row]
+        cell.configure(model: movies)
         
         return cell
     }
@@ -217,9 +200,8 @@ extension HomeVC: UICollectionViewDelegate {
         
         let id = movies[indexPath.row].id
         let poster = movies[indexPath.row].backdropPath
-        let genre = ""
         
-        let controller = DetailsVC.construct(id: id, genreIds: genre, poster: poster)
+        let controller = DetailsVC.construct(id: id, poster: poster)
         self.searchController.isActive = false
         self.searchController.searchBar.text = query
         self.navigationController?.pushViewController(controller, animated: true)
