@@ -60,12 +60,13 @@ class DetailsVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         getSingleMovie()
+        getReview()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getReview()
+        prepareStructure(with: .description)
         configureTableView()
     }
     
@@ -132,10 +133,11 @@ class DetailsVC: UIViewController {
             hideButtons(true)
         
         case .reviews:
-        
+            
             if reviews.count > 0 {
                 
                 cells = [ .details ]
+                getReview()
                 cells.append(contentsOf: reviews.map({ .review($0) }))
                 
             } else {
@@ -198,13 +200,10 @@ class DetailsVC: UIViewController {
             switch reviewsResult {
                 
             case .success(let review):
+                
                 self.reviews.append(contentsOf: review)
                 self.currentPage += 1
                 self.isFetchingData = false
-                
-                DispatchQueue.main.async {
-                    self.prepareStructure(with: .description)
-                }
                 
             case .failure(let error):
                 
@@ -255,6 +254,7 @@ extension DetailsVC: UITableViewDataSource {
             
             cell.changeCollectionCellToReview = { [weak self] in
                 guard let self = self else { return }
+                
                 self.prepareStructure(with: .reviews)
             }
             
@@ -309,18 +309,17 @@ extension DetailsVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if reviews.count > 1 {
+//        if reviews.count > 1 {
             
             let lastReview = reviews.count
             if indexPath.row == lastReview && !isFetchingData {
                 DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
-                    
                     self.isFetchingData = true
                     self.getReview()
                 }
             }
-        }
+//        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
