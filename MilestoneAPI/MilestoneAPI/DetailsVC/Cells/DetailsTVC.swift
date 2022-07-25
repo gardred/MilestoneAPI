@@ -21,11 +21,10 @@ class DetailsTVC: UITableViewCell {
     @IBOutlet private weak var reviewButton: UIButton!
     
     @IBOutlet weak var reviewsCount: UILabel!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
     var changeCollectionCellToDescription: (() -> Void)?
     var changeCollectionCellToReview: (() -> Void)?
-    private var genreNames: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -66,9 +65,6 @@ class DetailsTVC: UITableViewCell {
             
             titleLabel.text = model.title
             titleLabel.hideSkeleton()
-            
-            genreLabel.text = "[genre]"
-            genreLabel.hideSkeleton()
             
             rateLabel.text = "\(model.voteAverage)"
             rateLabel.hideSkeleton()

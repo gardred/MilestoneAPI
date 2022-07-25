@@ -32,9 +32,9 @@ class DetailsVC: UIViewController {
     @IBOutlet private weak var backButton: UIButton!
     @IBOutlet private weak var writeReviewButton: UIButton!
     @IBOutlet private weak var borderView: UIView!
-    @IBOutlet weak var headerView: UIView!
+    @IBOutlet private weak var headerView: UIView!
     
-    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var imageViewHeightConstraint: NSLayoutConstraint!
     // MARK: - Variables
     private var cells: [CellType] = []
     public  var reviews: [Review] = []
@@ -131,6 +131,7 @@ class DetailsVC: UIViewController {
             ]
             
             hideButtons(true)
+        
         case .reviews:
             
             if reviews.count > 0 {
@@ -184,6 +185,7 @@ class DetailsVC: UIViewController {
     
     private func getReview() {
         activityIndicator.startAnimating()
+        
         API.shared.getReview(id: id, atPage: currentPage) { [weak self] (reviewsResult) in
             
             guard let self = self else { return }
@@ -201,7 +203,7 @@ class DetailsVC: UIViewController {
                 self.isFetchingData = false
                 
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self.prepareStructure(with: .reviews)
                 }
                 
             case .failure(let error):

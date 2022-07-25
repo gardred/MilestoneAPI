@@ -64,6 +64,8 @@ class ReviewViewController: UIViewController {
     
     private func configureCollectionView() {
         
+        cells = [.details, .review]
+        
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.register(UINib(nibName: "ReviewCVC", bundle: nil), forCellWithReuseIdentifier: ReviewCVC.identifier)
         collectionView.register(UINib(nibName: "ReviewDetailsCVC", bundle: nil), forCellWithReuseIdentifier: ReviewDetailsCVC.identifier)
@@ -82,7 +84,6 @@ class ReviewViewController: UIViewController {
     static func construct(movie: Movie) -> ReviewViewController {
         let controller: ReviewViewController = .fromStoryboard("Main")
         controller.movie = movie
-        controller.cells = [.details, .review]
         return controller
     }
 
