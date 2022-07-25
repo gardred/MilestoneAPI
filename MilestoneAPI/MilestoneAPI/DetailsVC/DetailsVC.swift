@@ -45,6 +45,7 @@ class DetailsVC: UIViewController {
     private var id = 0
     private var currentPage = 1
     private var isFetchingData = false
+    private var hasNoMorePages = false
     private let headerHeight: CGFloat = 200
     // MARK: - Lifecycle
     
@@ -61,6 +62,7 @@ class DetailsVC: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         
+        prepareStructure(with: self.viewMode)
         getReview()
         getSingleMovie()
     }
@@ -127,7 +129,7 @@ class DetailsVC: UIViewController {
         switch viewMode {
             
         case .description:
-            self.viewMode = .description
+            
             cells = [
                 .details,
                 .description
@@ -138,8 +140,7 @@ class DetailsVC: UIViewController {
         case .reviews:
             
             if reviews.count > 0 {
-                self.viewMode = .reviews
-               
+
                 cells = [ .details ]
                 cells.append(contentsOf: reviews.map({ .review($0) }))
                 
@@ -177,7 +178,7 @@ class DetailsVC: UIViewController {
                 self.selectedMovie = movie
                 
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self.prepareStructure(with: self.viewMode)
                 }
                 
             case .failure(let error):
@@ -192,6 +193,7 @@ class DetailsVC: UIViewController {
     private func getReview() {
         
         activityIndicator.startAnimating()
+        isFetchingData = true
         
         API.shared.getReview(id: id, atPage: currentPage) { [weak self] (reviewsResult) in
             
@@ -210,9 +212,11 @@ class DetailsVC: UIViewController {
                 self.currentPage += 1
                 self.isFetchingData = false
                 
+                self.hasNoMorePages = review.count > 0
+                
+                
                 DispatchQueue.main.async {
                     self.prepareStructure(with: self.viewMode)
-                    print("ViewMode: \(self.viewMode)")
                 }
                 
             case .failure(let error):
@@ -322,11 +326,11 @@ extension DetailsVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         let lastReview = reviews.count
-        if indexPath.row == lastReview && !isFetchingData {
+        if indexPath.row == lastReview && !isFetchingData && hasNoMorePages {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.isFetchingData = true
-                self.prepareStructure(with: self.viewMode)
+                self.getReview()
             }
         }
     }

@@ -19,16 +19,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3CF39E4D-2589-4D98-8640-0510F0BD14CA"
-            shouldBeEnabled = "Yes"
+            uuid = "BB498974-31E2-4EB6-BA66-CD471212814E"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MilestoneAPI/DetailsVC/DetailsVC.swift"
+            filePath = "MilestoneAPI/HomeVC/HomeVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
-            landmarkName = "getReview()"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "getMovies()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

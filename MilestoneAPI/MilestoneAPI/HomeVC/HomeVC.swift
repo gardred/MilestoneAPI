@@ -26,6 +26,7 @@ class HomeVC: UIViewController {
     private var movies: [Movie] = []
     private var genre: [Genre] = []
     private var isFetchingData = false
+    private var hasNoMorePages = false
     private var currentPage = 1
     private var query: String?
     // MARK: - Lifecycle
@@ -113,6 +114,7 @@ class HomeVC: UIViewController {
     private func getMovies() {
         
         activityIndicator.startAnimating()
+        isFetchingData = true
         
         API.shared.getMovies(atPage: currentPage) {  [weak self] (result) in
             guard let self = self else { return }
@@ -128,6 +130,8 @@ class HomeVC: UIViewController {
                 self.movies.append(contentsOf: getMovies)
                 self.isFetchingData = false
                 self.currentPage += 1
+                
+                self.hasNoMorePages = getMovies.count > 0
                 
                 DispatchQueue.main.async {
                     self.moviesCollectionView.reloadData()
@@ -211,7 +215,7 @@ extension HomeVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let lastMovie = movies.count - 1
         
-        if indexPath.row == lastMovie && !isFetchingData {
+        if indexPath.row == lastMovie && !isFetchingData && hasNoMorePages  {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.isFetchingData = true
