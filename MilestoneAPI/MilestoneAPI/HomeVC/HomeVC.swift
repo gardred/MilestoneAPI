@@ -14,7 +14,6 @@ class HomeVC: UIViewController {
         return UIStoryboard(name: storyboardName, bundle: nil).instantiateViewController(withIdentifier: identifier) as! T
     }
     
-    
     // MARK: - UI Elements
     @IBOutlet private weak var moviesCollectionView: UICollectionView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
@@ -215,7 +214,7 @@ extension HomeVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let lastMovie = movies.count - 1
         
-        if indexPath.row == lastMovie && !isFetchingData && hasNoMorePages  {
+        if indexPath.row == lastMovie && !isFetchingData && hasNoMorePages {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.isFetchingData = true

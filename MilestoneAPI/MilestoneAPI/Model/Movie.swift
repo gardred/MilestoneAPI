@@ -48,4 +48,3 @@ struct Movie: Codable {
         return []
     }
 }
-

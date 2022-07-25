@@ -9,7 +9,6 @@ import UIKit
 
 class NoReviewsTVC: UITableViewCell {
 
-    
     static let identifier = "NoReviewsTVC"
     
     @IBOutlet private weak var errorLabel: UILabel!

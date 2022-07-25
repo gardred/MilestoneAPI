@@ -15,7 +15,6 @@ extension UIView {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         let date = dateFormatter.date(from: date)
 
-
         dateFormatter.dateFormat = "dd MMM yyyy"
         
         guard let date = date else {
@@ -23,8 +22,7 @@ extension UIView {
         }
 
         let timeStamp = dateFormatter.string(from: date)
-
-
+        
         return timeStamp
     }
 }

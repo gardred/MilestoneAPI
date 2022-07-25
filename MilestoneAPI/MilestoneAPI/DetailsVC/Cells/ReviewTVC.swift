@@ -15,7 +15,7 @@ class ReviewTVC: UITableViewCell {
     @IBOutlet private weak var author: UILabel!
     @IBOutlet private weak var date: UILabel!
     @IBOutlet private weak var body: UILabel!
-    @IBOutlet private weak var reviewTitle:  UILabel!
+    @IBOutlet private weak var reviewTitle: UILabel!
     @IBOutlet private weak var errorLabel: UILabel!
     
     override func awakeFromNib() {
@@ -29,7 +29,6 @@ class ReviewTVC: UITableViewCell {
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: date)
     }
-    
     
     public func configure(model: Review) {
         

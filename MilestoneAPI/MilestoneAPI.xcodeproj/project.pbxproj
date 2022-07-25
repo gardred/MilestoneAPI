@@ -262,6 +262,7 @@
 				F1A02F1A2869870400FCE92F /* Frameworks */,
 				F1A02F1B2869870400FCE92F /* Resources */,
 				6955EB5AA4E2671F8B70D9F8 /* [CP] Embed Pods Frameworks */,
+				F1A019A0288EE2D7008E87C0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -365,6 +366,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MilestoneAPI/Pods-MilestoneAPI-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		F1A019A0288EE2D7008E87C0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

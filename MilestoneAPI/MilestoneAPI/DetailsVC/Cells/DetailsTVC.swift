@@ -39,7 +39,6 @@ class DetailsTVC: UITableViewCell {
         configureButtons()
     }
     
-    
     private func makeElementsSkeletonable() {
         
         activityIndicator.isHidden = false

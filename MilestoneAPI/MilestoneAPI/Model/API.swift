@@ -14,13 +14,10 @@ struct Constants {
     static let imageURL = "https://image.tmdb.org/t/p/w500/"
 }
 
-
 class API {
     
     static let shared = API()
-    
-    
-    
+
     func getMovies(atPage page: Int, completion: @escaping (Result<[Movie], Error>) -> Void) {
         
         var components = URLComponents()
@@ -68,7 +65,6 @@ class API {
             URLQueryItem(name: "api_key", value: "a560703232bc4d393f220567c65184df"),
             URLQueryItem(name: "language", value: "en-US")
         ]
-        
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: components.url!)) { data, _, error in
             
@@ -147,7 +143,6 @@ class API {
         task.resume()
     }
     
-    
     func getReview(id: Int, atPage page: Int, completion: @escaping (Result<[Review], Error>) -> Void) {
         
         var components = URLComponents()
@@ -161,7 +156,7 @@ class API {
             URLQueryItem(name: "page", value: "\(page)")
         ]
         
-        let task = URLSession.shared.dataTask(with: URLRequest(url:  components.url!)) { data, _, error in
+        let task = URLSession.shared.dataTask(with: URLRequest(url: components.url!)) { data, _, error in
             
             if let data = data {
                 
@@ -178,7 +173,6 @@ class API {
         }
         task.resume()
     }
-    
     
     private func handleApiError(_ message: String) {
         DispatchQueue.main.async {

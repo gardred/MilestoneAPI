@@ -214,7 +214,6 @@ class DetailsVC: UIViewController {
                 
                 self.hasNoMorePages = review.count > 0
                 
-                
                 DispatchQueue.main.async {
                     self.prepareStructure(with: self.viewMode)
                 }
@@ -339,4 +338,3 @@ extension DetailsVC: UITableViewDelegate {
         updateHeader()
     }
 }
-

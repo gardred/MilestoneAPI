@@ -40,7 +40,5 @@ class HomeCVC: UICollectionViewCell {
             .joined(separator: ", ")
         
         genreLabel.text = genreNames
-        
-        
     }
 }
