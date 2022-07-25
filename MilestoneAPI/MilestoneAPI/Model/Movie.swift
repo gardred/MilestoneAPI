@@ -24,7 +24,7 @@ struct Movie: Codable {
     let overview: String
     let genreIds: [Int]?
     let genres: [Genre]?
-    let backdropPath: String
+    let backdropPath: String?
     
     private enum CodingKeys: String, CodingKey {
         case title, overview, id, genres

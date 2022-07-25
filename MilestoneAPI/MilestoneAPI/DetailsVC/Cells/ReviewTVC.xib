@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="V6F-Q7-WgQ">
-                        <rect key="frame" x="10" y="22" width="462" height="80"/>
+                        <rect key="frame" x="10" y="0.0" width="462" height="80"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lt9-Kt-OL7">
                                 <rect key="frame" x="0.0" y="0.0" width="72" height="24"/>
@@ -89,7 +89,7 @@
                         </subviews>
                     </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[body]" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UmC-hp-lUp">
-                        <rect key="frame" x="10" y="117" width="462" height="103"/>
+                        <rect key="frame" x="10" y="95" width="462" height="125"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                         <color key="textColor" red="0.5607843137254902" green="0.56470588235294117" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -109,7 +109,7 @@
                     <constraint firstItem="A1H-sI-2kX" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="myh-ZF-z8v"/>
                     <constraint firstAttribute="bottom" secondItem="UmC-hp-lUp" secondAttribute="bottom" id="vgw-lz-eNO"/>
                     <constraint firstAttribute="trailing" secondItem="V6F-Q7-WgQ" secondAttribute="trailing" constant="10" id="xjW-N7-dpQ"/>
-                    <constraint firstItem="V6F-Q7-WgQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="22" id="yBL-WY-bcu"/>
+                    <constraint firstItem="V6F-Q7-WgQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="yBL-WY-bcu"/>
                     <constraint firstItem="UmC-hp-lUp" firstAttribute="top" secondItem="V6F-Q7-WgQ" secondAttribute="bottom" constant="15" id="z7S-2g-eoc"/>
                 </constraints>
             </tableViewCellContentView>

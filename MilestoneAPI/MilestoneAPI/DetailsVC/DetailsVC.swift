@@ -14,6 +14,10 @@ enum CellType {
     case error
 }
 
+enum ViewMode {
+    case description, reviews
+}
+
 class DetailsVC: UIViewController {
     
     static func fromStoryboard<T: DetailsVC>(_ storyboardName: String) -> T {
@@ -61,7 +65,7 @@ class DetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        showDescriptionSection()
+        prepareStructure(with: .description)
         getReview()
         configureTableView()
     }
@@ -71,7 +75,7 @@ class DetailsVC: UIViewController {
     static func construct(id: Int, poster: String?) -> DetailsVC {
         
         let controller: DetailsVC = .fromStoryboard("Main")
-    
+        
         controller.id = id
         controller.poster = poster
         
@@ -105,7 +109,6 @@ class DetailsVC: UIViewController {
         writeReviewButton.isHidden = state
         writeReviewButton.layer.cornerRadius = 8
         borderView.isHidden = state
-        tableView.reloadData()
     }
     
     private func updateHeader() {
@@ -116,31 +119,36 @@ class DetailsVC: UIViewController {
         }
     }
     
-    private func showDescriptionSection() {
+    private func prepareStructure(with viewMode: ViewMode) {
         
-        cells = [
-            .details,
-            .description
-        ]
-        
-        hideButtons(true)
-    }
-    
-    private func showReviewSection() {
-        
-        if reviews.count > 0 {
-            cells = [ .details ]
-            cells.append(contentsOf: reviews.map({ .review($0) }))
+        switch viewMode {
             
-        } else {
+        case .description:
             
             cells = [
                 .details,
-                .error
+                .description
             ]
+            
+            hideButtons(true)
+        case .reviews:
+            
+            if reviews.count > 0 {
+                cells = [ .details ]
+                cells.append(contentsOf: reviews.map({ .review($0) }))
+                
+            } else {
+                
+                cells = [
+                    .details,
+                    .error
+                ]
+            }
+            
+            hideButtons(false)
         }
         
-        hideButtons(false)
+        tableView.reloadData()
     }
     
     // MARK: - API Request
@@ -164,7 +172,7 @@ class DetailsVC: UIViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-            
+                
             case .failure(let error):
                 
                 DispatchQueue.main.async {
@@ -179,7 +187,7 @@ class DetailsVC: UIViewController {
         API.shared.getReview(id: id, atPage: currentPage) { [weak self] (reviewsResult) in
             
             guard let self = self else { return }
-           
+            
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.isHidden = true
@@ -188,7 +196,7 @@ class DetailsVC: UIViewController {
             switch reviewsResult {
                 
             case .success(let review):
-                self.reviews = review
+                self.reviews.append(contentsOf: review)
                 self.currentPage += 1
                 self.isFetchingData = false
                 
@@ -240,12 +248,12 @@ extension DetailsVC: UITableViewDataSource {
             
             cell.changeCollectionCellToDescription = { [weak self] in
                 guard let self = self else { return }
-                self.showDescriptionSection()
+                self.prepareStructure(with: .description)
             }
             
             cell.changeCollectionCellToReview = { [weak self] in
                 guard let self = self else { return }
-                self.showReviewSection()
+                self.prepareStructure(with: .reviews)
             }
             
             return cell
@@ -267,7 +275,7 @@ extension DetailsVC: UITableViewDataSource {
             cell.configure(model: review)
             
             return cell
-        
+            
         case .error:
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: NoReviewsTVC.identifier, for: indexPath) as? NoReviewsTVC else { return UITableViewCell() }
@@ -286,7 +294,7 @@ extension DetailsVC: UITableViewDelegate {
         switch cells[indexPath.row] {
             
         case .details:
-            return 195
+            return 190
         case .description:
             guard let selectedMovie = selectedMovie else { return 0 }
             return DescriptionTVC.estimatedHeight(model: selectedMovie)

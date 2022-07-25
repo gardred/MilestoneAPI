@@ -74,6 +74,11 @@ class ReviewViewController: UIViewController {
         collectionView.backgroundColor = .black
     }
     
+    private func submitButtonConfiguration(color: String, interaction: Bool, alpha: Double) {
+        submitButton.isUserInteractionEnabled = interaction
+        submitButton.backgroundColor = hexStringToUIColor(hex: color).withAlphaComponent(alpha)
+    }
+    
     static func construct(movie: Movie) -> ReviewViewController {
         let controller: ReviewViewController = .fromStoryboard("Main")
         controller.movie = movie
@@ -101,8 +106,6 @@ extension ReviewViewController: UICollectionViewDataSource {
         case .details:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReviewDetailsCVC.identifier, for: indexPath) as? ReviewDetailsCVC else { return UICollectionViewCell() }
            
-            
-            
             if let movie = movie {
                 cell.configure(model: movie)
             }
@@ -115,14 +118,12 @@ extension ReviewViewController: UICollectionViewDataSource {
             
             cell.disableButtonInteraction = { [weak self] in
                 guard let self = self else { return }
-                self.submitButton.isUserInteractionEnabled = true
-                self.submitButton.backgroundColor = hexStringToUIColor(hex: "#606DDE").withAlphaComponent(1.0)
+                self.submitButtonConfiguration(color: "#606DDE", interaction: false, alpha: 1.0)
             }
             
             cell.enableButtonInteraction = { [weak self] in
                 guard let self = self else { return }
-                self.submitButton.isUserInteractionEnabled = false
-                self.submitButton.backgroundColor = hexStringToUIColor(hex: "#606DDE").withAlphaComponent(0.5)
+                self.submitButtonConfiguration(color: "#606DDE", interaction: true, alpha: 0.5)
             }
             return cell
         }

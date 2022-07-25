@@ -30,6 +30,7 @@ class ReviewCVC: UICollectionViewCell {
     // MARK: - Functions
     private func configureCell() {
         backgroundColor = .black
+        
         textField.delegate = self
         textField.setLeftPaddingPoints(16)
         textField.setRightPaddingPoints(16)

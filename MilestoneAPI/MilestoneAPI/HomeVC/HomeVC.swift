@@ -132,7 +132,7 @@ class HomeVC: UIViewController {
                 DispatchQueue.main.async {
                     self.moviesCollectionView.reloadData()
                 }
-        
+                
             case .failure(let error):
                 
                 DispatchQueue.main.async {
@@ -200,10 +200,11 @@ extension HomeVC: UICollectionViewDelegate {
         
         let id = movies[indexPath.row].id
         let poster = movies[indexPath.row].backdropPath
-        
         let controller = DetailsVC.construct(id: id, poster: poster)
+        
         self.searchController.isActive = false
         self.searchController.searchBar.text = query
+        
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -234,9 +235,16 @@ extension HomeVC: UICollectionViewDelegateFlowLayout {
 extension HomeVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
-        guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty, query.trimmingCharacters(in: .whitespaces).count >= 3 else { return }
+        guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty, query.trimmingCharacters(in: .whitespaces).count >= 0 else { return }
         
         self.searchRequest(with: query)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText.isEmpty {
+            self.searchBarCancelAction()
+        }
     }
 }
 

@@ -38,7 +38,7 @@ class API {
             URLQueryItem(name: "page", value: "\(page)"),
             URLQueryItem(name: "with_watch_monetization_types", value: "flatrate")
         ]
-        print(components.url)
+        
         let task = URLSession.shared.dataTask(with: URLRequest(url: components.url!)) { data, _, error in
             
             if let data = data {
