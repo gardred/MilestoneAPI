@@ -65,7 +65,6 @@ class DetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        prepareStructure(with: .description)
         getReview()
         configureTableView()
     }
@@ -133,8 +132,9 @@ class DetailsVC: UIViewController {
             hideButtons(true)
         
         case .reviews:
-            
+        
             if reviews.count > 0 {
+                
                 cells = [ .details ]
                 cells.append(contentsOf: reviews.map({ .review($0) }))
                 
@@ -203,7 +203,7 @@ class DetailsVC: UIViewController {
                 self.isFetchingData = false
                 
                 DispatchQueue.main.async {
-                    self.prepareStructure(with: .reviews)
+                    self.prepareStructure(with: .description)
                 }
                 
             case .failure(let error):
