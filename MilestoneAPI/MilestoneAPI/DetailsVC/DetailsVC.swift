@@ -37,6 +37,7 @@ class DetailsVC: UIViewController {
     @IBOutlet private weak var imageViewHeightConstraint: NSLayoutConstraint!
     // MARK: - Variables
     private var cells: [CellType] = []
+    private var viewMode: ViewMode = .description
     public  var reviews: [Review] = []
     private var selectedMovie: Movie?
     private var poster: String?
@@ -59,14 +60,14 @@ class DetailsVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        getSingleMovie()
+        
         getReview()
+        getSingleMovie()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        prepareStructure(with: .description)
         configureTableView()
     }
     
@@ -121,23 +122,25 @@ class DetailsVC: UIViewController {
     
     private func prepareStructure(with viewMode: ViewMode) {
         
+        self.viewMode = viewMode
+        
         switch viewMode {
             
         case .description:
-            
+            self.viewMode = .description
             cells = [
                 .details,
                 .description
             ]
             
             hideButtons(true)
-        
+            
         case .reviews:
             
             if reviews.count > 0 {
-                
+                self.viewMode = .reviews
+               
                 cells = [ .details ]
-                getReview()
                 cells.append(contentsOf: reviews.map({ .review($0) }))
                 
             } else {
@@ -150,8 +153,8 @@ class DetailsVC: UIViewController {
             
             hideButtons(false)
         }
-        
         tableView.reloadData()
+        
     }
     
     // MARK: - API Request
@@ -172,6 +175,7 @@ class DetailsVC: UIViewController {
                 
             case .success(let movie):
                 self.selectedMovie = movie
+                
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -186,6 +190,7 @@ class DetailsVC: UIViewController {
     }
     
     private func getReview() {
+        
         activityIndicator.startAnimating()
         
         API.shared.getReview(id: id, atPage: currentPage) { [weak self] (reviewsResult) in
@@ -204,6 +209,11 @@ class DetailsVC: UIViewController {
                 self.reviews.append(contentsOf: review)
                 self.currentPage += 1
                 self.isFetchingData = false
+                
+                DispatchQueue.main.async {
+                    self.prepareStructure(with: self.viewMode)
+                    print("ViewMode: \(self.viewMode)")
+                }
                 
             case .failure(let error):
                 
@@ -248,7 +258,9 @@ extension DetailsVC: UITableViewDataSource {
             }
             
             cell.changeCollectionCellToDescription = { [weak self] in
+                
                 guard let self = self else { return }
+                
                 self.prepareStructure(with: .description)
             }
             
@@ -309,17 +321,14 @@ extension DetailsVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-//        if reviews.count > 1 {
-            
-            let lastReview = reviews.count
-            if indexPath.row == lastReview && !isFetchingData {
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else { return }
-                    self.isFetchingData = true
-                    self.getReview()
-                }
+        let lastReview = reviews.count
+        if indexPath.row == lastReview && !isFetchingData {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                self.isFetchingData = true
+                self.prepareStructure(with: self.viewMode)
             }
-//        }
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
